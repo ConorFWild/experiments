@@ -3,7 +3,7 @@ from typing import TypedDict
 
 import fire
 
-from dlib import match_structure_ligands, get_rmsd_from_match
+from dlib.dsmall import match_structure_ligands, get_rmsd_from_match
 
 class CLI:
     def compare_pandda_2_build_to_human(self,
