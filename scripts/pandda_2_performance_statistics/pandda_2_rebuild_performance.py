@@ -66,7 +66,11 @@ class CLI:
         print(pandda_2_structures)
 
         # Get the stats for each
-
+        for dtag, human_build in human_structures.items():
+            self.compare_pandda_2_build_to_human(
+                pandda_2_structures[dtag],
+                human_build
+            )
         ...
 
     def get_pandda_2_rebuild_performance_all_systems(self, cli=True):
