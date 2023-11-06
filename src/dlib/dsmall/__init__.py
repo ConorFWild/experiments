@@ -35,7 +35,7 @@ def get_ligands(st):
         for chain in model:
             for res in chain:
                 if res.name == "LIG":
-                    ligands[(chain.name, res.seqid.num)] = res
+                    ligands[(chain.name, str(res.seqid.num))] = res
 
     return ligands
 
