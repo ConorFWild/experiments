@@ -14,6 +14,7 @@ class CLI:
                                         human_structure
                                         ):
         # Get the ligand matches
+        print(f"Getting ligand matches...")
         ligand_matches = match_structure_ligands(
             pandda_2_structure,
             human_structure,
