@@ -55,10 +55,14 @@ class CLI:
     def get_pandda_2_rebuild_performance(self, pandda_2_dir, human_build_dir, cli=True):
 
         # Collect the human models
+        print(f"\tGetting human structures...")
         human_structures = self.parse_human_model_dir(human_build_dir)
+        print(human_structures)
 
-        # Collect the PanDDA 2 models
+        # Collect the PanDDA 2 models]
+        print(f"\tGetting pannda 2 structures...")
         pandda_2_structures = self.parse_pandda_2_dir(pandda_2_dir)
+        print(pandda_2_structures)
 
         # Get the stats for each
 
