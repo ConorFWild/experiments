@@ -3,6 +3,7 @@ from pathlib import Path
 
 import gemmi
 import fire
+import pandas as pd
 
 from dlib import constants
 from dlib.dcommon import read_yaml
@@ -123,6 +124,7 @@ class CLI:
                 for dtag, dtag_stats in system_stats.items()
             ]
         )
+        print(table)
 
         # Output statistics if from cli
 
