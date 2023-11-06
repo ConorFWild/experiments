@@ -18,6 +18,7 @@ class CLI:
             pandda_2_structure,
             human_structure,
         )
+        print(f"Ligand matches: {ligand_matches}")
 
         # Select the closest one
         for pandda_2_lig_id, human_lig_matches in ligand_matches.items():
