@@ -45,12 +45,13 @@ class CLI:
     def parse_pandda_2_dir(self, pandda_2_dir):
         pandda_2_structures = {}
         processed_datasets_dir = pandda_2_dir / constants.PANDDA_PROCESSED_DATASETS_DIR
-        for dtag_dir in pandda_2_dir.glob('*'):
+        for dtag_dir in processed_datasets_dir.glob('*'):
             model_building_dir = dtag_dir / constants.PANDDA_INSPECT_MODEL_DIR
             st_path = model_building_dir / constants.PANDDA_MODEL_FILE.format(dtag=dtag_dir.name)
             if st_path.exists():
                 pandda_2_structures[dtag_dir.name] = gemmi.read_structure(str(st_path))
 
+        return pandda_2_structures
 
     def get_pandda_2_rebuild_performance(self, pandda_2_dir, human_build_dir, cli=True):
 
