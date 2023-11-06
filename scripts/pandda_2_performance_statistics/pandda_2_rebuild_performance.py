@@ -1,8 +1,9 @@
 from typing import TypedDict
 
-
+import gemmi
 import fire
 
+from dlib import constants
 from dlib.dcommon import read_yaml
 from dlib.dsmall import match_structure_ligands, get_rmsd_from_match
 
@@ -33,12 +34,30 @@ class CLI:
 
         ...
 
+    def parse_human_model_dir(self, human_build_dir):
+        human_structures = {}
+        for path in human_build_dir.glob("*.pdb"):
+            human_structures[path.stem] = gemmi.read_structure(str(path))
+
+        return human_structures
+
+    def parse_pandda_2_dir(self, pandda_2_dir):
+        pandda_2_structures = {}
+        processed_datasets_dir = pandda_2_dir / constants.PANDDA_PROCESSED_DATASETS_DIR
+        for dtag_dir in pandda_2_dir.glob('*'):
+            model_building_dir = dtag_dir / constants.PANDDA_INSPECT_MODEL_DIR
+            st_path = model_building_dir / constants.PANDDA_MODEL_FILE.format(dtag=dtag_dir.name)
+            if st_path.exists():
+                pandda_2_structures[dtag_dir.name] = gemmi.read_structure(str(st_path))
+
 
     def get_pandda_2_rebuild_performance(self, pandda_2_dir, human_build_dir, cli=True):
 
         # Collect the human models
+        human_structures = self.parse_human_model_dir(human_build_dir)
 
         # Collect the PanDDA 2 models
+        pandda_2_structures = self.parse_pandda_2_dir(pandda_2_dir)
 
         # Get the stats for each
 
@@ -53,6 +72,7 @@ class CLI:
 
         # Loop over collecting statistics for each system
         for system, system_data in datamap.items():
+            print(f"\tAnalysing system: {system}")
             self.get_pandda_2_rebuild_performance(
                 system_data["pandda_2"],
                 system_data["human_builds"]
