@@ -37,6 +37,12 @@ class CLI:
         closest_match_id = min(distances, key=lambda _key: distances[_key])
         print(f"Closest match id is: {closest_match_id} : {distances[closest_match_id]}")
 
+        return {
+            "PanDDA 2 LIG ID": str(closest_match_id[0]),
+            "Human Build LIG ID": str(closest_match_id[1]),
+            "RMSD": distances[closest_match_id]
+        }
+
         #
 
         ...
@@ -72,11 +78,17 @@ class CLI:
         print(pandda_2_structures)
 
         # Get the stats for each
+        stats = {}
         for dtag, human_build in human_structures.items():
-            self.compare_pandda_2_build_to_human(
+
+            dtag_stats = self.compare_pandda_2_build_to_human(
                 pandda_2_structures[dtag],
                 human_build
             )
+            stats[dtag] = dtag_stats
+
+        return stats
+
         ...
 
     def get_pandda_2_rebuild_performance_all_systems(self, cli=True):
@@ -87,15 +99,30 @@ class CLI:
         # Collect PanDDA 2 directories and human models
 
         # Loop over collecting statistics for each system
+        stats = {}
         for system, system_data in datamap.items():
             print(f"\tAnalysing system: {system}")
-            self.get_pandda_2_rebuild_performance(
+            system_stats = self.get_pandda_2_rebuild_performance(
                 Path(system_data["pandda_2"]),
                 Path(system_data["human_builds"])
             )
+            system_stats[system] = system_stats
 
 
         # Combine statistics
+        table = pd.DataFrame(
+            [
+                {
+                    "System": system,
+                    "Dtag": dtag,
+                    "PanDDA 2 LIG ID": dtag_stats['PanDDA 2 LIG ID'],
+            "Human Build LIG ID": dtag_stats['Human Build LIG ID'],
+            "RMSD": dtag_stats['RMSD']
+                }
+                for system, system_stats in stats.items()
+                for dtag, dtag_stats in system_stats.items()
+            ]
+        )
 
         # Output statistics if from cli
 
