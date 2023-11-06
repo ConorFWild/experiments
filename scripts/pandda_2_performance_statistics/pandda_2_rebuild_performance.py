@@ -1,4 +1,5 @@
 from typing import TypedDict
+from pathlib import Path
 
 import gemmi
 import fire
@@ -74,8 +75,8 @@ class CLI:
         for system, system_data in datamap.items():
             print(f"\tAnalysing system: {system}")
             self.get_pandda_2_rebuild_performance(
-                system_data["pandda_2"],
-                system_data["human_builds"]
+                Path(system_data["pandda_2"]),
+                Path(system_data["human_builds"])
             )
 
 
