@@ -7,7 +7,13 @@ from ..dcommon import AtomID
 AtomMatch = list[tuple[AtomID, AtomID]]
 
 def get_structure_atom(st, atom_id):
-    return st[0][atom_id[0]][atom_id[1]][0][atom_id[2]][0]
+    model = st[0]
+    chain = model[atom_id[0]]
+    res_group = chain[atom_id[1]]
+    res = res_group[0]
+    atom_group = res[atom_id[2]]
+    atom = atom_group[0]
+    return atom
 
 def get_rmsd_from_match(
         st1,
