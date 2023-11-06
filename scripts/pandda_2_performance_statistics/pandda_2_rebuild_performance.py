@@ -107,7 +107,7 @@ class CLI:
                 Path(system_data["pandda_2"]),
                 Path(system_data["human_builds"])
             )
-            system_stats[system] = system_stats
+            stats[system] = system_stats
 
 
         # Combine statistics
