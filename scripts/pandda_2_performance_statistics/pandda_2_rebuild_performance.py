@@ -22,14 +22,14 @@ class CLI:
         print(f"Ligand matches: {ligand_matches}")
 
         # Select the closest one
-        for pandda_2_lig_id, human_lig_matches in ligand_matches.items():
-            distances = {}
-            for human_lig_id, matched_atoms in human_lig_matches.items():
-                rmsd = get_rmsd_from_match(
-                    pandda_2_structure,
-                    human_structure,
-                    matched_atoms
-                )
+        for (pandda_2_lig_id, human_lig_id), matched_atoms in ligand_matches.items():
+            # distances = {}
+            # for , matched_atoms in human_lig_matches.items():
+            rmsd = get_rmsd_from_match(
+                pandda_2_structure,
+                human_structure,
+                matched_atoms
+            )
 
             closest_lig_id = min(distances, key=lambda _key: distances[_key])
 
