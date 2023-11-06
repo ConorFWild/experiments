@@ -34,7 +34,7 @@ class CLI:
         ...
 
 
-    def get_pandda_2_rebuild_performance(self, cli=True):
+    def get_pandda_2_rebuild_performance(self, pandda_2_dir, human_build_dir, cli=True):
 
         # Collect the human models
 
@@ -45,9 +45,19 @@ class CLI:
         ...
 
     def get_pandda_2_rebuild_performance_all_systems(self, cli=True):
+
+        print(f"Reading datamap...")
+        datamap = read_yaml("datamap.yaml")
+        print(datamap)
         # Collect PanDDA 2 directories and human models
 
         # Loop over collecting statistics for each system
+        for system, system_data in datamap.items():
+            self.get_pandda_2_rebuild_performance(
+                system_data["pandda_2"],
+                system_data["human_builds"]
+            )
+
 
         # Combine statistics
 
