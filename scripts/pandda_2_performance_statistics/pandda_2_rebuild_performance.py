@@ -7,7 +7,7 @@ import pandas as pd
 
 from dlib import constants
 from dlib.dcommon import read_yaml
-from dlib.dsmall import match_structure_ligands, get_rmsd_from_match
+from dlib.dsmall import match_structure_ligands, get_rmsd_from_match, get_rmsd_from_closest_atom
 
 class CLI:
     def compare_pandda_2_build_to_human(self,
@@ -23,7 +23,7 @@ class CLI:
         # print(f"Ligand matches: {ligand_matches}")
 
         # Select the closest one
-        distances = {}
+        distances_atom_match = {}
         for match_id, matched_atoms in ligand_matches.items():
             # distances = {}
             # for , matched_atoms in human_lig_matches.items():
@@ -33,15 +33,27 @@ class CLI:
                 matched_atoms
             )
             # print(f"\t\tRMSD is: {rmsd}")
-            distances[match_id] = rmsd
+            distances_atom_match[match_id] = rmsd
 
-        closest_match_id = min(distances, key=lambda _key: distances[_key])
+        closest_atom_match_match_id = min(
+            distances_atom_match,
+            key=lambda _key: distances_atom_match[_key],
+        )
         # print(f"Closest match id is: {closest_match_id} : {distances[closest_match_id]}")
 
+        # Get the RMSD by closest atom
+        rmsd_closest_atom = get_rmsd_from_closest_atom(
+            pandda_2_structure,
+            human_structure,
+            closest_atom_match_match_id[0],
+            closest_atom_match_match_id[1]
+        )
+
         return {
-            "PanDDA 2 LIG ID": str(closest_match_id[0]),
-            "Human Build LIG ID": str(closest_match_id[1]),
-            "RMSD": distances[closest_match_id]
+            "PanDDA 2 LIG ID": str(closest_atom_match_match_id[0]),
+            "Human Build LIG ID": str(closest_atom_match_match_id[1]),
+            "RMSD (atom match)": distances_atom_match[closest_atom_match_match_id],
+            "RMSD (closest atom)":
         }
 
         #

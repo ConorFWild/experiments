@@ -15,6 +15,13 @@ def get_structure_atom(st, atom_id):
     atom = atom_group[0]
     return atom
 
+def get_structure_res(st, residue_id):
+    model = st[0]
+    chain = model[residue_id[0]]
+    res_group = chain[residue_id[1]]
+    res = res_group[0]
+    return res
+
 def get_rmsd_from_match(
         st1,
         st2,
@@ -28,6 +35,26 @@ def get_rmsd_from_match(
         distances.append(distance)
 
     return np.sqrt(np.mean(np.square(distances)))
+
+def get_rmsd_from_closest_atom(
+            st1,
+            st2,
+            st1_lig_id,
+            st2_lig_id
+        ):
+
+    lig_1_res = get_structure_res(st1, st1_lig_id)
+    lig_2_res = get_structure_res(st2, st2_lig_id)
+
+    distances = []
+    for atom1 in lig_1_res:
+        atom_distances = []
+        for atom2 in lig_2_res:
+            atom_distances.append(atom1.pos.dist(atom2.pos))
+        distances.append(min(atom_distances))
+
+    return np.sqrt(np.mean(np.square(distances)))
+
 
 def get_ligands(st):
     ligands = {}
