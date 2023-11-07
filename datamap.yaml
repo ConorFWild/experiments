@@ -6,6 +6,6 @@
             },
     BRD1A: {
       human_builds: "data/BRD1A",
-      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BRD1A_3"
+      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BRD1A_only_known_hits"
     }
 }
