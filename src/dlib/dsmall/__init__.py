@@ -96,6 +96,7 @@ def get_match(res_1, res_2):
     for atom_1 in res_1:
         if atom_1.element.name == "H":
             continue
+
         match = None
 
         for atom_2 in res_2:
@@ -104,7 +105,7 @@ def get_match(res_1, res_2):
         if not match:
             return None
         atom_matches.append(
-            (atom_1.name, atom_2.name)
+            (atom_1.name, match)
         )
 
     return atom_matches
