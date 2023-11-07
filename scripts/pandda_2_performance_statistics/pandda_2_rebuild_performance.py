@@ -158,6 +158,8 @@ class CLI:
         )
         print(table)
 
+        print(f"######### Poorly fit subset #########")
+        print(table[table['RMSD (closest atom)'] > 2.0])
         # Output statistics if from cli
 
         ...
