@@ -83,12 +83,12 @@ class CLI:
         # Collect the human models
         print(f"\tGetting human structures...")
         human_structures = self.parse_human_model_dir(human_build_dir)
-        # print(human_structures)
+        print(f"Got {len(human_structures)} structures")
 
         # Collect the PanDDA 2 models]
         print(f"\tGetting pannda 2 structures...")
         pandda_2_structures = self.parse_pandda_2_dir(pandda_2_dir)
-        # print(pandda_2_structures)
+        print(f"Got {len(pandda_2_structures)} structures")
 
         # Get the stats for each
         stats = {}
