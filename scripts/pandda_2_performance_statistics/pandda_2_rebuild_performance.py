@@ -20,6 +20,13 @@ class CLI:
             pandda_2_structure,
             human_structure,
         )
+        if len(ligand_matches) == 0:
+            return {
+            "PanDDA 2 LIG ID": None,
+            "Human Build LIG ID": None,
+            "RMSD (atom match)": None,
+            "RMSD (closest atom)": None
+        }
         # print(f"Ligand matches: {ligand_matches}")
 
         # Select the closest one

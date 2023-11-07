@@ -94,11 +94,16 @@ def match_res_to_cif(res, cif):
 def get_match(res_1, res_2):
     atom_matches = []
     for atom_1 in res_1:
+        match = None
+
         for atom_2 in res_2:
             if atom_1.name == atom_2.name:
-                atom_matches.append(
-                    (atom_1.name, atom_2.name)
-                )
+                match = atom_2.name
+        if not match:
+            return None
+        atom_matches.append(
+            (atom_1.name, atom_2.name)
+        )
 
     return atom_matches
 
@@ -131,6 +136,8 @@ def match_structure_ligands(
                 st1_ligand,
                 st2_ligand
             )
+            if not matched_atoms:
+                continue
             # for atom_pair in matched_atoms:
             matches[(st1_ligand_id, st2_ligand_id)] = [
                 (
