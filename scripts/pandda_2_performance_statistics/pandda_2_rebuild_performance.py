@@ -53,7 +53,7 @@ class CLI:
             "PanDDA 2 LIG ID": str(closest_atom_match_match_id[0]),
             "Human Build LIG ID": str(closest_atom_match_match_id[1]),
             "RMSD (atom match)": distances_atom_match[closest_atom_match_match_id],
-            "RMSD (closest atom)":
+            "RMSD (closest atom)": rmsd_closest_atom
         }
 
         #
@@ -98,8 +98,8 @@ class CLI:
 
                         "PanDDA 2 LIG ID": None,
                         "Human Build LIG ID": None,
-                        "RMSD": None
-
+                    "RMSD (atom match)": None,
+                    "RMSD (closest atom)": None
                 }
             else:
                 dtag_stats = self.compare_pandda_2_build_to_human(
@@ -138,7 +138,8 @@ class CLI:
                     "Dtag": dtag,
                     "PanDDA 2 LIG ID": dtag_stats['PanDDA 2 LIG ID'],
             "Human Build LIG ID": dtag_stats['Human Build LIG ID'],
-            "RMSD": dtag_stats['RMSD']
+                    "RMSD (atom match)": dtag_stats['RMSD (atom match)'],
+                    "RMSD (closest atom)": dtag_stats['RMSD (closest atom)']
                 }
                 for system, system_stats in stats.items()
                 for dtag, dtag_stats in system_stats.items()
