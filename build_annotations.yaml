@@ -1,0 +1,7 @@
+{
+  JMJD2DA-x393: "Density clipped by symmetry EDO",
+  JMJD2DA-x543: "Built but doesn't get an event map as selected model has non hits in protein and side chain with better RSCC",
+  JMJD2DA-x568: "Relatively weak density overlapping sidechain",
+  JMJD2DA-x620: "Hit event filtered by CNN",
+  JMJD2DA-x623: "Partial ligand density in area of significant conformational change"
+}
