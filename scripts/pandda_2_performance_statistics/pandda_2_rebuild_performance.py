@@ -81,11 +81,19 @@ class CLI:
         # Get the stats for each
         stats = {}
         for dtag, human_build in human_structures.items():
-
-            dtag_stats = self.compare_pandda_2_build_to_human(
-                pandda_2_structures[dtag],
-                human_build
-            )
+            if dtag not in pandda_2_structures:
+                dtag_stats[dtag] = {
+                    {
+                        "PanDDA 2 LIG ID": None,
+                        "Human Build LIG ID": None,
+                        "RMSD": None
+                    }
+                }
+            else:
+                dtag_stats = self.compare_pandda_2_build_to_human(
+                    pandda_2_structures[dtag],
+                    human_build
+                )
             stats[dtag] = dtag_stats
 
         return stats
