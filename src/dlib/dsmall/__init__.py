@@ -94,6 +94,8 @@ def match_res_to_cif(res, cif):
 def get_match(res_1, res_2):
     atom_matches = []
     for atom_1 in res_1:
+        if atom_1.element.name == "H":
+            continue
         match = None
 
         for atom_2 in res_2:
