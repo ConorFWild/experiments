@@ -20,7 +20,7 @@ class CLI:
             pandda_2_structure,
             human_structure,
         )
-        print(f"Ligand matches: {ligand_matches}")
+        # print(f"Ligand matches: {ligand_matches}")
 
         # Select the closest one
         distances = {}
@@ -32,11 +32,11 @@ class CLI:
                 human_structure,
                 matched_atoms
             )
-            print(f"\t\tRMSD is: {rmsd}")
+            # print(f"\t\tRMSD is: {rmsd}")
             distances[match_id] = rmsd
 
         closest_match_id = min(distances, key=lambda _key: distances[_key])
-        print(f"Closest match id is: {closest_match_id} : {distances[closest_match_id]}")
+        # print(f"Closest match id is: {closest_match_id} : {distances[closest_match_id]}")
 
         return {
             "PanDDA 2 LIG ID": str(closest_match_id[0]),
@@ -71,12 +71,12 @@ class CLI:
         # Collect the human models
         print(f"\tGetting human structures...")
         human_structures = self.parse_human_model_dir(human_build_dir)
-        print(human_structures)
+        # print(human_structures)
 
         # Collect the PanDDA 2 models]
         print(f"\tGetting pannda 2 structures...")
         pandda_2_structures = self.parse_pandda_2_dir(pandda_2_dir)
-        print(pandda_2_structures)
+        # print(pandda_2_structures)
 
         # Get the stats for each
         stats = {}
