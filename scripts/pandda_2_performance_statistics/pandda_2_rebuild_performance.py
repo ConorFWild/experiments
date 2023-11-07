@@ -9,6 +9,8 @@ from dlib import constants
 from dlib.dcommon import read_yaml
 from dlib.dsmall import match_structure_ligands, get_rmsd_from_match, get_rmsd_from_closest_atom
 
+pd.set_option('display.max_rows', 5000)
+
 class CLI:
     def compare_pandda_2_build_to_human(self,
                                         pandda_2_structure,
