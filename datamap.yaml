@@ -3,5 +3,9 @@
               human_builds: "data/BAZ2BA",
 #              pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_neighbourhood_probe_build"
               pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_neighbourhood_probe_build_shgo"
-            }
+            },
+    BRD1A: {
+      human_builds: "data/BRD1A",
+      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BRD1A"
+    }
 }
