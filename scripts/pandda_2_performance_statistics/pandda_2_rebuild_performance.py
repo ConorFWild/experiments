@@ -83,11 +83,11 @@ class CLI:
         for dtag, human_build in human_structures.items():
             if dtag not in pandda_2_structures:
                 dtag_stats = {
-                    {
+
                         "PanDDA 2 LIG ID": None,
                         "Human Build LIG ID": None,
                         "RMSD": None
-                    }
+
                 }
             else:
                 dtag_stats = self.compare_pandda_2_build_to_human(
