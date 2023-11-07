@@ -82,7 +82,7 @@ class CLI:
         stats = {}
         for dtag, human_build in human_structures.items():
             if dtag not in pandda_2_structures:
-                dtag_stats[dtag] = {
+                dtag_stats = {
                     {
                         "PanDDA 2 LIG ID": None,
                         "Human Build LIG ID": None,
