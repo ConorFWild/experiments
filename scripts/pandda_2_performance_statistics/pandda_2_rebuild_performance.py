@@ -84,6 +84,8 @@ class CLI:
         print(f"\tGetting human structures...")
         human_structures = self.parse_human_model_dir(human_build_dir)
         print(f"Got {len(human_structures)} structures")
+        print(",".join(human_structures))
+
 
         # Collect the PanDDA 2 models]
         print(f"\tGetting pannda 2 structures...")
