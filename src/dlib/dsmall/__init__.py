@@ -53,7 +53,10 @@ def get_rmsd_from_closest_atom(
     for atom1 in lig_1_res:
         atom_distances = []
         for atom2 in lig_2_res:
-            atom_distances.append(atom1.pos.dist(atom2.pos))
+            nearest_image = st1.cell.find_nearest_image(atom1.pos, atom2.pos)
+            distance = nearest_image.dist()
+            # atom_distances.append(atom1.pos.dist(atom2.pos))
+            atom_distances.append(distance)
         distances.append(min(atom_distances))
 
     return np.sqrt(np.mean(np.square(distances)))
