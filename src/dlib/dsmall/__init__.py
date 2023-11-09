@@ -27,11 +27,15 @@ def get_rmsd_from_match(
         st2,
         match
 ):
+    uc = st1.
     distances = []
     for atom_1_id, atom_2_id in match:
         atom_1 = get_structure_atom(st1, atom_1_id)
         atom_2 = get_structure_atom(st2, atom_2_id)
-        distance = atom_1.pos.dist(atom_2.pos)
+        nearest_image = st1.cell.find_nearest_image(atom_1.pos, atom_2.pos)
+        distance = nearest_image.dist()
+
+        # distance = atom_1.pos.dist(atom_2.pos)
         distances.append(distance)
 
     return np.sqrt(np.mean(np.square(distances)))
