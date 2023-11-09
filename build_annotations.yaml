@@ -1,4 +1,10 @@
 {
+  BRD1A-x062: "Hit partially obfuscated by symmetry sidechain",
+  BRD1A-x069: "Very dubious density in human build",
+  BRD1A-x081: "Two very poor events somehow have better RSCC",
+  BRD1A-x160: "Hit partially obfuscated by symmetry sidechain",
+  BRD1A-x167: "Hit partially obfuscated by symmetry sidechain",
+  BRD1A-x310: "Hit partially obfuscated by symmetry sidechain",
   JMJD2DA-x393: "Density clipped by symmetry EDO",
   JMJD2DA-x543: "Built but doesn't get an event map as selected model has non hits in protein and side chain with better RSCC",
   JMJD2DA-x568: "Relatively weak density overlapping sidechain",

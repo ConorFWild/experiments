@@ -148,7 +148,7 @@ class CLI:
                     "System": system,
                     "Dtag": dtag,
                     "PanDDA 2 LIG ID": dtag_stats['PanDDA 2 LIG ID'],
-            "Human Build LIG ID": dtag_stats['Human Build LIG ID'],
+                    "Human Build LIG ID": dtag_stats['Human Build LIG ID'],
                     "RMSD (atom match)": dtag_stats['RMSD (atom match)'],
                     "RMSD (closest atom)": dtag_stats['RMSD (closest atom)']
                 }

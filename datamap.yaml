@@ -12,4 +12,8 @@
       human_builds: "data/JMJD2DA",
       pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_JMJD2DA_only_known_hits"
     },
+    Mpro: {
+            human_builds: "data/Mpro",
+            pandda_2: "/dls/labxchem/data/2020/lb18145-153/processing/analysis/20231106/pandda"
+    }
 }
