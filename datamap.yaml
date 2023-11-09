@@ -14,6 +14,6 @@
     },
     Mpro: {
             human_builds: "data/Mpro",
-            pandda_2: "/dls/labxchem/data/2020/lb18145-153/processing/analysis/20231106/pandda"
+            pandda_2: "/dls/labxchem/data/2020/lb18145-153/processing/analysis/20231109/pandda"
     }
 }
