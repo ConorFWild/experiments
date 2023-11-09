@@ -27,7 +27,6 @@ def get_rmsd_from_match(
         st2,
         match
 ):
-    uc = st1.
     distances = []
     for atom_1_id, atom_2_id in match:
         atom_1 = get_structure_atom(st1, atom_1_id)
