@@ -24,7 +24,7 @@ def get_system_name(data_dir):
     mode_idx = np.argmax(counts)
     mode = unique_vals[mode_idx]
 
-    return mode
+    return str(mode)
 
 def number_of_system_hits():
     xchem_data_path = Path('/dls/labxchem/data')
