@@ -35,7 +35,7 @@ def get_system_name(data_dir):
 
 def number_of_system_hits():
     xchem_data_path = Path('/dls/labxchem/data')
-    system_modelled_structures = {}
+    records = []
     for year_or_visit_dir in xchem_data_path.glob('*'):
         for experiment_dir in year_or_visit_dir.glob('*'):
             print(f"Processing: {experiment_dir}")
@@ -58,26 +58,29 @@ def number_of_system_hits():
                     print(f"No datasets! Skipping!")
                     continue
 
-                system_modelled_structures[system_name] = 0
+                num_modelled_structures = 0
 
                 for dtag_dir in data_dir.glob("*"):
                     dtag = dtag_dir.name
                     pandda_model_file = dtag_dir / constants.PANDDA_MODEL_FILE.format(dtag=dtag)
                     if pandda_model_file.exists():
-                        system_modelled_structures[system_name] += 1
+                        num_modelled_structures += 1
+
+
+                records.append(
+                    {
+                        "System": system_name,
+                        "Number of Hits": num_modelled_structures,
+                        "Data Dir": data_dir
+                    }
+                )
+
             except Exception as e:
                 print(f"An exception occured!")
                 print(e)
 
     df = pd.DataFrame(
-        [
-            {
-                "System": system_name,
-                "Number of Hits": number_of_hits
-            }
-            for system_name, number_of_hits
-            in system_modelled_structures.items()
-        ]
+        records
     )
     print(df)
 
