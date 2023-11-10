@@ -56,6 +56,7 @@ def number_of_system_hits():
 
             try:
                 print(f"Got data dir: {data_dir}")
+                num_datasets = len([x for x in data_dir.glob('*')])
                 system_name = get_system_name(data_dir)
                 if system_name is None:
                     print(f"No datasets! Skipping!")
@@ -73,6 +74,7 @@ def number_of_system_hits():
                 records.append(
                     {
                         "System": system_name,
+                        "Number of Datasets": num_datasets,
                         "Number of Hits": num_modelled_structures,
                         "Data Dir": data_dir
                     }
