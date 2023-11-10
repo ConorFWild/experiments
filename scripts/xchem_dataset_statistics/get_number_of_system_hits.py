@@ -19,7 +19,7 @@ def get_system_name_from_dtag(dtag):
         return system_name
 def get_system_name(data_dir):
     dtags = [path.name for path in data_dir.glob('*')]
-    print(f"Got {len(dtags)} datasets")
+    # print(f"Got {len(dtags)} datasets")
     systems = [get_system_name_from_dtag(dtag) for dtag in dtags]
     unique_vals, counts = np.unique(systems, return_counts=True)
 
@@ -33,6 +33,7 @@ def number_of_system_hits():
     system_modelled_structures = {}
     for year_or_visit_dir in xchem_data_path.glob('*'):
         for experiment_dir in year_or_visit_dir.glob('*'):
+            print(f"Processing: {experiment_dir}")
             analysis_dir = experiment_dir / "processing" / "analysis"
             initial_models_dir = analysis_dir / "initial_models"
             model_building_dir = analysis_dir / "model_building"
