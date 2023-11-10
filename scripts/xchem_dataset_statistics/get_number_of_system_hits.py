@@ -35,7 +35,7 @@ def number_of_system_hits():
         for experiment_dir in year_or_visit_dir.glob('*'):
             print(f"Processing: {experiment_dir}")
             analysis_dir = experiment_dir / "processing" / "analysis"
-            initial_models_dir = analysis_dir / "initial_models"
+            initial_models_dir = analysis_dir / "initial_model"
             model_building_dir = analysis_dir / "model_building"
 
             if initial_models_dir.exists():
