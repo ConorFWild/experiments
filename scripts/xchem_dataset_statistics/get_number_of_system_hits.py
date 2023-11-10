@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import fire
+import numpy as np
 from scipy import stats
 import pandas as pd
 pd.set_option('display.max_rows', 5000)
@@ -19,7 +20,11 @@ def get_system_name_from_dtag(dtag):
 def get_system_name(data_dir):
     dtags = [path.name for path in data_dir.glob('*')]
     systems = [get_system_name_from_dtag(dtag) for dtag in dtags]
-    return str(stats.mode(systems, axis=None, keepdims=False)[0])
+    unique_vals, counts = np.unique(systems, return_counts=True)
+    mode_idx = np.argmax(counts)
+    mode = unique_vals[mode_idx]
+
+    return mode
 
 def number_of_system_hits():
     xchem_data_path = Path('/dls/labxchem/data')
