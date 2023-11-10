@@ -5,6 +5,9 @@ import numpy as np
 from scipy import stats
 import pandas as pd
 pd.set_option('display.max_rows', 5000)
+pd.set_option('display.max_colwidth', 100)
+pd.set_option('display.width', 200)
+
 
 from dlib import constants
 
