@@ -1,23 +1,33 @@
 {
     BAZ2BA: {
-              human_builds: "data/BAZ2BA",
-#              pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_neighbourhood_probe_build"
-              pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_neighbourhood_probe_build_shgo"
+      human_builds: "data/BAZ2BA",
+#     pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_neighbourhood_probe_build"
+#      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_neighbourhood_probe_build_shgo"
+      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BAZ2BA_signal"
+
             },
     BRD1A: {
       human_builds: "data/BRD1A",
-      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BRD1A_only_known_hits"
+#      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BRD1A_only_known_hits"
+      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_BRD1A_signal"
+
     },
     JMJD2DA: {
       human_builds: "data/JMJD2DA",
-      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_JMJD2DA_only_known_hits"
+#      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_JMJD2DA_only_known_hits"
+      pandda_2: "/dls/science/groups/i04-1/Downloads/pandda_JMJD2DA_signal"
+
     },
     Mpro: {
-            human_builds: "data/Mpro",
-            pandda_2: "/dls/labxchem/data/2020/lb18145-153/processing/analysis/20231109/pandda"
+      human_builds: "data/Mpro",
+#      pandda_2: "/dls/labxchem/data/2020/lb18145-153/processing/analysis/20231109/pandda"
+      pandda_2: "/dls/labxchem/data/2020/lb18145-153/processing/analysis/20231109/pandda_signal"
+
     },
     MRE11AA: {
       human_builds: "data/MRE11AA",
-      pandda_2: "/dls/labxchem/data/lb30602/lb30602-30/processing/analysis/20231110/pandda"
+#      pandda_2: "/dls/labxchem/data/lb30602/lb30602-30/processing/analysis/20231110/pandda"
+      pandda_2: "/dls/labxchem/data/lb30602/lb30602-30/processing/analysis/20231110/pandda_signal"
+
     }
 }
