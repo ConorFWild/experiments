@@ -19,6 +19,8 @@ def get_system_name_from_dtag(dtag):
         return system_name
 def get_system_name(data_dir):
     dtags = [path.name for path in data_dir.glob('*')]
+    if len(dtags) == 0:
+        return None
     # print(f"Got {len(dtags)} datasets")
     systems = [get_system_name_from_dtag(dtag) for dtag in dtags]
     unique_vals, counts = np.unique(systems, return_counts=True)
@@ -48,6 +50,9 @@ def number_of_system_hits():
 
             print(f"Got data dir: {data_dir}")
             system_name = get_system_name(data_dir)
+            if system_name is None:
+                print(f"No datasets! Skipping!")
+                continue
 
             system_modelled_structures[system_name] = 0
 
