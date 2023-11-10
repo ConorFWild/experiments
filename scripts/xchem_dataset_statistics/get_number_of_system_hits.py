@@ -46,6 +46,7 @@ def number_of_system_hits():
                 print(f"No data dir for {experiment_dir}!")
                 continue
 
+            print(f"Got data dir: {data_dir}")
             system_name = get_system_name(data_dir)
 
             system_modelled_structures[system_name] = 0
