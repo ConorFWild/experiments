@@ -36,6 +36,22 @@ def get_system_name(data_dir):
 
     return str(mode)
 
+def get_num_high_conf_best_pandda(analysis_dir):
+    num_high_conf_hits = []
+    for possible_pandda_dir in analysis_dir.glob('*'):
+        pandda_inspect_table_path = possible_pandda_dir / "analyses" / "pandda_inspect_events.csv"
+        if pandda_inspect_table_path.exists():
+            df = pd.read_csv(pandda_inspect_table_path)
+            num_high_conf_hits.append(
+                len(df[df["Ligand Confidence"] == "High"])
+            )
+
+    if len(num_high_conf_hits) == 0:
+        return 0
+    else:
+        return max(num_high_conf_hits)
+
+
 def number_of_system_hits():
     xchem_data_path = Path('/dls/labxchem/data')
     records = []
@@ -62,6 +78,8 @@ def number_of_system_hits():
                     print(f"No datasets! Skipping!")
                     continue
 
+                num_high_conf_best_pandda = get_num_high_conf_best_pandda(analysis_dir)
+
                 num_modelled_structures = 0
 
                 for dtag_dir in data_dir.glob("*"):
@@ -75,6 +93,7 @@ def number_of_system_hits():
                     {
                         "System": system_name,
                         "Number of Datasets": num_datasets,
+                        "Number of PanDDA Hits": num_high_conf_best_pandda,
                         "Number of Hits": num_modelled_structures,
                         "Data Dir": data_dir
                     }
