@@ -35,7 +35,7 @@ def number_of_system_hits():
             elif model_building_dir.exists():
                 data_dir = model_building_dir
             else:
-                print(f"No data dir!")
+                print(f"No data dir for {experiment_dir}!")
                 continue
 
             system_name = get_system_name(data_dir)
