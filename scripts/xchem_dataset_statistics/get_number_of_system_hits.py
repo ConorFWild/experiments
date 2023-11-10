@@ -24,6 +24,8 @@ def get_system_name(data_dir):
     # print(f"Got {len(dtags)} datasets")
     systems = [get_system_name_from_dtag(dtag) for dtag in dtags ]
     systems_sanitized = [system for system in systems if system]
+    if len(systems_sanitized) < 2:
+        return None
     unique_vals, counts = np.unique(systems_sanitized, return_counts=True)
 
     mode_idx = np.argmax(counts)
