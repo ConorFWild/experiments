@@ -19,8 +19,10 @@ def get_system_name_from_dtag(dtag):
         return system_name
 def get_system_name(data_dir):
     dtags = [path.name for path in data_dir.glob('*')]
+    print(f"Got {len(dtags)} datasets")
     systems = [get_system_name_from_dtag(dtag) for dtag in dtags]
     unique_vals, counts = np.unique(systems, return_counts=True)
+
     mode_idx = np.argmax(counts)
     mode = unique_vals[mode_idx]
 
