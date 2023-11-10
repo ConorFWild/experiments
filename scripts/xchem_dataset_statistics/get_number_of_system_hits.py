@@ -19,7 +19,7 @@ def get_system_name_from_dtag(dtag):
         return system_name
 def get_system_name(data_dir):
     dtags = [path.name for path in data_dir.glob('*')]
-    if len(dtags) == 0:
+    if len(dtags) < 2:
         return None
     # print(f"Got {len(dtags)} datasets")
     systems = [get_system_name_from_dtag(dtag) for dtag in dtags ]
