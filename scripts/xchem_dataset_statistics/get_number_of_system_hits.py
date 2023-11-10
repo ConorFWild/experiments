@@ -51,19 +51,23 @@ def number_of_system_hits():
                 print(f"No data dir for {experiment_dir}!")
                 continue
 
-            print(f"Got data dir: {data_dir}")
-            system_name = get_system_name(data_dir)
-            if system_name is None:
-                print(f"No datasets! Skipping!")
-                continue
+            try:
+                print(f"Got data dir: {data_dir}")
+                system_name = get_system_name(data_dir)
+                if system_name is None:
+                    print(f"No datasets! Skipping!")
+                    continue
 
-            system_modelled_structures[system_name] = 0
+                system_modelled_structures[system_name] = 0
 
-            for dtag_dir in data_dir.glob("*"):
-                dtag = dtag_dir.name
-                pandda_model_file = dtag_dir / constants.PANDDA_MODEL_FILE.format(dtag=dtag)
-                if pandda_model_file.exists():
-                    system_modelled_structures[system_name] += 1
+                for dtag_dir in data_dir.glob("*"):
+                    dtag = dtag_dir.name
+                    pandda_model_file = dtag_dir / constants.PANDDA_MODEL_FILE.format(dtag=dtag)
+                    if pandda_model_file.exists():
+                        system_modelled_structures[system_name] += 1
+            except Exception as e:
+                print(f"An exception occured!")
+                print(e)
 
     df = pd.DataFrame(
         [
