@@ -21,7 +21,7 @@ def plot_projection(
     dmap = gemmi.read_ccp4_map(str(map_path))
 
     # Generate the 2d projection
-    AllChem.rdDepictor.Compute2DCoords(mol)
+    AllChem.Compute2DCoords(mol)
     coord_array = get_coord_array(mol)
 
     # Get bounding box
