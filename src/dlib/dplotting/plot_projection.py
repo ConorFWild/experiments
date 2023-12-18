@@ -140,7 +140,7 @@ def plot_projection(
         pv2 = pvs[pv_keys[1]]
         # comp2 =  np.dot(point_rel, pv2) / np.linalg.norm(pv2)
         components = np.linalg.solve(
-            np.vstact(
+            np.vstack(
                 [
                     pv1.reshape(1,2),
                     pv2.reshape(1,2)
