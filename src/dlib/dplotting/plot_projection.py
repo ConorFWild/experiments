@@ -4,7 +4,7 @@ import numpy as np
 import gemmi
 from scipy.spatial import KDTree
 from scipy import spatial
-from scipy.interpolate import LinearNDInterpolator, NearestNDInterpolator
+from scipy.interpolate import LinearNDInterpolator, NearestNDInterpolator, RBFInterpolator
 import rdkit
 from rdkit.Chem import AllChem
 from matplotlib import pyplot as plt
@@ -373,7 +373,11 @@ def plot_projection(structure_path,
         )
     print(interpoland)
 
-    transform_interpolator = LinearNDInterpolator(
+    # transform_interpolator = LinearNDInterpolator(
+    #     coord_array,
+    #     interpoland
+    # )
+    transform_interpolator = RBFInterpolator(
         coord_array,
         interpoland
     )
