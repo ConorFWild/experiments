@@ -100,7 +100,7 @@ def plot_projection(
     # xs = grid[0].flatten()
     # ys = grid[1].flatten()
     xs = np.linspace(bounds[0][0], bounds[1][0], 100)
-    ys = np.linspace(bounds[1][0], bounds[1][1], 100)
+    ys = np.linspace(bounds[0][1], bounds[1][1], 100)
     grid_samples = np.array(
         [x for x in itertools.product(
             xs, ys
