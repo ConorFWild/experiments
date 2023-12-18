@@ -1,3 +1,5 @@
+import itertools
+
 import numpy as np
 import gemmi
 from scipy.spatial import KDTree
@@ -100,7 +102,7 @@ def plot_projection(
     xs = np.linspace(bounds[0][0], bounds[1][0], 100)
     ys = np.linspace(bounds[1][0], bounds[1][1], 100)
     grid_samples = np.array(
-        np.itertools.product(
+        itertools.product(
             xs, ys
         )
     )
