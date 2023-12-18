@@ -76,7 +76,7 @@ def plot_projection(
     kd = KDTree(
         coord_array
     )
-    vcells = get_vcells(coord_array, grid_samples)
+    vcells = get_vcells(kd, grid_samples)
     print(vcells)
 
     # For each point
