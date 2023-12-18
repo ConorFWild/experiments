@@ -164,9 +164,9 @@ def match_structure_ligands(
     return matches
 
 
-def get_fragment_mol_from_dataset_cif_path(dataset_cif_path: Path):
+def cif_to_mol(cif):
     # Open the cif document with gemmi
-    cif = gemmi.cif.read(str(dataset_cif_path))
+    # cif = gemmi.cif.read(str(dataset_cif_path))
 
     # Create a blank rdkit mol
     mol = Chem.Mol()
