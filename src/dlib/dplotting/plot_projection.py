@@ -3,6 +3,7 @@ import itertools
 import numpy as np
 import gemmi
 from scipy.spatial import KDTree
+from scipy import spatial
 import rdkit
 from rdkit.Chem import AllChem
 from matplotlib import pyplot as plt
@@ -247,3 +248,96 @@ def plot_projection(
     # Plot grid points
 
     ...
+
+def get_transform(
+        ref,
+        mov
+):
+
+        mean_mov = np.mean(mov, axis=0)
+        mean_ref = np.mean(ref, axis=0)
+
+        vec = np.array([0.0, 0.0, 0.0])
+
+        de_meaned_mov = mov - mean_mov
+        de_meaned_ref = ref - mean_ref
+
+        rotation, rmsd = spatial.transform.Rotation.align_vectors(de_meaned_mov, de_meaned_ref)
+
+        return vec, rotation, mean_ref, mean_mov
+
+def plot_projection(structure_path,
+        cif_path,
+        map_path
+):
+    # Load the structure
+    st = gemmi.read_structure(str(structure_path))
+
+    # Structure atom array
+    st_atom_pos_dict = get_structure_atom_array(st)
+
+    # Load the cif
+    cif = gemmi.cif.read(str(cif_path))
+    mol, atom_ids = cif_to_mol(cif)
+
+    # # Get the atom id array
+    # atom_id_array = get_atom_id_array(mol)
+
+    # Load the map
+    ccp4 = gemmi.read_ccp4_map(str(map_path), )
+    ccp4.setup(0.0)
+    dmap = ccp4.grid
+
+    # Generate the 2d projection
+    AllChem.Compute2DCoords(mol)
+    coord_array = get_coord_array(mol)
+    print(coord_array)
+    print([np.min(coord_array, axis=0), np.max(coord_array, axis=0)])
+
+    # Get bounding box
+    bounds = get_bounds(coord_array)
+    print(f"Bounds: {bounds}")
+
+    # Generate the grid
+
+    xs = np.linspace(bounds[0][0], bounds[1][0], 500)
+    ys = np.linspace(bounds[0][1], bounds[1][1], 500)
+    grid_samples = np.array(
+        [x for x in itertools.product(
+            xs, ys
+        )]
+    )
+    print(grid_samples)
+    print(grid_samples.shape)
+    # Get the voronoi cells of the grid points relative to projection
+    # Get the atom coord kdtree
+    kd = KDTree(
+        coord_array
+    )
+
+    # For each atom get the three closest
+    transforms = []
+    for pos in coord_array:
+        dists, nbs = kd.query(pos, k=3)
+        poss_2d = np.array(
+            coord_array[nbr]
+            for nbr
+            in nbs
+        )
+        poss_3d = np.array(
+            st_atom_pos_dict[atom_ids[nbr]]
+            for nbr
+            in nbs
+        )
+        transform = get_transform(
+            poss_2d,
+            poss_3d
+        )
+        rprint(transform)
+        transforms.append(transform)
+
+
+    # Get the best plane through ligand
+
+
+    #
