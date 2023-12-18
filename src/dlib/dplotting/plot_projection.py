@@ -1,7 +1,7 @@
 import numpy as np
 import gemmi
 import rdkit
-from rdkit import Chem
+from rdkit import AllChem
 
 from dlib.dsmall import cif_to_mol
 
@@ -21,7 +21,7 @@ def plot_projection(
     dmap = gemmi.read_ccp4_map(str(map_path))
 
     # Generate the 2d projection
-    Chem.rdDepictor.Compute2DCoords(mol)
+    AllChem.rdDepictor.Compute2DCoords(mol)
     coord_array = get_coord_array(mol)
 
     # Get bounding box
