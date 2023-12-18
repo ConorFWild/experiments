@@ -30,11 +30,6 @@ def get_vcells(kd, grid_samples):
     return nbs
 
 
-def get_atom_id_array(mol):
-    for atom in mol.GetAtoms():
-
-
-
 def plot_projection(
         structure_path,
         cif_path,
