@@ -329,6 +329,8 @@ def plot_projection(structure_path,
             for nbr
             in nbs
         )
+        print(poss_2d)
+        print(poss_3d)
         transform = get_transform(
             poss_2d,
             poss_3d
