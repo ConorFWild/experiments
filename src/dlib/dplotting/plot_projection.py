@@ -376,7 +376,7 @@ def plot_projection(structure_path,
         # Get the sample point
         sample_point_2d = np.array([sample[0], sample[1], 0.0])
         sample_point_2d_rel = sample_point_2d - tr[2]
-        sample_point_3d_rel = np.matmul(tr[1].T, sample_point_2d_rel)
+        sample_point_3d_rel = np.matmul(tr[1], sample_point_2d_rel)
         point_3d = sample_point_3d_rel + tr[3]
 
         # Interpolate
