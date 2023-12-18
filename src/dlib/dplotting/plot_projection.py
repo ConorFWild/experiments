@@ -186,7 +186,7 @@ def plot_projection(
         )
 
 
-    h = plt.contourf(grid_samples[:,0], grid_samples[:,1], np.array(values.reshape(100,100)))
+    h = plt.contourf(grid_samples[:,0], grid_samples[:,1], np.array(values).reshape(100,100))
     plt.axis('scaled')
     plt.colorbar()
     plt.save_fig('test.png')
