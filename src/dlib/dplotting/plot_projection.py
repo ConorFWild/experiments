@@ -4,6 +4,7 @@ import numpy as np
 import gemmi
 from scipy.spatial import KDTree
 from scipy import spatial
+from scipy.interpolate import LinearNDInterpolator
 import rdkit
 from rdkit.Chem import AllChem
 from matplotlib import pyplot as plt
@@ -348,6 +349,21 @@ def plot_projection(structure_path,
         )
         rprint(transform)
         transforms[atom_ids[j]] = transform
+
+    transform_interpolator = LinearNDInterpolator(
+        coord_array,
+        np.array(
+            np.concatenate(
+                [
+                tr[1].flatten(),
+                tr[2].flatten(),
+                    tr[3].flatten()
+            ]
+            )
+            for tr
+            in transforms.keys()
+        )
+    )
 
     # For each point
     values = []
