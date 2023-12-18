@@ -116,7 +116,7 @@ def plot_projection(
     # for j, atom_id in enumerate(atom_ids):
         print(sample)
         # Get the anchor atoms
-        dists, nbs = kd.query(sample, k=3)[1]
+        dists, nbs = kd.query(sample, k=3)
         if dists[0] > 3:
             continue
         print(nbs)
