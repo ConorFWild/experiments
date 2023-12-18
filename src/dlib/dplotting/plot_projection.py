@@ -111,6 +111,8 @@ def plot_projection(
     vcells = get_vcells(kd, grid_samples)
     print(vcells)
 
+    exit()
+
     # For each point
     for sample in grid_samples:
     # for j, atom_id in enumerate(atom_ids):
