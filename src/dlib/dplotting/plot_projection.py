@@ -205,7 +205,7 @@ def plot_projection(
             "Point 3D": point_3d,
             "Anchor Poss 3D": nbr_poss_3d,
             "Point 3d Relative": point_3d_rel,
-            "Point 3d Relative Dist": np.linalg.norm(point_3d_rel)
+            "Point 3d Relative Dist": np.linalg.norm(point_3d_rel),
             # "Reconstruction 2": np.dot(mat, components)
             "Value": value
         })
