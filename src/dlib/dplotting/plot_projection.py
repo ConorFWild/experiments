@@ -189,7 +189,7 @@ def plot_projection(
 
     # h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
     # h = plt.imshow(np.array(values).reshape(100,100))
-    h = plt.plot(
+    h = plt.scatter(
         grid_samples[:,0],
         grid_samples[:,1],
 
