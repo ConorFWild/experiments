@@ -102,9 +102,9 @@ def plot_projection(
     xs = np.linspace(bounds[0][0], bounds[1][0], 100)
     ys = np.linspace(bounds[1][0], bounds[1][1], 100)
     grid_samples = np.array(
-        itertools.product(
+        [x for x in itertools.product(
             xs, ys
-        )
+        )]
     )
     print(grid_samples)
     exit()
