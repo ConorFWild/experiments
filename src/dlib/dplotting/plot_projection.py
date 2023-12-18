@@ -90,18 +90,19 @@ def plot_projection(
     print(f"Bounds: {bounds}")
 
     # Generate the grid
-    grid = np.meshgrid(
-        np.linspace(bounds[0][0], bounds[1][0], 100),
-        np.linspace(bounds[1][0], bounds[1][1], 100),
-    )
+    # grid = np.meshgrid(
+    #     np.linspace(bounds[0][0], bounds[1][0], 100),
+    #     np.linspace(bounds[1][0], bounds[1][1], 100),
+    # )
     # Get the query array
-    xs = grid[0].flatten()
-    ys = grid[1].flatten()
-    grid_samples = np.hstack(
-        [
-            xs.reshape(-1,1),
-            ys.reshape(-1, 1),
-        ]
+    # xs = grid[0].flatten()
+    # ys = grid[1].flatten()
+    xs = np.linspace(bounds[0][0], bounds[1][0], 100)
+    ys = np.linspace(bounds[1][0], bounds[1][1], 100)
+    grid_samples = np.array(
+        np.itertools.product(
+            xs, ys
+        )
     )
     print(grid_samples)
     exit()
