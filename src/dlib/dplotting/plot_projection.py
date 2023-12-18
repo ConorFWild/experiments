@@ -195,7 +195,7 @@ def plot_projection(
 
     )
     plt.axis('scaled')
-    plt.colorbar()
+    # plt.colorbar()
     plt.savefig('test.png')
 
         # rprint({
