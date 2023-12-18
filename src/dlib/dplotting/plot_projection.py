@@ -349,6 +349,7 @@ def plot_projection(structure_path,
         )
         rprint(transform)
         transforms[atom_ids[j]] = transform
+        print(transform[1])
 
     interpoland = np.array(
         [
