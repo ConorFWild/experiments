@@ -11,6 +11,9 @@ def get_coord_array(mol):
         positions: np.ndarray = conformer.GetPositions()
         return positions
 
+def get_bounds(arr, border=5.0):
+    ...
+
 def plot_projection(
         structure_path,
         cif_path,
