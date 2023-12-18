@@ -192,7 +192,7 @@ def plot_projection(
     h = plt.scatter(
         grid_samples[:,0],
         grid_samples[:,1],
-
+        c=values
     )
     plt.axis('scaled')
     # plt.colorbar()
