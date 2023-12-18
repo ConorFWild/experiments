@@ -394,7 +394,9 @@ def plot_projection(structure_path,
             nbr_poss[atom_ids[nbr]] = pos
 
         # Get the transform
-        tr = transforms[atom_ids[nbs[0]]]
+        # tr = transforms[atom_ids[nbs[0]]]
+        tr_array = transform_interpolator(sample)
+        print(tr_array)
 
         # Get the sample point
         sample_point_2d = np.array([sample[0], sample[1], 0.0])
