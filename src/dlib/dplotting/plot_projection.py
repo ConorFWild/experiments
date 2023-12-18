@@ -395,7 +395,8 @@ def plot_projection(structure_path,
         if dists[0] < 1.0:
             rprint({
             "Pos": sample_point_2d,
-            "Anchor Poss": nbr_poss,
+            "Anchor Pos 2d": tr[2],
+            "Anchor Pos 3d": tr[3],
             "Relative Pos": sample_point_2d_rel,
             "Relative Pos Distance": np.linalg.norm(sample_point_2d_rel),
             "Point 3D": point_3d,
