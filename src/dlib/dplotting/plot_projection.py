@@ -142,6 +142,7 @@ def plot_projection(
 
         rprint({
             "Pos": sample,
+            "Anchor Poss": nbr_poss,
             "Relative Pos": point_rel,
             "Plane Vector 1": pv1,
             "Plane Vector 2": pv2,
