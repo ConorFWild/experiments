@@ -400,7 +400,7 @@ def plot_projection(structure_path,
         # Get the transform
         # tr = transforms[atom_ids[nbs[0]]]
         tr_array = transform_interpolator(sample)
-        # print(tr_array)
+        print(tr_array)
         if np.isnan(tr_array[0]):
             tr_array = transform_interpolator_nearest(sample)
         # print(tr_array_nearest)
