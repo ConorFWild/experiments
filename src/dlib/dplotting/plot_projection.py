@@ -224,6 +224,7 @@ def plot_projection(
     )
     plt.axis('scaled')
     # plt.colorbar()
+    print(f"Writing map!")
     plt.savefig('test.png')
 
 
