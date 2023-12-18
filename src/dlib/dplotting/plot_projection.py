@@ -265,7 +265,7 @@ def get_transform(
 
         rotation, rmsd = spatial.transform.Rotation.align_vectors(de_meaned_mov, de_meaned_ref)
 
-        return vec, rotation.as_euler(), mean_ref, mean_mov
+        return vec, rotation.as_euler('zyx'), mean_ref, mean_mov
 
 def plot_projection(structure_path,
         cif_path,
@@ -421,7 +421,7 @@ def plot_projection(structure_path,
         # Get the sample point
         sample_point_2d = np.array([sample[0], sample[1], 0.0])
         sample_point_2d_rel = sample_point_2d - ref
-        sample_point_3d_rel = np.matmul(spatial.transform.Rotation.from_euler(rot).as_matrix(), sample_point_2d_rel)
+        sample_point_3d_rel = np.matmul(spatial.transform.Rotation.from_euler('zyx', rot).as_matrix(), sample_point_2d_rel)
         point_3d = sample_point_3d_rel + mov
 
         # Interpolate
