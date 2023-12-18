@@ -146,7 +146,8 @@ def plot_projection(
             "Relative Pos": point_rel,
             "Plane Vector 1": pv1,
             "Plane Vector 2": pv2,
-            "Components": (comp1, comp2)
+            "Components": (comp1, comp2),
+            "Reconstruction": (comp1 * pv1) + (comp2*pv2)
         })
 
         # Get structure poss
