@@ -325,4 +325,4 @@ def cif_to_mol(cif):
 
     new_mol.UpdatePropertyCache()
     # Chem.SanitizeMol(new_mol)
-    return new_mol
+    return new_mol, atom_id_loop

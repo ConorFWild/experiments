@@ -18,28 +18,20 @@ def get_bounds(arr, border=5.0):
         (np.max(arr, axis=0)+border)[np.array([0,1]),]
     ]
 
-def get_vcells(coord_array, grid):
+def get_vcells(kd, grid_samples):
 
-    # Get the atom coord kdtree
-    kd = KDTree(
-        coord_array
-    )
 
-    # Get the query array
-    xs = grid[0].flatten()
-    ys = grid[1].flatten()
-    samples = np.hstack(
-        [
-            xs.reshape(-1,1),
-            ys.reshape(-1, 1),
-        ]
-    )
+
+
 
     # Get nearest neighbour
-    nbs = kd.query(samples)
+    nbs = kd.query(grid_samples)
 
     return nbs
 
+
+def get_atom_id_array(mol):
+    for atom in mol.GetAtoms():
 
 
 
@@ -53,7 +45,10 @@ def plot_projection(
 
     # Load the cif
     cif = gemmi.cif.read(str(cif_path))
-    mol = cif_to_mol(cif)
+    mol, atom_ids = cif_to_mol(cif)
+
+    # # Get the atom id array
+    # atom_id_array = get_atom_id_array(mol)
 
     # Load the map
     dmap = gemmi.read_ccp4_map(str(map_path))
@@ -71,15 +66,32 @@ def plot_projection(
     grid = np.meshgrid(
         np.linspace(bounds[0][0], bounds[1][0], 100),
         np.linspace(bounds[1][0], bounds[1][1], 100),
-
     )
-
+    # Get the query array
+    xs = grid[0].flatten()
+    ys = grid[1].flatten()
+    grid_samples = np.hstack(
+        [
+            xs.reshape(-1,1),
+            ys.reshape(-1, 1),
+        ]
+    )
     # Get the voronoi cells of the grid points relative to projection
-    vcells = get_vcells(coord_array, grid)
+    # Get the atom coord kdtree
+    kd = KDTree(
+        coord_array
+    )
+    vcells = get_vcells(coord_array, grid_samples)
     print(vcells)
 
     # For each point
+    for sample in grid_samples:
+    # for j, atom_id in enumerate(atom_ids):
+        print(sample)
         # Get the anchor atoms
+        nbs = kd.query(sample, k=3)
+        print(nbs)
+        print(np.array(atom_ids)[nbs])
 
         # Get the plane
 
