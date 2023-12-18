@@ -264,7 +264,7 @@ def get_transform(
 
         rotation, rmsd = spatial.transform.Rotation.align_vectors(de_meaned_mov, de_meaned_ref)
 
-        return vec, rotation, mean_ref, mean_mov
+        return vec, rotation.as_matrix(), mean_ref, mean_mov
 
 def plot_projection(structure_path,
         cif_path,
