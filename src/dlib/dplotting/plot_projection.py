@@ -103,6 +103,7 @@ def plot_projection(
             ys.reshape(-1, 1),
         ]
     )
+    print(grid_samples.shape)
     # Get the voronoi cells of the grid points relative to projection
     # Get the atom coord kdtree
     kd = KDTree(
