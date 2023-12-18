@@ -362,7 +362,7 @@ def plot_projection(structure_path,
                 ]
             )
             for tr
-            in transforms.keys()
+            in transforms.values()
             ]
         )
     print(interpoland)
