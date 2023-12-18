@@ -4,7 +4,7 @@ import numpy as np
 import gemmi
 from scipy.spatial import KDTree
 from scipy import spatial
-from scipy.interpolate import LinearNDInterpolator
+from scipy.interpolate import LinearNDInterpolator, NearestNDInterpolator
 import rdkit
 from rdkit.Chem import AllChem
 from matplotlib import pyplot as plt
@@ -371,6 +371,10 @@ def plot_projection(structure_path,
         coord_array,
         interpoland
     )
+    transform_interpolator_nearest = NearestNDInterpolator(
+        coord_array,
+        interpoland
+    )
 
     # For each point
     values = []
@@ -397,6 +401,8 @@ def plot_projection(structure_path,
         # tr = transforms[atom_ids[nbs[0]]]
         tr_array = transform_interpolator(sample)
         print(tr_array)
+        tr_array_nearest = transform_interpolator_nearest(sample)
+        print(tr_array_nearest)
 
         # Get the sample point
         sample_point_2d = np.array([sample[0], sample[1], 0.0])
