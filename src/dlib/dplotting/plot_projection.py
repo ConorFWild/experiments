@@ -81,7 +81,9 @@ def plot_projection(
     # atom_id_array = get_atom_id_array(mol)
 
     # Load the map
-    dmap = gemmi.read_ccp4_map(str(map_path), setup=True).grid
+    ccp4 = gemmi.read_ccp4_map(str(map_path), )
+    ccp4.setup(0.0)
+    dmap = ccp4.grid
 
     # Generate the 2d projection
     AllChem.Compute2DCoords(mol)
