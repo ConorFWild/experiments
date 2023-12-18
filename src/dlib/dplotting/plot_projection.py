@@ -139,6 +139,7 @@ def plot_projection(
         # Get the 3d pos
 
         # Interpolate
+        exit()
 
     # Get
 
