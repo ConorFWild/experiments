@@ -182,8 +182,9 @@ def plot_projection(
         point_3d = point_3d_rel + nbr_poss_3d[pv_keys[0][0]]
 
         # Interpolate
-        value = dmap.interpolate_value(
-            gemmi.Position(
+        # value = dmap.interpolate_value(
+        value=dmap.tricubic_interpolation(
+                gemmi.Position(
                 point_3d[0],
                 point_3d[1],
                 point_3d[2],
