@@ -187,7 +187,8 @@ def plot_projection(
         )
 
 
-    h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
+    # h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
+    h = plt.imshow(np.array(values).reshape(100,100))
     plt.axis('scaled')
     plt.colorbar()
     plt.savefig('test.png')
