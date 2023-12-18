@@ -193,26 +193,26 @@ def plot_projection(
         values.append(
             value
         )
-        # rprint({
-        #     "Pos": sample,
-        #     "Anchor Poss": nbr_poss,
-        #     "Relative Pos": point_rel,
-        #     "Relative Pos Distance": np.linalg.norm(point_rel),
-        #     "Plane Vector 1": pv1,
-        #     "Plane Vector 2": pv2,
-        #     "Components": components,
-        #     "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
-        #     "3D Plane Vectors": pvs_3d,
-        #     "Point 3D": point_3d,
-        #     "Anchor Poss 3D": nbr_poss_3d,
-        #     "Point 3d Relative": point_3d_rel,
-        #     "Point 3d Relative Dist": np.linalg.norm(point_3d_rel),
-        #     # "Reconstruction 2": np.dot(mat, components)
-        #     "Value": value
-        # })
+        rprint({
+            "Pos": sample,
+            "Anchor Poss": nbr_poss,
+            "Relative Pos": point_rel,
+            "Relative Pos Distance": np.linalg.norm(point_rel),
+            "Plane Vector 1": pv1,
+            "Plane Vector 2": pv2,
+            "Components": components,
+            "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
+            "3D Plane Vectors": pvs_3d,
+            "Point 3D": point_3d,
+            "Anchor Poss 3D": nbr_poss_3d,
+            "Point 3d Relative": point_3d_rel,
+            "Point 3d Relative Dist": np.linalg.norm(point_3d_rel),
+            # "Reconstruction 2": np.dot(mat, components)
+            "Value": value
+        })
 
-        # if np.linalg.norm(point_3d_rel) < 0.5:
-        #     exit()
+        if np.linalg.norm(point_3d_rel) < 0.5:
+            exit()
 
 
     # h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
