@@ -103,8 +103,8 @@ def plot_projection(
     # Get the query array
     # xs = grid[0].flatten()
     # ys = grid[1].flatten()
-    xs = np.linspace(bounds[0][0], bounds[1][0], 100)
-    ys = np.linspace(bounds[0][1], bounds[1][1], 100)
+    xs = np.linspace(bounds[0][0], bounds[1][0], 1000)
+    ys = np.linspace(bounds[0][1], bounds[1][1], 1000)
     grid_samples = np.array(
         [x for x in itertools.product(
             xs, ys
@@ -197,29 +197,31 @@ def plot_projection(
         )
 
 
-        if np.linalg.norm(point_3d_rel) < 0.5:
-            rprint({
-                "Pos": sample,
-                "Anchor Poss": nbr_poss,
-                "Relative Pos": point_rel,
-                "Relative Pos Distance": np.linalg.norm(point_rel),
-                "Plane Vector 1": pv1,
-                "Plane Vector 2": pv2,
-                "Components": components,
-                "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
-                "3D Plane Vectors": pvs_3d,
-                "Point 3D": point_3d,
-                "Anchor Poss 3D": nbr_poss_3d,
-                "Point 3d Relative": point_3d_rel,
-                "Point 3d Relative Dist": np.linalg.norm(point_3d_rel),
-                # "Reconstruction 2": np.dot(mat, components)
-                "Value": value
-            })
+        # if np.linalg.norm(point_3d_rel) < 0.5:
+        #     rprint({
+        #         "Pos": sample,
+        #         "Anchor Poss": nbr_poss,
+        #         "Relative Pos": point_rel,
+        #         "Relative Pos Distance": np.linalg.norm(point_rel),
+        #         "Plane Vector 1": pv1,
+        #         "Plane Vector 2": pv2,
+        #         "Components": components,
+        #         "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
+        #         "3D Plane Vectors": pvs_3d,
+        #         "Point 3D": point_3d,
+        #         "Anchor Poss 3D": nbr_poss_3d,
+        #         "Point 3d Relative": point_3d_rel,
+        #         "Point 3d Relative Dist": np.linalg.norm(point_3d_rel),
+        #         # "Reconstruction 2": np.dot(mat, components)
+        #         "Value": value
+        #     })
             # exit()
 
 
     # h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
     # h = plt.imshow(np.array(values).reshape(100,100))
+    plt.figure(figsize=(16, 9))
+
     h = plt.scatter(
         grid_samples[:,0],
         grid_samples[:,1],
