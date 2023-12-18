@@ -12,7 +12,11 @@ def get_coord_array(mol):
         return positions
 
 def get_bounds(arr, border=5.0):
-    ...
+    return [
+        (np.min(arr, axis=0)-border)[0,1],
+        (np.max(arr, axis=0)+border)[0,1]
+    ]
+
 
 def plot_projection(
         structure_path,
@@ -36,6 +40,7 @@ def plot_projection(
 
     # Get bounding box
     bounds = get_bounds(mol)
+    print(f"Bounds: {bounds}")
 
     # Generate the grid
     grid = np.meshgrid(
