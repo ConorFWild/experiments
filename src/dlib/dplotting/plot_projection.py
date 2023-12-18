@@ -135,10 +135,18 @@ def plot_projection(
         pv_keys = list(pvs.keys())
         point_rel = sample - nbr_poss[pv_keys[0][0]]
         pv1 = pvs[pv_keys[0]]
-        comp1 =  np.dot(point_rel, pv1) / np.linalg.norm(pv1)
+        # comp1 =  np.dot(point_rel, pv1) / np.linalg.norm(pv1)
 
         pv2 = pvs[pv_keys[1]]
-        comp2 =  np.dot(point_rel, pv2) / np.linalg.norm(pv2)
+        # comp2 =  np.dot(point_rel, pv2) / np.linalg.norm(pv2)
+        components = np.linalg.solve(
+            np.vstact(
+                [
+                    pv1.reshape(1,2),
+                    pv2.reshape(1,2)
+                ]),
+            point_rel
+        )
 
         rprint({
             "Pos": sample,
@@ -146,8 +154,8 @@ def plot_projection(
             "Relative Pos": point_rel,
             "Plane Vector 1": pv1,
             "Plane Vector 2": pv2,
-            "Components": (comp1, comp2),
-            "Reconstruction": (comp1 * pv1) + (comp2*pv2)
+            "Components": components,
+            "Reconstruction": (components[0] * pv1) + (components[1]*pv2)
         })
 
         # Get structure poss
