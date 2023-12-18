@@ -6,6 +6,8 @@ from rdkit.Chem import AllChem
 
 from dlib.dsmall import cif_to_mol
 
+from rich import print as rprint
+
 def get_coord_array(mol):
     for i, conformer in enumerate(mol.GetConformers()):
 
@@ -138,7 +140,7 @@ def plot_projection(
         pv2 = pvs[pv_keys[1]]
         comp2 = pv2 * np.dot(point_rel, pv2)
 
-        print({
+        rprint({
             "Pos": sample,
             "Relative Pos": point_rel,
             "Plane Vector 1": pv1,
