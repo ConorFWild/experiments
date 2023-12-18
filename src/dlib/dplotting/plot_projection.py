@@ -139,12 +139,13 @@ def plot_projection(
 
         pv2 = pvs[pv_keys[1]]
         # comp2 =  np.dot(point_rel, pv2) / np.linalg.norm(pv2)
-        components = np.linalg.solve(
-            np.vstack(
+        mat = np.vstack(
                 [
                     pv1.reshape(1,2),
                     pv2.reshape(1,2)
-                ]),
+                ])
+        components = np.linalg.solve(
+            mat,
             point_rel
         )
 
@@ -155,7 +156,8 @@ def plot_projection(
             "Plane Vector 1": pv1,
             "Plane Vector 2": pv2,
             "Components": components,
-            "Reconstruction": (components[0] * pv1) + (components[1]*pv2)
+            "Reconstruction": (components[0] * pv1) + (components[1]*pv2),
+            "Reconstruction 2": np.dot(mat, components)
         })
 
         # Get structure poss
