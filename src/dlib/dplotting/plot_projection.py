@@ -405,11 +405,11 @@ def plot_projection(structure_path,
 
         # Get the transform
         # tr = transforms[atom_ids[nbs[0]]]
-        tr_array = transform_interpolator(sample)[0]
+        # tr_array = transform_interpolator(sample)[0]
         # print(f"Transform array")
         # print(tr_array)
-        if np.isnan(tr_array[0]):
-            tr_array = transform_interpolator_nearest(sample)[0]
+        # if np.isnan(tr_array[0]):
+        tr_array = transform_interpolator_nearest(sample)[0]
             # print(tr_array)
 
         # mat = tr_array[:9].reshape(3,3)
@@ -427,7 +427,10 @@ def plot_projection(structure_path,
         # Get the sample point
         sample_point_2d = np.array([sample[0], sample[1], 0.0])
         sample_point_2d_rel = sample_point_2d - ref
-        sample_point_3d_rel = np.matmul(spatial.transform.Rotation.from_euler('zyx', rot).as_matrix(), sample_point_2d_rel)
+        sample_point_3d_rel = np.matmul(
+            spatial.transform.Rotation.from_euler('zyx', rot).as_matrix(),
+            sample_point_2d_rel,
+        )
         point_3d = sample_point_3d_rel + mov
 
         # Interpolate
