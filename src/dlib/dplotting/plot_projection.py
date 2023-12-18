@@ -402,7 +402,7 @@ def plot_projection(structure_path,
         tr_array = transform_interpolator(sample)
         print(f"Transform array")
         print(tr_array)
-        if np.isnan(tr_array[0]):
+        if np.isnan(tr_array[0][0]):
             tr_array = transform_interpolator_nearest(sample)
         # print(tr_array_nearest)
 
