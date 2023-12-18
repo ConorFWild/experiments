@@ -52,10 +52,10 @@ def get_plane_vectors(nbr_poss):
     atom_ids = list(nbr_poss.keys())
 
     pv1 = nbr_poss[atom_ids[0]] - nbr_poss[atom_ids[1]]
-    pvs[(atom_ids[1], atom_ids[0])] = pv1 / np.linalg.norm(pv1)
+    pvs[(atom_ids[1], atom_ids[0])] = pv1 #/ np.linalg.norm(pv1)
 
     pv2 = nbr_poss[atom_ids[2]] - nbr_poss[atom_ids[1]]
-    pvs[(atom_ids[1], atom_ids[2])] = pv2 / np.linalg.norm(pv2)
+    pvs[(atom_ids[1], atom_ids[2])] = pv2 #/ np.linalg.norm(pv2)
 
     return pvs
 
