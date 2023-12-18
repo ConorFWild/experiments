@@ -210,7 +210,7 @@ def plot_projection(
             "Value": value
         })
 
-        if np.linalg.norm(point_3d_rel) < 1:
+        if np.linalg.norm(point_3d_rel) < 0.5:
             exit()
 
 
