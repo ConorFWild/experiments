@@ -149,6 +149,25 @@ def plot_projection(
             point_rel
         )
 
+
+
+        # Get structure poss
+        nbr_poss_3d = {}
+        for nbr in nbs:
+            pos = st_atom_pos_dict[atom_ids[nbr]]
+            nbr_poss_3d[atom_ids[nbr]] = pos
+
+        # Get the 3d plane
+        pvs_3d = get_plane_vectors(nbr_poss_3d)
+        pv1_3d = pvs_3d[pv_keys[0]]
+        pv2_3d = pvs_3d[pv_keys[1]]
+
+        # Get the 3d pos
+        point_3d = (components[0] * pv1) + (components[1] * pv2)
+        point_3d_rel = point_3d - nbr_poss_3d[pv_keys[0][0]]
+
+        # Interpolate
+
         rprint({
             "Pos": sample,
             "Anchor Poss": nbr_poss,
@@ -156,24 +175,13 @@ def plot_projection(
             "Plane Vector 1": pv1,
             "Plane Vector 2": pv2,
             "Components": components,
-            "Reconstruction": (components[0] * pv1) + (components[1]*pv2),
+            "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
+            "3D Plane Vectors": pvs_3d,
+            "Point 3D": point_3d,
+            "Anchor Poss 3D": nbr_poss_3d,
+            "Point 3d Relative": point_3d_rel,
             # "Reconstruction 2": np.dot(mat, components)
         })
-
-        # Get structure poss
-        nbr_poss = {}
-        for nbr in nbs:
-            pos = st_atom_pos_dict[atom_ids[nbr]]
-            nbr_poss[atom_ids[nbr]] = pos
-        print(nbr_poss)
-
-        # Get the 3d plane
-
-        # Get the 3d plane coords
-
-        # Get the 3d pos
-
-        # Interpolate
         exit()
 
     # Get
