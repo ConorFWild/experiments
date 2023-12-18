@@ -379,7 +379,8 @@ def plot_projection(structure_path,
     # )
     transform_interpolator = RBFInterpolator(
         coord_array,
-        interpoland
+        interpoland,
+        smoothing=2
     )
     transform_interpolator_nearest = NearestNDInterpolator(
         coord_array,
