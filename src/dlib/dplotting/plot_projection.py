@@ -112,7 +112,7 @@ def plot_projection(
     vcells = get_vcells(kd, grid_samples)
     print(vcells)
 
-    exit()
+    # exit()
 
     # For each point
     for sample in grid_samples:
