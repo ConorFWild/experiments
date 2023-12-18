@@ -227,7 +227,8 @@ def plot_projection(
     )
     plt.scatter(
         coord_array[:,0],
-        coord_array[:,1]
+        coord_array[:,1],
+        c='r'
     )
     plt.axis('scaled')
     # plt.colorbar()
