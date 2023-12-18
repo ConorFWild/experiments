@@ -119,13 +119,12 @@ def plot_projection(
         print(np.array(atom_ids)[nbs])
         # exit()
 
-        # Get structure poss
+        # Get the 2d Poss
         nbr_poss = {}
         for nbr in nbs:
-            pos = st_atom_pos_dict[atom_ids[nbr]]
+            pos = coord_array[nbr]
             nbr_poss[atom_ids[nbr]] = pos
         print(nbr_poss)
-
         # Get the plane
         pvs = get_plane_vectors(nbr_poss)
         print(pvs)
@@ -147,7 +146,12 @@ def plot_projection(
             "Components": (comp1, comp2)
         })
 
-
+        # Get structure poss
+        nbr_poss = {}
+        for nbr in nbs:
+            pos = st_atom_pos_dict[atom_ids[nbr]]
+            nbr_poss[atom_ids[nbr]] = pos
+        print(nbr_poss)
 
         # Get the 3d plane
 
