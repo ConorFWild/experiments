@@ -1,5 +1,6 @@
 import numpy as np
 import gemmi
+import scipy
 import rdkit
 from rdkit.Chem import AllChem
 
