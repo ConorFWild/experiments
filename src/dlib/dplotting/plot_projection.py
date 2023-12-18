@@ -87,6 +87,7 @@ def plot_projection(
         nbs = kd.query(sample, k=3)[1]
         print(nbs)
         print(np.array(atom_ids)[nbs])
+        exit()
 
         # Get the plane
 
