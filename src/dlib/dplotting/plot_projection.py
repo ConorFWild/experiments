@@ -130,7 +130,24 @@ def plot_projection(
         pvs = get_plane_vectors(nbr_poss)
         print(pvs)
 
-        # Get the plane coords of point
+        # Get the plane coords of point relative to p1
+        pv_keys = list(pvs.keys())
+        point_rel = sample - nbr_poss[pv_keys[0][0]]
+        pv1 = pvs[pv_keys[0]]
+        comp1 = pv1 * np.dot(point_rel, pv1)
+
+        pv2 = pvs[pv_keys[1]]
+        comp2 = pv2 * np.dot(point_rel, pv2)
+
+        print({
+            "Pos": sample,
+            "Relative Pos": point_rel,
+            "Plane Vector 1": pv1,
+            "Plane Vector 2": pv2,
+            "Components": (comp1, comp2)
+        })
+
+
 
         # Get the 3d plane
 
