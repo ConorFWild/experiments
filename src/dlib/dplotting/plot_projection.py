@@ -350,19 +350,22 @@ def plot_projection(structure_path,
         rprint(transform)
         transforms[atom_ids[j]] = transform
 
-    transform_interpolator = LinearNDInterpolator(
-        coord_array,
-        np.array(
+    interpoland = np.array(
             np.concatenate(
                 [
-                tr[1].flatten(),
-                tr[2].flatten(),
+                    tr[1].flatten(),
+                    tr[2].flatten(),
                     tr[3].flatten()
-            ]
+                ]
             )
             for tr
             in transforms.keys()
         )
+    print(interpoland)
+
+    transform_interpolator = LinearNDInterpolator(
+        coord_array,
+        interpoland
     )
 
     # For each point
