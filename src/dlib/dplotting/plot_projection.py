@@ -393,7 +393,7 @@ def plot_projection(structure_path,
         )
 
         if dists[0] < 1.0:
-        rprint({
+            rprint({
             "Pos": sample_point_2d,
             "Anchor Poss": nbr_poss,
             "Relative Pos": sample_point_2d_rel,
