@@ -405,6 +405,6 @@ def plot_projection(structure_path,
         c='r'
     )
     plt.axis('scaled')
-    # plt.colorbar()
+    plt.colorbar()
     print(f"Writing map!")
     plt.savefig('test.png')
