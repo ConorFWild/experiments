@@ -174,8 +174,8 @@ def plot_projection(
         pv2_3d = pvs_3d[pv_keys[1]]
 
         # Get the 3d pos
-        point_3d = (components[0] * pv1_3d) + (components[1] * pv2_3d)
-        point_3d_rel = point_3d + nbr_poss_3d[pv_keys[0][0]]
+        point_3d_rel = (components[0] * pv1_3d) + (components[1] * pv2_3d)
+        point_3d = point_3d_rel + nbr_poss_3d[pv_keys[0][0]]
 
         # Interpolate
 
