@@ -39,7 +39,7 @@ def plot_projection(
     print([np.min(coord_array, axis=0), np.max(coord_array, axis=0)])
 
     # Get bounding box
-    bounds = get_bounds(mol)
+    bounds = get_bounds(coord_array)
     print(f"Bounds: {bounds}")
 
     # Generate the grid
