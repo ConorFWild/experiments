@@ -29,7 +29,7 @@ def plot_projection(
     # Generate the 2d projection
     AllChem.Compute2DCoords(mol)
     coord_array = get_coord_array(mol)
-    print(coord_array)
+    print([np.min(coord_array, axis=0), np.max(coord_array, axis=0)])
 
     # Get bounding box
     bounds = get_bounds(mol)
