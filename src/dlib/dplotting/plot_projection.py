@@ -331,13 +331,14 @@ def plot_projection(structure_path,
 
         poss_2d = np.pad(
             poss_2d_unpadded,
-            [(0, 1), (0, 1)]
+            [(0, 0), (0, 1)]
         )
         poss_3d = np.array(
             [
             st_atom_pos_dict[atom_ids[nbr]]
             for nbr
-            in nbs]
+            in nbs
+            ]
         )
         print(poss_2d)
         print(poss_3d)
