@@ -5,6 +5,7 @@ import gemmi
 from scipy.spatial import KDTree
 import rdkit
 from rdkit.Chem import AllChem
+from matplotlib import pyplot as plt
 
 from dlib.dsmall import cif_to_mol
 
@@ -80,7 +81,7 @@ def plot_projection(
     # atom_id_array = get_atom_id_array(mol)
 
     # Load the map
-    dmap = gemmi.read_ccp4_map(str(map_path))
+    dmap = gemmi.read_ccp4_map(str(map_path)).grid
 
     # Generate the 2d projection
     AllChem.Compute2DCoords(mol)
@@ -120,16 +121,17 @@ def plot_projection(
     # exit()
 
     # For each point
+    values = []
     for sample in grid_samples:
     # for j, atom_id in enumerate(atom_ids):
-        print(sample)
+    #     print(sample)
         # Get the anchor atoms
         dists, nbs = kd.query(sample, k=3)
         if dists[0] > 3:
-            print(dists[0])
+            # print(dists[0])
             continue
-        print(nbs)
-        print(np.array(atom_ids)[nbs])
+        # print(nbs)
+        # print(np.array(atom_ids)[nbs])
         # exit()
 
         # Get the 2d Poss
@@ -137,10 +139,10 @@ def plot_projection(
         for nbr in nbs:
             pos = coord_array[nbr]
             nbr_poss[atom_ids[nbr]] = pos
-        print(nbr_poss)
+        # print(nbr_poss)
         # Get the plane
         pvs = get_plane_vectors(nbr_poss)
-        print(pvs)
+        # print(pvs)
 
         # Get the plane coords of point relative to p1
         pv_keys = list(pvs.keys())
@@ -179,23 +181,33 @@ def plot_projection(
 
         # Interpolate
 
-        rprint({
-            "Pos": sample,
-            "Anchor Poss": nbr_poss,
-            "Relative Pos": point_rel,
-            "Relative Pos Distance": np.linalg.norm(point_rel),
-            "Plane Vector 1": pv1,
-            "Plane Vector 2": pv2,
-            "Components": components,
-            "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
-            "3D Plane Vectors": pvs_3d,
-            "Point 3D": point_3d,
-            "Anchor Poss 3D": nbr_poss_3d,
-            "Point 3d Relative": point_3d_rel,
-            "Point 3d Relative Dist": np.linalg.norm(point_3d_rel)
-            # "Reconstruction 2": np.dot(mat, components)
-        })
-        exit()
+        values.append(
+            dmap.interpolate_value(gemmi.Position(point_3d[0], point_3d[1], point_3d[2]))
+        )
+
+
+    h = plt.contourf(grid_samples[:,0], grid_samples[:,1], np.array(values))
+    plt.axis('scaled')
+    plt.colorbar()
+    plt.save_fig('test.png')
+
+        # rprint({
+        #     "Pos": sample,
+        #     "Anchor Poss": nbr_poss,
+        #     "Relative Pos": point_rel,
+        #     "Relative Pos Distance": np.linalg.norm(point_rel),
+        #     "Plane Vector 1": pv1,
+        #     "Plane Vector 2": pv2,
+        #     "Components": components,
+        #     "Reconstruction": (components[0] * pv1) + (components[1] * pv2),
+        #     "3D Plane Vectors": pvs_3d,
+        #     "Point 3D": point_3d,
+        #     "Anchor Poss 3D": nbr_poss_3d,
+        #     "Point 3d Relative": point_3d_rel,
+        #     "Point 3d Relative Dist": np.linalg.norm(point_3d_rel)
+        #     # "Reconstruction 2": np.dot(mat, components)
+        # })
+        # exit()
 
     # Get
 
