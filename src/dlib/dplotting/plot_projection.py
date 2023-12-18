@@ -1,6 +1,6 @@
 import numpy as np
 import gemmi
-import scipy
+from scipy import spatial
 import rdkit
 from rdkit.Chem import AllChem
 
@@ -21,7 +21,7 @@ def get_bounds(arr, border=5.0):
 def get_vcells(coord_array, grid):
 
     # Get the atom coord kdtree
-    kd = scipy.spatial.kdtree(
+    kd = spatial.kdtree(
         coord_array
     )
 
