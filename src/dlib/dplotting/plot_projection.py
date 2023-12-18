@@ -13,8 +13,8 @@ def get_coord_array(mol):
 
 def get_bounds(arr, border=5.0):
     return [
-        (np.min(arr, axis=0)-border)[(0,1)],
-        (np.max(arr, axis=0)+border)[(0,1)]
+        (np.min(arr, axis=0)-border)[np.array(0,1),],
+        (np.max(arr, axis=0)+border)[np.array(0,1),]
     ]
 
 
