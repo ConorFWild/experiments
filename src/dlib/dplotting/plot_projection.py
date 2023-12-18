@@ -410,6 +410,10 @@ def plot_projection(structure_path,
         ref = tr_array[10:13]
         mov = tr_array[13:16]
 
+        print(mat)
+        print(ref)
+        print(mov)
+
 
         # Get the sample point
         sample_point_2d = np.array([sample[0], sample[1], 0.0])
