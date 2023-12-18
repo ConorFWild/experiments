@@ -37,14 +37,25 @@ def get_structure_atom_array(st):
                 if res.name == "LIG":
                     for atom in res:
                         pos = atom.pos
-                        atoms[atom.name] = [
+                        atoms[atom.name] = np.array([
                             pos.x,
                             pos.y,
                             pos.z
-                        ]
+                        ])
 
     return atoms
 
+def get_plane_vectors(nbr_poss):
+    pvs = {}
+    atom_ids = list(nbr_poss.keys())
+
+    pv1 = nbr_poss[atom_ids[0]] - nbr_poss[atom_ids[1]]
+    pvs[(atom_ids[1], atom_ids[0])] = pv1 / np.linalg.norm(pv1)
+
+    pv2 = nbr_poss[atom_ids[2]] - nbr_poss[atom_ids[1]]
+    pvs[(atom_ids[1], atom_ids[2])] = pv2 / np.linalg.norm(pv2)
+
+    return pvs
 
 def plot_projection(
         structure_path,
@@ -114,7 +125,10 @@ def plot_projection(
             pos = st_atom_pos_dict[atom_ids[nbr]]
             nbr_poss[atom_ids[nbr]] = pos
         print(nbr_poss)
+
         # Get the plane
+        pvs = get_plane_vectors(nbr_poss)
+        print(pvs)
 
         # Get the plane coords of point
 
