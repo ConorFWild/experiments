@@ -1,7 +1,7 @@
 import numpy as np
 import gemmi
 import rdkit
-from rdkit import AllChem
+from rdkit.Chem import AllChem
 
 from dlib.dsmall import cif_to_mol
 
