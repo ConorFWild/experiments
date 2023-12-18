@@ -157,7 +157,7 @@ def plot_projection(
             "Plane Vector 2": pv2,
             "Components": components,
             "Reconstruction": (components[0] * pv1) + (components[1]*pv2),
-            "Reconstruction 2": np.dot(mat, components)
+            # "Reconstruction 2": np.dot(mat, components)
         })
 
         # Get structure poss
