@@ -409,7 +409,7 @@ def plot_projection(structure_path,
         # mat = tr_array[:9].reshape(3,3)
         # ref = tr_array[9:12]
         # mov = tr_array[12:16]
-        rot = tr_array[:3].reshape(3,3)
+        rot = tr_array[:3]
         ref = tr_array[3:6]
         mov = tr_array[6:9]
 
