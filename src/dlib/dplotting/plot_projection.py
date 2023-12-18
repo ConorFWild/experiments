@@ -5,6 +5,12 @@ from rdkit.Chem import AllChem
 
 from dlib.dsmall import cif_to_mol
 
+def get_coord_array(mol):
+    for i, conformer in enumerate(mol.GetConformers()):
+
+        positions: np.ndarray = conformer.GetPositions()
+        return positions
+
 def plot_projection(
         structure_path,
         cif_path,
@@ -23,6 +29,7 @@ def plot_projection(
     # Generate the 2d projection
     AllChem.Compute2DCoords(mol)
     coord_array = get_coord_array(mol)
+    print(coord_array)
 
     # Get bounding box
     bounds = get_bounds(mol)
