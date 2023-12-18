@@ -225,6 +225,10 @@ def plot_projection(
         grid_samples[:,1],
         c=values
     )
+    plt.scatter(
+        coord_array[:,0],
+        coord_array[:,1]
+    )
     plt.axis('scaled')
     # plt.colorbar()
     print(f"Writing map!")
