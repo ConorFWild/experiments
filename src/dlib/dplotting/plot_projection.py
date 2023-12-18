@@ -210,6 +210,9 @@ def plot_projection(
             "Value": value
         })
 
+        if np.linalg.norm(point_3d_rel) < 1:
+            exit()
+
 
     # h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
     # h = plt.imshow(np.array(values).reshape(100,100))
