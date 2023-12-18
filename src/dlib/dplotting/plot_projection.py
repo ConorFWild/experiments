@@ -325,7 +325,7 @@ def plot_projection(structure_path,
                 in nbs
             )
 
-        print(poss_2d)
+        print(poss_2d_unpadded)
 
         poss_2d = np.pad(
             poss_2d_unpadded,
