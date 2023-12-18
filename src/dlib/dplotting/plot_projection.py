@@ -29,6 +29,22 @@ def get_vcells(kd, grid_samples):
 
     return nbs[1]
 
+def get_structure_atom_array(st):
+    atoms = {}
+    for model in st:
+        for chain in model:
+            for res in chain:
+                if res.name == "LIG":
+                    for atom in res:
+                        pos = atom.pos
+                        atoms[atom.name] = [
+                            pos.x,
+                            pos.y,
+                            pos.z
+                        ]
+
+    return atoms
+
 
 def plot_projection(
         structure_path,
@@ -37,6 +53,9 @@ def plot_projection(
 ):
     # Load the structure
     st = gemmi.read_structure(str(structure_path))
+
+    # Structure atom array
+    st_atom_pos_dict = get_structure_atom_array(st)
 
     # Load the cif
     cif = gemmi.cif.read(str(cif_path))
@@ -87,8 +106,14 @@ def plot_projection(
         nbs = kd.query(sample, k=3)[1]
         print(nbs)
         print(np.array(atom_ids)[nbs])
-        exit()
+        # exit()
 
+        # Get structure poss
+        nbr_poss = {}
+        for nbr in nbs:
+            pos = st_atom_pos_dict[atom_ids[nbr]]
+            nbr_poss[atom_ids[nbr]] = pos
+        print(nbr_poss)
         # Get the plane
 
         # Get the plane coords of point
