@@ -319,13 +319,17 @@ def plot_projection(structure_path,
     transforms = []
     for pos in coord_array:
         dists, nbs = kd.query(pos, k=3)
-        poss_2d = np.pad(
-            np.array(
+        poss_2d_unpadded = np.array(
                 coord_array[nbr]
                 for nbr
                 in nbs
-            ),
-            [(0,1),(0,1)]
+            )
+
+        print(poss_2d)
+
+        poss_2d = np.pad(
+            poss_2d_unpadded,
+            [(0, 1), (0, 1)]
         )
         poss_3d = np.array(
             st_atom_pos_dict[atom_ids[nbr]]
