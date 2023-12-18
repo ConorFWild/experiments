@@ -351,6 +351,7 @@ def plot_projection(structure_path,
         transforms[atom_ids[j]] = transform
 
     interpoland = np.array(
+        [
             np.concatenate(
                 [
                     tr[1].flatten(),
@@ -360,6 +361,7 @@ def plot_projection(structure_path,
             )
             for tr
             in transforms.keys()
+            ]
         )
     print(interpoland)
 
