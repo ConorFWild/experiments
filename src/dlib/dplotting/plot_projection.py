@@ -183,6 +183,7 @@ def plot_projection(
             "Pos": sample,
             "Anchor Poss": nbr_poss,
             "Relative Pos": point_rel,
+            "Relative Pos Distance": np.linalg.norm(point_rel),
             "Plane Vector 1": pv1,
             "Plane Vector 2": pv2,
             "Components": components,
@@ -191,6 +192,7 @@ def plot_projection(
             "Point 3D": point_3d,
             "Anchor Poss 3D": nbr_poss_3d,
             "Point 3d Relative": point_3d_rel,
+            "Point 3d Relative Dist": np.linalg.norm(point_3d_rel)
             # "Reconstruction 2": np.dot(mat, components)
         })
         exit()
