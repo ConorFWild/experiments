@@ -399,11 +399,11 @@ def plot_projection(structure_path,
 
         # Get the transform
         # tr = transforms[atom_ids[nbs[0]]]
-        tr_array = transform_interpolator(sample)[0]
+        # tr_array = transform_interpolator(sample)[0]
         # print(f"Transform array")
         # print(tr_array)
-        if np.isnan(tr_array[0]):
-            tr_array = transform_interpolator_nearest(sample)[0]
+        # if np.isnan(tr_array[0]):
+        tr_array = transform_interpolator_nearest(sample)[0]
             # print(tr_array)
 
         # mat = tr_array[:9].reshape(3,3)
@@ -437,19 +437,19 @@ def plot_projection(structure_path,
             value
         )
 
-        if dists[0] < 1.0:
-            rprint({
-            "Pos": sample_point_2d,
-            "Anchor Pos 2d": tr[2],
-            "Anchor Pos 3d": tr[3],
-            "Relative Pos": sample_point_2d_rel,
-            "Relative Pos Distance": np.linalg.norm(sample_point_2d_rel),
-            "Point 3D": point_3d,
-            "Point 3d Relative": sample_point_3d_rel,
-            "Point 3d Relative Dist": np.linalg.norm(sample_point_3d_rel),
-            # "Reconstruction 2": np.dot(mat, components)
-            "Value": value
-        })
+        # if dists[0] < 1.0:
+        #     rprint({
+        #     "Pos": sample_point_2d,
+        #     "Anchor Pos 2d": tr[2],
+        #     "Anchor Pos 3d": tr[3],
+        #     "Relative Pos": sample_point_2d_rel,
+        #     "Relative Pos Distance": np.linalg.norm(sample_point_2d_rel),
+        #     "Point 3D": point_3d,
+        #     "Point 3d Relative": sample_point_3d_rel,
+        #     "Point 3d Relative Dist": np.linalg.norm(sample_point_3d_rel),
+        #     # "Reconstruction 2": np.dot(mat, components)
+        #     "Value": value
+        # })
 
 
     plt.figure(figsize=(16, 9))
