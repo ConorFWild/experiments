@@ -190,7 +190,7 @@ def plot_projection(
     h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
     plt.axis('scaled')
     plt.colorbar()
-    plt.save_fig('test.png')
+    plt.savefig('test.png')
 
         # rprint({
         #     "Pos": sample,
