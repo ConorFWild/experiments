@@ -383,7 +383,7 @@ def plot_projection(structure_path,
         #     print(sample)
         # Get the anchor atoms
         dists, nbs = kd.query(sample, k=3)
-        if dists[0] > 1:
+        if dists[0] > 2:
             # print(dists[0])
             values.append(0)
             continue
