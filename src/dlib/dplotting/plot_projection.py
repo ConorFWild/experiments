@@ -27,7 +27,7 @@ def get_vcells(kd, grid_samples):
     # Get nearest neighbour
     nbs = kd.query(grid_samples)
 
-    return nbs
+    return nbs[1]
 
 
 def plot_projection(
@@ -84,7 +84,7 @@ def plot_projection(
     # for j, atom_id in enumerate(atom_ids):
         print(sample)
         # Get the anchor atoms
-        nbs = kd.query(sample, k=3)
+        nbs = kd.query(sample, k=3)[1]
         print(nbs)
         print(np.array(atom_ids)[nbs])
 
