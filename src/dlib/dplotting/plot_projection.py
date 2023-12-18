@@ -145,7 +145,7 @@ def plot_projection(
                     pv2.reshape(1,2)
                 ])
         components = np.linalg.solve(
-            mat,
+            mat.T,
             point_rel
         )
 
