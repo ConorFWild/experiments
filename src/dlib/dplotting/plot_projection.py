@@ -279,7 +279,7 @@ def plot_projection(structure_path,
 
     # Load the cif
     cif = gemmi.cif.read(str(cif_path))
-    mol, atom_ids = cif_to_mol(cif)
+    mol, atom_ids, atom_type_loop = cif_to_mol(cif)
 
     # # Get the atom id array
     # atom_id_array = get_atom_id_array(mol)
@@ -291,7 +291,13 @@ def plot_projection(structure_path,
 
     # Generate the 2d projection
     AllChem.Compute2DCoords(mol)
-    coord_array = get_coord_array(mol)
+    mask = []
+    for el in atom_type_loop:
+        if el == "H":
+            mask.append(False)
+        else:
+            mask.append(True)
+    coord_array = get_coord_array(mol)[np.array(mask), :]
     print(coord_array)
     print([np.min(coord_array, axis=0), np.max(coord_array, axis=0)])
 
