@@ -316,8 +316,8 @@ def plot_projection(structure_path,
     )
 
     # For each atom get the three closest
-    transforms = []
-    for pos in coord_array:
+    transforms = {}
+    for j, pos in enumerate(coord_array):
         dists, nbs = kd.query(pos, k=3)
         poss_2d_unpadded = np.array(
             [
@@ -347,10 +347,64 @@ def plot_projection(structure_path,
             poss_3d
         )
         rprint(transform)
-        transforms.append(transform)
+        transforms[atom_ids[j]] = transform
 
+        # For each point
+        values = []
+        for sample in grid_samples:
+            # for j, atom_id in enumerate(atom_ids):
+            #     print(sample)
+            # Get the anchor atoms
+            dists, nbs = kd.query(sample, k=3)
+            if dists[0] > 3:
+                # print(dists[0])
+                values.append(0)
+                continue
+            # print(nbs)
+            # print(np.array(atom_ids)[nbs])
+            # exit()
 
-    # Get the best plane through ligand
+            # Get the 2d Poss
+            nbr_poss = {}
+            for nbr in nbs:
+                pos = coord_array[nbr]
+                nbr_poss[atom_ids[nbr]] = pos
 
+            # Get the transform
+            tr = transforms[atom_ids[nbs[0]]]
 
-    #
+            # Get the sample point
+            sample_point_2d = np.array([sample[0], sample[1], 0.0])
+            sample_point_2d_rel = sample_point_2d - tr[2]
+            sample_point_3d_rel = np.matmul(tr[1], sample_point_2d_rel)
+            point_3d = sample_point_3d_rel + tr[3]
+
+            # Interpolate
+            value = dmap.interpolate_value(
+                # value=dmap.tricubic_interpolation(
+                gemmi.Position(
+                    point_3d[0],
+                    point_3d[1],
+                    point_3d[2],
+                )
+            )
+            values.append(
+                value
+            )
+
+    plt.figure(figsize=(16, 9))
+
+    h = plt.scatter(
+        grid_samples[:,0],
+        grid_samples[:,1],
+        c=values
+    )
+    plt.scatter(
+        coord_array[:,0],
+        coord_array[:,1],
+        c='r'
+    )
+    plt.axis('scaled')
+    # plt.colorbar()
+    print(f"Writing map!")
+    plt.savefig('test.png')
