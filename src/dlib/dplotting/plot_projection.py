@@ -135,10 +135,10 @@ def plot_projection(
         pv_keys = list(pvs.keys())
         point_rel = sample - nbr_poss[pv_keys[0][0]]
         pv1 = pvs[pv_keys[0]]
-        comp1 = pv1 * np.dot(point_rel, pv1)
+        comp1 =  np.dot(point_rel, pv1)
 
         pv2 = pvs[pv_keys[1]]
-        comp2 = pv2 * np.dot(point_rel, pv2)
+        comp2 =  np.dot(point_rel, pv2)
 
         rprint({
             "Pos": sample,
