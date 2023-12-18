@@ -9,13 +9,37 @@ def get_coord_array(mol):
     for i, conformer in enumerate(mol.GetConformers()):
 
         positions: np.ndarray = conformer.GetPositions()
-        return positions
+        return positions[:, np.array([0,1])]
 
 def get_bounds(arr, border=5.0):
     return [
         (np.min(arr, axis=0)-border)[np.array([0,1]),],
         (np.max(arr, axis=0)+border)[np.array([0,1]),]
     ]
+
+def get_vcells(coord_array, grid):
+
+    # Get the atom coord kdtree
+    kd = scipy.spatial.kdtree(
+        coord_array
+    )
+
+    # Get the query array
+    xs = grid[0].flatten()
+    ys = grid[1].flatten()
+    samples = np.hstack(
+        [
+            xs.reshape(-1,1),
+            ys.reshape(-1, 1),
+        ]
+    )
+
+    # Get nearest neighbour
+    nbs = kd.query(samples)
+
+    return nbs
+
+
 
 
 def plot_projection(
@@ -51,6 +75,7 @@ def plot_projection(
 
     # Get the voronoi cells of the grid points relative to projection
     vcells = get_vcells(coord_array, grid)
+    print(vcells)
 
     # For each point
         # Get the anchor atoms
