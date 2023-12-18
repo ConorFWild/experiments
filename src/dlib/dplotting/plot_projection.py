@@ -216,12 +216,12 @@ def plot_projection(
 
 
     # h = plt.contourf(xs, ys, np.array(values).reshape(100,100))
-    # h = plt.imshow(np.array(values).reshape(100,100))
-    h = plt.scatter(
-        grid_samples[:,0],
-        grid_samples[:,1],
-        c=values
-    )
+    h = plt.imshow(np.array(values).reshape(100,100))
+    # h = plt.scatter(
+    #     grid_samples[:,0],
+    #     grid_samples[:,1],
+    #     c=values
+    # )
     plt.axis('scaled')
     # plt.colorbar()
     print(f"Writing map!")
