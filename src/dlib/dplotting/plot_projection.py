@@ -1020,16 +1020,22 @@ def plot_projection(structure_path,
 
 
         # Interpolate
-        value = dmap.interpolate_value(
-            # value=dmap.tricubic_interpolation(
-            gemmi.Position(
-                sample_3d[0][0],
-                sample_3d[0][1],
-                sample_3d[0][2],
+        tmp_vals = []
+
+        for x in np.linspace(-1,1,11):
+            pos_to_sample = sample_3d[0] + (x*plane_normal)
+            value = dmap.interpolate_value(
+                # value=dmap.tricubic_interpolation(
+                gemmi.Position(
+                    pos_to_sample[0][0],
+                    pos_to_sample[0][1],
+                    pos_to_sample[0][2],
+                )
             )
-        )
+            tmp_vals.append(value)
+
         values.append(
-            value
+            max(tmp_vals)
         )
 
         # if dists[0] < 0.5:
