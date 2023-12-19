@@ -1027,9 +1027,9 @@ def plot_projection(structure_path,
             value = dmap.interpolate_value(
                 # value=dmap.tricubic_interpolation(
                 gemmi.Position(
-                    pos_to_sample[0][0],
-                    pos_to_sample[0][1],
-                    pos_to_sample[0][2],
+                    pos_to_sample[0],
+                    pos_to_sample[1],
+                    pos_to_sample[2],
                 )
             )
             tmp_vals.append(value)
