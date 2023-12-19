@@ -1000,11 +1000,11 @@ def plot_projection(structure_path,
     for sample in grid_samples:
         # Project point into ligand components
         sample_rel_2d  = pca_2d.transform((sample - mean_2d).reshape(1,-1))
-        rprint(f"Relative sample pos: {sample_rel_2d}")
+        # rprint(f"Relative sample pos: {sample_rel_2d}")
 
         # Get the equivilent 3d pos
         sample_3d = pca_3d.inverse_transform(sample_rel_2d) + mean_3d
-        rprint(f"Sample pos 3d: {sample_3d}")
+        # rprint(f"Sample pos 3d: {sample_3d}")
         # exit()
 
         # for j, atom_id in enumerate(atom_ids):
