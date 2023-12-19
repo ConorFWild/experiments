@@ -1070,17 +1070,17 @@ def plot_projection(structure_path,
     plt.figure(figsize=(16, 9))
 
 
-    # h = plt.scatter(
-    #     grid_samples[:,0],
-    #     grid_samples[:,1],
-    #     c=values
-    # )
-    plt.imshow(np.array(values).reshape(100,100).T,
-               extent=(
-                   bounds[0][0],
-                   bounds[1][0],
-                   bounds[0][1],
-                   bounds[1][1]))
+    h = plt.scatter(
+        grid_samples[:,0],
+        grid_samples[:,1],
+        c=values
+    )
+    # plt.imshow(np.array(values).reshape(100,100).T,
+    #            extent=(
+    #                bounds[0][0],
+    #                bounds[1][0],
+    #                bounds[0][1],
+    #                bounds[1][1]))
     plt.scatter(
         projected_atom_poss_array_2d[:,0],
         projected_atom_poss_array_2d[:,1],
