@@ -1048,7 +1048,22 @@ def plot_projection(structure_path,
         # })
 
 
+    a = plane_normal
+    d = np.dot(mean_3d, plane_normal)
+    projected_atom_poss = []
+    for coord in st_atom_pos_dict.values():
+        plane_pos = coord - (
+                (
+            (np.dot(coord, a) - d) / np.dot(a,a)
+        ) * a
+        )
+        projected_atom_poss.append(plane_pos)
+
+    projected_atom_poss_array = np.array(projected_atom_poss)
+    rprint(projected_atom_poss_array)
+
     plt.figure(figsize=(16, 9))
+
 
     h = plt.scatter(
         grid_samples[:,0],
