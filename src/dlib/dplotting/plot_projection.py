@@ -977,15 +977,21 @@ def plot_projection(structure_path,
     )
 
     # Get the 3d best fit plane thorugh pca
-    pca = decomposition.PCA(n_components=2)
+    pca_3d = decomposition.PCA(n_components=2)
     coord_array_3d = np.array(
         [
             x for x in st_atom_pos_dict.values()
         ]
     )
-    pca.fit(coord_array_3d)
-    components = pca.components_
-    rprint(components)
+    pca_3d.fit(coord_array_3d)
+    components_3d = pca_3d.components_
+    rprint(components_3d)
+
+    # Get the
+    pca_2d = decomposition.PCA(n_components=2)
+    pca_2d.fit(coord_array)
+    components_2d = pca_2d.components_
+    rprint(components_2d)
 
     # Get the transform between the planes
 
