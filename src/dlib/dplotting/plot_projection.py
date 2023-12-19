@@ -896,6 +896,7 @@ def plot_projection(structure_path,
         if dists[0] < 0.5:
             rprint({
             "Pos": sample,
+                "Anchor Pos 2d": coord_array[nbs[0]],
             "Anchor Pos 3d": nbr_poss[atom_ids[nbs[0]]],
             "Point 3D": point_3d,
             "Value": value
