@@ -1075,7 +1075,7 @@ def plot_projection(structure_path,
     #     grid_samples[:,1],
     #     c=values
     # )
-    plt.countourf(
+    plt.contourf(
         xs,
         ys,
         np.array(values).reshape(100, 100)
