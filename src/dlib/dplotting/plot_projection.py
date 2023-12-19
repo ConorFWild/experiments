@@ -1060,7 +1060,10 @@ def plot_projection(structure_path,
         projected_atom_poss.append(plane_pos)
 
     projected_atom_poss_array = np.array(projected_atom_poss)
-    rprint(projected_atom_poss_array)
+    projected_atom_poss_array_rel = projected_atom_poss_array - mean_3d
+    projected_atom_poss_array_rel_pca = pca_3d.transform(projected_atom_poss_array_rel)
+    projected_atom_poss_array_2d = pca_2d.inverse_transform(projected_atom_poss_array_rel_pca) + mean_2d
+    rprint(projected_atom_poss_array_2d)
 
     plt.figure(figsize=(16, 9))
 
@@ -1070,11 +1073,11 @@ def plot_projection(structure_path,
         grid_samples[:,1],
         c=values
     )
-    # plt.scatter(
-    #     coord_array[:,0],
-    #     coord_array[:,1],
-    #     c='r'
-    # )
+    plt.scatter(
+        projected_atom_poss_array_2d[:,0],
+        projected_atom_poss_array_2d[:,1],
+        c='r'
+    )
     plt.axis('scaled')
     plt.colorbar()
     print(f"Writing map!")
