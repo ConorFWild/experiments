@@ -987,6 +987,8 @@ def plot_projection(structure_path,
     components = pca.components_
     rprint(components)
 
+    # Get the transform between the planes
+
 
     exit()
 
