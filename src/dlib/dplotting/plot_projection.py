@@ -743,8 +743,8 @@ def plot_projection(structure_path,
 
     # Generate the grid
 
-    xs = np.linspace(bounds[0][0], bounds[1][0], 500)
-    ys = np.linspace(bounds[0][1], bounds[1][1], 500)
+    xs = np.linspace(bounds[0][0], bounds[1][0], 100)
+    ys = np.linspace(bounds[0][1], bounds[1][1], 100)
     grid_samples = np.array(
         [x for x in itertools.product(
             xs, ys
