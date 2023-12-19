@@ -702,3 +702,223 @@ def plot_projection(structure_path,
 #     plt.colorbar()
 #     print(f"Writing map!")
 #     plt.savefig('test.png')
+
+def plot_projection(structure_path,
+        cif_path,
+        map_path
+):
+    # Load the structure
+    st = gemmi.read_structure(str(structure_path))
+
+    # Structure atom array
+    st_atom_pos_dict = get_structure_atom_array(st)
+
+    # Load the cif
+    cif = gemmi.cif.read(str(cif_path))
+    mol, atom_ids, atom_type_loop = cif_to_mol(cif)
+
+    # # Get the atom id array
+    # atom_id_array = get_atom_id_array(mol)
+
+    # Load the map
+    ccp4 = gemmi.read_ccp4_map(str(map_path), )
+    ccp4.setup(0.0)
+    dmap = ccp4.grid
+
+    # Generate the 2d projection
+    AllChem.Compute2DCoords(mol)
+    mask = []
+    for el in atom_type_loop:
+        if el == "H":
+            mask.append(False)
+        else:
+            mask.append(True)
+    coord_array = get_coord_array(mol)[np.array(mask), :]
+    print(coord_array)
+    print([np.min(coord_array, axis=0), np.max(coord_array, axis=0)])
+
+    # Get bounding box
+    bounds = get_bounds(coord_array)
+    print(f"Bounds: {bounds}")
+
+    # Generate the grid
+
+    xs = np.linspace(bounds[0][0], bounds[1][0], 500)
+    ys = np.linspace(bounds[0][1], bounds[1][1], 500)
+    grid_samples = np.array(
+        [x for x in itertools.product(
+            xs, ys
+        )]
+    )
+    print(grid_samples)
+    print(grid_samples.shape)
+    # Get the voronoi cells of the grid points relative to projection
+    # Get the atom coord kdtree
+    kd = KDTree(
+        coord_array
+    )
+
+    # For each atom get the three closest
+    transforms = {}
+    for j, pos in enumerate(coord_array):
+        dists, nbs = kd.query(pos, k=3)
+        poss_2d_unpadded = np.array(
+            [
+                coord_array[nbr]
+                for nbr
+                in nbs
+                ]
+            )
+
+        print(poss_2d_unpadded)
+
+        poss_2d = np.pad(
+            poss_2d_unpadded,
+            [(0, 0), (0, 1)]
+        )
+        poss_3d = np.array(
+            [
+            st_atom_pos_dict[atom_ids[nbr]]
+            for nbr
+            in nbs
+            ]
+        )
+        print(poss_2d)
+        print(poss_3d)
+        transform = get_transform(
+            poss_2d,
+            poss_3d
+        )
+        rprint(transform)
+        transforms[atom_ids[j]] = transform
+    for tr in transforms.values():
+        print(tr[1])
+
+    interpoland = np.array(
+        [
+            np.concatenate(
+                [
+                    # tr[1].flatten(),
+                    # tr[2].flatten(),
+                    tr[3].flatten()
+                ]
+            )
+            for tr
+            in transforms.values()
+            ]
+        )
+    print(interpoland)
+
+    # transform_interpolator = LinearNDInterpolator(
+    #     coord_array,
+    #     interpoland
+    # )
+    transform_interpolator = RBFInterpolator(
+        coord_array,
+        interpoland,
+        smoothing=2
+    )
+    # transform_interpolator_nearest = NearestNDInterpolator(
+    #     coord_array,
+    #     interpoland
+    # )
+
+    # For each point
+    values = []
+    for sample in grid_samples:
+        # for j, atom_id in enumerate(atom_ids):
+        #     print(sample)
+        # Get the anchor atoms
+        dists, nbs = kd.query(sample, k=3)
+        if dists[0] > 2:
+            # print(dists[0])
+            values.append(0)
+            continue
+        # print(nbs)
+        # print(np.array(atom_ids)[nbs])
+        # exit()
+
+        # Get the 2d Poss
+        nbr_poss = {}
+        for nbr in nbs:
+            pos = coord_array[nbr]
+            nbr_poss[atom_ids[nbr]] = pos
+
+        # Get the transform
+        # tr = transforms[atom_ids[nbs[0]]]
+        # tr_array = transform_interpolator(sample)[0]
+        tr_array = transform_interpolator(sample.reshape(1,2))[0]
+
+        # print(f"Transform array")
+        # print(tr_array)
+        # if np.isnan(tr_array[0]):
+        # tr_array = transform_interpolator_nearest(sample)[0]
+            # print(tr_array)
+
+        # mat = tr_array[:9].reshape(3,3)
+        # ref = tr_array[9:12]
+        # mov = tr_array[12:16]
+        # rot = tr_array[:3]
+        # ref = tr_array[3:6]
+        # mov = tr_array[6:9]
+
+        # print(mat)
+        # print(ref)
+        # print(mov)
+
+
+        # Get the sample point
+        # sample_point_2d = np.array([sample[0], sample[1], 0.0])
+        # sample_point_2d_rel = sample_point_2d - ref
+        # sample_point_3d_rel = np.matmul(
+        #     spatial.transform.Rotation.from_euler('zyx', rot).as_matrix(),
+        #     sample_point_2d_rel,
+        # )
+        # point_3d = sample_point_3d_rel + mov
+
+        point_3d = tr_array
+
+        # Interpolate
+        value = dmap.interpolate_value(
+            # value=dmap.tricubic_interpolation(
+            gemmi.Position(
+                point_3d[0],
+                point_3d[1],
+                point_3d[2],
+            )
+        )
+        values.append(
+            value
+        )
+
+        if dists[0] < 1.0:
+            rprint({
+            "Pos": sample,
+            # "Anchor Pos 2d": tr[2],
+            # "Anchor Pos 3d": tr[3],
+            # "Relative Pos": sample_point_2d_rel,
+            # "Relative Pos Distance": np.linalg.norm(sample_point_2d_rel),
+            "Point 3D": point_3d,
+            # "Point 3d Relative": sample_point_3d_rel,
+            # "Point 3d Relative Dist": np.linalg.norm(sample_point_3d_rel),
+            # "Reconstruction 2": np.dot(mat, components)
+            "Value": value
+        })
+
+
+    plt.figure(figsize=(16, 9))
+
+    h = plt.scatter(
+        grid_samples[:,0],
+        grid_samples[:,1],
+        c=values
+    )
+    plt.scatter(
+        coord_array[:,0],
+        coord_array[:,1],
+        c='r'
+    )
+    plt.axis('scaled')
+    plt.colorbar()
+    print(f"Writing map!")
+    plt.savefig('test.png')
