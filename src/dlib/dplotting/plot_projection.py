@@ -1076,8 +1076,8 @@ def plot_projection(structure_path,
     #     c=values
     # )
     plt.countourf(
-        grid_samples[:, 0],
-            grid_samples[:,1],
+        xs,
+        ys,
         np.array(values).reshape(100, 100)
     )
     # plt.imshow(np.array(values).reshape(100,100).T,
