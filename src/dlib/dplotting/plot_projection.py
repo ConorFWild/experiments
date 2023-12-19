@@ -1078,7 +1078,7 @@ def plot_projection(structure_path,
     plt.contourf(
         xs,
         ys,
-        np.array(values).reshape(100, 100)
+        np.array(values).reshape(100, 100).T
     )
     # plt.imshow(np.array(values).reshape(100,100).T,
     #            extent=(
