@@ -987,6 +987,12 @@ def plot_projection(structure_path,
     components_3d = pca_3d.components_
     mean_3d = np.mean(components_3d, axis=0)
     rprint(components_3d)
+    plane_normal = np.cross(
+        components_3d[0],
+        components_3d[1]
+    )
+    rprint(plane_normal)
+
 
     # Get the
     pca_2d = decomposition.PCA(n_components=2)
@@ -1010,6 +1016,7 @@ def plot_projection(structure_path,
         # for j, atom_id in enumerate(atom_ids):
         #     print(sample)
         # Get the anchor atoms
+
 
 
         # Interpolate
