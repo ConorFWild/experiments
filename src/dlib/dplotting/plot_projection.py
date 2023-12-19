@@ -1022,7 +1022,7 @@ def plot_projection(structure_path,
         # Interpolate
         tmp_vals = []
 
-        for x in np.linspace(-1,1,11):
+        for x in np.linspace(-0.5,0.5,11):
             pos_to_sample = sample_3d[0] + (x*plane_normal)
             value = dmap.interpolate_value(
                 # value=dmap.tricubic_interpolation(
