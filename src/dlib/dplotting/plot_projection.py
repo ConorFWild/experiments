@@ -1070,10 +1070,15 @@ def plot_projection(structure_path,
     plt.figure(figsize=(16, 9))
 
 
-    h = plt.scatter(
-        grid_samples[:,0],
-        grid_samples[:,1],
-        c=values
+    # h = plt.scatter(
+    #     grid_samples[:,0],
+    #     grid_samples[:,1],
+    #     c=values
+    # )
+    plt.countourf(
+        grid_samples[:, 0],
+            grid_samples[:,1],
+        np.array(values).reshape(100, 100)
     )
     # plt.imshow(np.array(values).reshape(100,100).T,
     #            extent=(
