@@ -1075,7 +1075,7 @@ def plot_projection(structure_path,
     #     grid_samples[:,1],
     #     c=values
     # )
-    plt.imshow(np.array(values).reshape(100,100),
+    plt.imshow(np.array(values).reshape(100,100).T,
                extent=(
                    bounds[0][0]-0.5,
                    bounds[1][0]-0.5,
