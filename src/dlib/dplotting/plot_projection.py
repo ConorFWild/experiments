@@ -1055,11 +1055,11 @@ def plot_projection(structure_path,
         grid_samples[:,1],
         c=values
     )
-    plt.scatter(
-        coord_array[:,0],
-        coord_array[:,1],
-        c='r'
-    )
+    # plt.scatter(
+    #     coord_array[:,0],
+    #     coord_array[:,1],
+    #     c='r'
+    # )
     plt.axis('scaled')
     plt.colorbar()
     print(f"Writing map!")
