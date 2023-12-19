@@ -1076,7 +1076,11 @@ def plot_projection(structure_path,
     #     c=values
     # )
     plt.imshow(np.array(values).reshape(100,100).T,
-               extent=(bounds[0][0]-0.5, bounds[0][1]-0.5, bounds[0][1]-0.5, bounds[1][1]-0.5))
+               extent=(
+                   bounds[0][0]-0.5,
+                   bounds[1][0]-0.5,
+                   bounds[0][1]-0.5,
+                   bounds[1][1]-0.5))
     plt.scatter(
         projected_atom_poss_array_2d[:,0],
         projected_atom_poss_array_2d[:,1],
