@@ -983,9 +983,11 @@ def plot_projection(structure_path,
             x for x in st_atom_pos_dict.values()
         ]
     )
-    pca.fit()
+    pca.fit(coord_array_3d)
     components = pca.components_
     rprint(components)
+
+
     exit()
 
 
