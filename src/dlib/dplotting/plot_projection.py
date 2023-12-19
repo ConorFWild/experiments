@@ -843,7 +843,7 @@ def plot_projection(structure_path,
         # Get the 2d Poss
         nbr_poss = {}
         for nbr in nbs:
-            pos = st_atom_pos_dict[nbr]
+            pos = st_atom_pos_dict[atom_ids[nbr]]
             nbr_poss[atom_ids[nbr]] = pos
 
         # Get the transform
