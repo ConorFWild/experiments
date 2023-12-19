@@ -811,19 +811,19 @@ def plot_projection(structure_path,
 
 
 
-    # transform_interpolator = LinearNDInterpolator(
-    #     coord_array,
-    #     interpoland
-    # )
-    transform_interpolator = RBFInterpolator(
+    transform_interpolator = LinearNDInterpolator(
         coord_array,
-        interpoland,
-        # smoothing=2
+        interpoland
     )
-    # transform_interpolator_nearest = NearestNDInterpolator(
+    # transform_interpolator = RBFInterpolator(
     #     coord_array,
-    #     interpoland
+    #     interpoland,
+    #     # smoothing=2
     # )
+    transform_interpolator_nearest = NearestNDInterpolator(
+        coord_array,
+        interpoland
+    )
 
     # For each point
     values = []
@@ -853,8 +853,8 @@ def plot_projection(structure_path,
 
         # print(f"Transform array")
         # print(tr_array)
-        # if np.isnan(tr_array[0]):
-        # tr_array = transform_interpolator_nearest(sample)[0]
+        if np.isnan(tr_array[0]):
+            tr_array = transform_interpolator_nearest(sample)[0]
             # print(tr_array)
 
         # mat = tr_array[:9].reshape(3,3)
