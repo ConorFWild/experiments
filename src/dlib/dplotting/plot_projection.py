@@ -1080,7 +1080,7 @@ def plot_projection(structure_path,
         projected_atom_poss_array_2d[:,1],
         c='r'
     )
-    # plt.axis('scaled')
+    plt.axis('scaled')
     plt.colorbar()
     print(f"Writing map!")
     plt.savefig('test.png')
