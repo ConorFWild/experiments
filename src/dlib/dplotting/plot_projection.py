@@ -985,23 +985,28 @@ def plot_projection(structure_path,
     )
     pca_3d.fit(coord_array_3d)
     components_3d = pca_3d.components_
+    mean_3d = np.mean(components_3d, axis=0)
     rprint(components_3d)
 
     # Get the
     pca_2d = decomposition.PCA(n_components=2)
     pca_2d.fit(coord_array)
     components_2d = pca_2d.components_
+    mean_2d = np.mean(coord_array, axis=0)
     rprint(components_2d)
-
-    # Get the transform between the planes
-
-
-    exit()
-
 
     # For each point
     values = []
     for sample in grid_samples:
+        # Project point into ligand components
+        sample_rel_2d  = pca_2d.transform(sample - mean_2d)
+        rprint(f"Relative sample pos: {sample_rel_2d}")
+
+        # Get the equivilent 3d pos
+        sample_3d = pca_3d.inverse_transform(sample_rel_2d) + mean_3d
+        rprint(f"Sample pos 3d: {sample_3d}")
+        exit()
+
         # for j, atom_id in enumerate(atom_ids):
         #     print(sample)
         # Get the anchor atoms
