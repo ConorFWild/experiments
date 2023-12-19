@@ -1075,7 +1075,7 @@ def plot_projection(structure_path,
     #     grid_samples[:,1],
     #     c=values
     # )
-    plt.imshow(np.array(values).reshape(100,100))
+    plt.imshow(np.array(values).reshape(100,100).T)
     plt.scatter(
         projected_atom_poss_array_2d[:,0],
         projected_atom_poss_array_2d[:,1],
