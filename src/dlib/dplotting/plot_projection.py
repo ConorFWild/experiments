@@ -1005,67 +1005,20 @@ def plot_projection(structure_path,
         # Get the equivilent 3d pos
         sample_3d = pca_3d.inverse_transform(sample_rel_2d) + mean_3d
         rprint(f"Sample pos 3d: {sample_3d}")
-        exit()
+        # exit()
 
         # for j, atom_id in enumerate(atom_ids):
         #     print(sample)
         # Get the anchor atoms
-        dists, nbs = kd.query(sample, k=3)
-        if dists[0] > 2:
-            # print(dists[0])
-            values.append(0)
-            continue
-        # print(nbs)
-        # print(np.array(atom_ids)[nbs])
-        # exit()
 
-        # Get the 2d Poss
-        nbr_poss = {}
-        for nbr in nbs:
-            pos = st_atom_pos_dict[atom_ids[nbr]]
-            nbr_poss[atom_ids[nbr]] = pos
-
-        # Get the transform
-        # tr = transforms[atom_ids[nbs[0]]]
-        # tr_array = transform_interpolator(sample)[0]
-        tr_array = transform_interpolator(sample.reshape(1,2))[0]
-
-        # print(f"Transform array")
-        # print(tr_array)
-        if np.isnan(tr_array[0]):
-            tr_array = transform_interpolator_nearest(sample)[0]
-            # print(tr_array)
-
-        # mat = tr_array[:9].reshape(3,3)
-        # ref = tr_array[9:12]
-        # mov = tr_array[12:16]
-        # rot = tr_array[:3]
-        # ref = tr_array[3:6]
-        # mov = tr_array[6:9]
-
-        # print(mat)
-        # print(ref)
-        # print(mov)
-
-
-        # Get the sample point
-        # sample_point_2d = np.array([sample[0], sample[1], 0.0])
-        # sample_point_2d_rel = sample_point_2d - ref
-        # sample_point_3d_rel = np.matmul(
-        #     spatial.transform.Rotation.from_euler('zyx', rot).as_matrix(),
-        #     sample_point_2d_rel,
-        # )
-        # point_3d = sample_point_3d_rel + mov
-
-        point_3d = tr_array
 
         # Interpolate
         value = dmap.interpolate_value(
             # value=dmap.tricubic_interpolation(
             gemmi.Position(
-                point_3d[0],
-                point_3d[1],
-                point_3d[2],
+                sample_3d[0][0],
+                sample_3d[0][1],
+                sample_3d[0][2],
             )
         )
         values.append(
