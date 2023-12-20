@@ -324,7 +324,7 @@ def main(args):
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
                 "Dtag": _dtag,
                 "DensityEmbedding": val,
-                "DensityDistance": densities[_dtag]-densities[dtag],
+                "DensityDistance": np.linalg.norm(densities[_dtag]-densities[dtag]),
             }
             for _dtag, val
             in zip(dmaps_dict, embedding)
@@ -378,6 +378,22 @@ def main(args):
 
     # Save
     plt.savefig('outputs/regional_projections.png')
+    fig, ax = plt.subplots(
+        figsize=(j, 4.8)
+    )
+
+    ax = sns.violinplot(
+        data=joint_table,
+        x="ResidueID", y="DensityDistance", hue=True,
+        hue_order=[True, False], split=True,
+        ax=ax
+    )
+    ax.legend_ = None
+
+    # Save
+    plt.savefig('outputs/regional_projections.png')
+
+
     joint_table.to_csv('outputs/regional_projections.csv')
 
 if __name__ == '__main__':
