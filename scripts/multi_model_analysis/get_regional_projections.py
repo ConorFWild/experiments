@@ -250,7 +250,7 @@ def main(args):
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
         # Get the relevant density from all the datasets in the cell
         densities = {}
-        for dtag, dmap in dmaps.items():
+        for dtag, dmap in dmaps_dict.items():
             grid = reference_frame.unmask(SparseDMap(dmap))
             grid_array = np.array(grid, copy=False)
             density = grid_array[ppa]
@@ -270,7 +270,7 @@ def main(args):
                 "DensityEmbedding": point
             }
             for dtag, point
-            in zip(dmaps, embedding.flatten())
+            in zip(dmaps_dict, embedding.flatten())
         ]
         table = pd.DataFrame(records)
         print(table)
