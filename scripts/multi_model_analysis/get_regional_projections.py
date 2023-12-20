@@ -281,7 +281,7 @@ def main(args):
         density_array = np.vstack([den.flatten() for den in densities.values()])
         # tsne = TSNE(n_components=1)
         # embedding = tsne.fit_transform(density_array)
-        embedder = PDA(n_components=1)
+        embedder = PCA(n_components=1)
         embedding = embedder.fit_transform(density_array)
 
         # Contruct a seaborn-usable table
