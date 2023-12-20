@@ -159,7 +159,7 @@ def main(args):
     autobuilds = {}
 
     # Get the highest res dataset to process as a reference
-    dtag = min(datasets, key=lambda _dataset: _dataset.reflections.resolution())
+    dtag = min(datasets, key=lambda _dtag: datasets[_dtag].reflections.resolution())
 
     # Get the dataset
     dataset = datasets[dtag]
