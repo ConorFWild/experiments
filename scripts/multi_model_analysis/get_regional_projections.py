@@ -264,8 +264,8 @@ def main(args):
         #     continue
         # if residue_id.chain != 'A':
         #     continue
-        if residue_id.number not in ['1888',]:
-            continue
+        # if residue_id.number not in ['1888',]:
+        #     continue
         # if residue_id.number not in ['1888', '1914']:
         #     continue
         # Get the relevant density from all the datasets in the cell
