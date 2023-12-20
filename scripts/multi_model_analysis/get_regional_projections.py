@@ -287,10 +287,10 @@ def main(args):
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
-        print(density_array)
-        print(density_array.shape)
-        embedder = TSNE(n_components=1, init='pca')
-        embedding = embedder.fit_transform(density_array)
+        # print(density_array)
+        # print(density_array.shape)
+        # embedder = TSNE(n_components=1, init='pca')
+        # embedding = embedder.fit_transform(density_array)
         # embedder = PCA(n_components=1)
         # embedding = embedder.fit_transform(density_array)
         # #
@@ -323,30 +323,30 @@ def main(args):
         # ]
 
         # Contruct a seaborn-usable table
-        records = [
-            {
-                "ResidueID": f"{residue_id.chain}{residue_id.number}",
-                "Dtag": _dtag,
-                "DensityEmbedding": val,
-                "DensityDistance": np.linalg.norm(densities[_dtag]-densities[dtag]),
-            }
-            for _dtag, val
-            in zip(dmaps_dict, embedding.flatten())
-        ]
-
-        # stds = np.std(density_array, axis=0)
-        #
-        # # Contruct a seaborn-usable table
         # records = [
         #     {
         #         "ResidueID": f"{residue_id.chain}{residue_id.number}",
-        #         "Index": f"{point[0]}_{point[1]}_{point[2]}",
-        #         "DensityEmbedding": val
+        #         "Dtag": _dtag,
+        #         "DensityEmbedding": val,
+        #         "DensityDistance": np.linalg.norm(densities[_dtag]-densities[dtag]),
         #     }
-        #     for point, val
-        #     in zip(ppa.points, stds.flatten())
-        #     if val != 0.0
+        #     for _dtag, val
+        #     in zip(dmaps_dict, embedding.flatten())
         # ]
+
+        stds = np.std(density_array, axis=0)
+
+        # Contruct a seaborn-usable table
+        records = [
+            {
+                "ResidueID": f"{residue_id.chain}{residue_id.number}",
+                "Index": f"{point[0]}_{point[1]}_{point[2]}",
+                "SD": val
+            }
+            for point, val
+            in zip(ppa.points, stds.flatten())
+            if val != 0.0
+        ]
         table = pd.DataFrame(records)
         embeddings[residue_id] = table
         # print(table)
@@ -368,34 +368,49 @@ def main(args):
 
     # Plot in seaborn
     joint_table = pd.concat([embedding for embedding in embeddings.values()], axis=0)
+    # fig, ax = plt.subplots(
+    #     figsize=(j, 4.8)
+    # )
+    #
+    # ax = sns.violinplot(
+    #     data=joint_table,
+    #     x="ResidueID", y="DensityEmbedding", hue=True,
+    #     hue_order=[True, False], split=True,
+    #     ax=ax
+    # )
+    # ax.legend_ = None
+
+    # Save
+    # plt.savefig('outputs/regional_projections.png')
+    # fig, ax = plt.subplots(
+    #     figsize=(j, 4.8)
+    # )
+    #
+    # ax = sns.violinplot(
+    #     data=joint_table,
+    #     x="ResidueID", y="DensityDistance", hue=True,
+    #     hue_order=[True, False], split=True,
+    #     ax=ax
+    # )
+    # ax.legend_ = None
+
+    # Save
+    # plt.savefig('outputs/regional_projections_distance.png')
+
     fig, ax = plt.subplots(
         figsize=(j, 4.8)
     )
 
     ax = sns.violinplot(
         data=joint_table,
-        x="ResidueID", y="DensityEmbedding", hue=True,
+        x="Index", y="SD", hue=True,
         hue_order=[True, False], split=True,
         ax=ax
     )
     ax.legend_ = None
 
     # Save
-    plt.savefig('outputs/regional_projections.png')
-    fig, ax = plt.subplots(
-        figsize=(j, 4.8)
-    )
-
-    ax = sns.violinplot(
-        data=joint_table,
-        x="ResidueID", y="DensityDistance", hue=True,
-        hue_order=[True, False], split=True,
-        ax=ax
-    )
-    ax.legend_ = None
-
-    # Save
-    plt.savefig('outputs/regional_projections_distance.png')
+    plt.savefig('outputs/regional_projections_sigma.png')
 
 
     joint_table.to_csv('outputs/regional_projections.csv')
