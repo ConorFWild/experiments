@@ -275,6 +275,7 @@ def main(args):
         ]
         table = pd.DataFrame(records)
         print(table)
+        break
 
     # Plot in seaborn
     fig, ax = plt.subplots()
