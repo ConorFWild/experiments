@@ -391,7 +391,7 @@ def main(args):
     ax.legend_ = None
 
     # Save
-    plt.savefig('outputs/regional_projections.png')
+    plt.savefig('outputs/regional_projections_distance.png')
 
 
     joint_table.to_csv('outputs/regional_projections.csv')
