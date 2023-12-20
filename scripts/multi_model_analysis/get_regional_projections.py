@@ -251,12 +251,12 @@ def main(args):
     embeddings = {}
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
         # Get the relevant density from all the datasets in the cell
-        print(ppa)
+        print(ppa.points)
         densities = {}
         for dtag, dmap in dmaps_dict.items():
             grid = reference_frame.unmask(SparseDMap(dmap.data))
             grid_array = np.array(grid, copy=False)
-            density = grid_array[ppa]
+            density = grid_array[ppa.points]
             densities[dtag] = density
 
         # Project into a single dimension
