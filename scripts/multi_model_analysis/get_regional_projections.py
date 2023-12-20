@@ -403,7 +403,7 @@ def main(args):
 
     ax = sns.violinplot(
         data=joint_table,
-        x="Index", y="SD", hue=True,
+        x="ResidueID", y="SD", hue=True,
         hue_order=[True, False], split=True,
         ax=ax
     )
