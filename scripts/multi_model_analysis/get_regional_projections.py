@@ -405,6 +405,7 @@ def main(args):
         data=joint_table,
         x="ResidueID", y="SD", hue=True,
         hue_order=[True, False], split=True,
+        inner='quart',
         ax=ax
     )
     ax.legend_ = None
