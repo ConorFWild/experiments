@@ -271,7 +271,7 @@ def main(args):
         # Get the relevant density from all the datasets in the cell
         # print(ppa.points)
         densities = {}
-        for dtag, dmap in dmaps_dict.items():
+        for _dtag, dmap in dmaps_dict.items():
             grid = reference_frame.unmask(SparseDMap(dmap.data))
             grid_array = np.array(grid, copy=False)
             density = grid_array[
@@ -281,7 +281,7 @@ def main(args):
                     np.mod(ppa.points[:, 2].flatten(), grid_array.shape[0]),
                 )
             ]
-            densities[dtag] = density[density != 0.0]
+            densities[_dtag] = density[density != 0.0]
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
@@ -301,24 +301,33 @@ def main(args):
         #     in zip(dmaps_dict, embedding.flatten())
         # ]
 
-        embedder = TSNE(n_components=2, init='pca')
-        embedding = embedder.fit_transform(density_array)
-        # embedder = PCA(n_components=1)
+        # embedder = TSNE(n_components=2, init='pca')
         # embedding = embedder.fit_transform(density_array)
-        #
+        # # embedder = PCA(n_components=1)
+        # # embedding = embedder.fit_transform(density_array)
+        # #
+        # # Contruct a seaborn-usable table
+        # records = [
+        #     {
+        #         "ResidueID": f"{residue_id.chain}{residue_id.number}",
+        #         "Dtag": dtag,
+        #         "DensityEmbeddingX": point[0],
+        #         "DensityEmbeddingY": point[1],
+        #     }
+        #     for dtag, point
+        #     in zip(dmaps_dict, embedding)
+        # ]
+
         # Contruct a seaborn-usable table
         records = [
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
-                "Dtag": dtag,
-                "DensityEmbeddingX": point[0],
-                "DensityEmbeddingY": point[1],
+                "Dtag": _dtag,
+                "DensityEmbedding": densities[_dtag]-densities[dtag],
             }
-            for dtag, point
-            in zip(dmaps_dict, embedding)
+            for _dtag, point
+            in dmaps_dict
         ]
-
-
 
         # stds = np.std(density_array, axis=0)
         #
@@ -337,20 +346,20 @@ def main(args):
         embeddings[residue_id] = table
         # print(table)
 
-        fig, ax = plt.subplots(
-            # figsize=(j, 4.8)
-        )
+        # fig, ax = plt.subplots(
+        #     # figsize=(j, 4.8)
+        # )
 
-        ax = sns.scatterplot(
-            data=table,
-            x="DensityEmbeddingX", y="DensityEmbeddingY",
-            ax=ax
-        )
-        ax.legend_ = None
-
-        # Save
-        plt.savefig('outputs/regional_projection_A1888.png')
-        exit()
+        # ax = sns.scatterplot(
+        #     data=table,
+        #     x="DensityEmbeddingX", y="DensityEmbeddingY",
+        #     ax=ax
+        # )
+        # ax.legend_ = None
+        #
+        # # Save
+        # plt.savefig('outputs/regional_projection_A1888.png')
+        # exit()
 
     # Plot in seaborn
     joint_table = pd.concat([embedding for embedding in embeddings.values()], axis=0)
