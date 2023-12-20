@@ -6,7 +6,7 @@ import pandas as pd
 from sklearnex import patch_sklearn
 patch_sklearn()
 
-from sklearn.manifold import TSNE
+from sklearn.manifold import TSNE, PCA
 
 from matplotlib import pyplot as plt
 import seaborn as sns
@@ -278,8 +278,10 @@ def main(args):
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
-        tsne = TSNE(n_components=1)
-        embedding = tsne.fit_transform(density_array)
+        # tsne = TSNE(n_components=1)
+        # embedding = tsne.fit_transform(density_array)
+        embedder = PDA(n_components=1)
+        embedding = embedder.fit_transform(density_array)
 
         # Contruct a seaborn-usable table
         records = [
