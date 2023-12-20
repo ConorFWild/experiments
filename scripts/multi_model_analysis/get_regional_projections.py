@@ -289,8 +289,9 @@ def main(args):
     ax.legend_ = None
 
     # Save
-    plt.savefig('outputs/regional_projections.png')
 
+    plt.savefig('outputs/regional_projections.png')
+    table.to_csv('outputs/regional_projections.csv')
 
 if __name__ == '__main__':
     # Parse Command Line Arguments
