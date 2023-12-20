@@ -252,7 +252,7 @@ def main(args):
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
         if residue_id.chain != 'A':
             continue
-        if residue_id.number != '1888':
+        if residue_id.number not in ['1888', '1914']:
             continue
         # Get the relevant density from all the datasets in the cell
         print(ppa.points)
@@ -286,7 +286,6 @@ def main(args):
         ]
         table = pd.DataFrame(records)
         print(table)
-        break
 
     # Plot in seaborn
     fig, ax = plt.subplots()
