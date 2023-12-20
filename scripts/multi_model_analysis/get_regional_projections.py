@@ -271,8 +271,8 @@ def main(args):
         # Get the relevant density from all the datasets in the cell
         # print(ppa.points)
         densities = {}
-        for _dtag, dmap in dmaps_dict.items():
-            grid = reference_frame.unmask(SparseDMap(dmap.data))
+        for _dtag, _dmap_data in zip(dtag_array, dmaps):
+            grid = reference_frame.unmask(SparseDMap(_dmap_data))
             grid_array = np.array(grid, copy=False)
             density = grid_array[
                 (
