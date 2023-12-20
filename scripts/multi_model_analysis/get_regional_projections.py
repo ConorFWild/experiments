@@ -247,7 +247,7 @@ def main(args):
 
     # For each residue (and its voronoi cell)...
     embeddings = {}
-    for residue_id, ppa in reference_frame.partitions.items():
+    for residue_id, ppa in reference_frame.partitioning.partitions.items():
         # Get the relevant density from all the datasets in the cell
         densities = {}
         for dtag, dmap in dmaps.items():
