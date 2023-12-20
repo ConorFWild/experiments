@@ -4,6 +4,9 @@ import time
 from sklearnex import patch_sklearn
 patch_sklearn()
 
+from sklearn.manifold import TSNE
+
+
 import numpy as np
 import gemmi
 
@@ -241,11 +244,32 @@ def main(args):
     dtag_array = np.array([_dtag for _dtag in comparator_datasets])
 
     # For each residue (and its voronoi cell)...
+    embeddings = {}
+    for residue_id, ppa in reference_frame.partitions.items():
         # Get the relevant density from all the datasets in the cell
+        densities = {}
+        for dtag, dmap in dmaps.items():
+            grid = reference_frame.unmask(SparseDMap(dmap))
+            grid_array = np.array(grid, copy=False)
+            density = grid_array[ppa]
+            densities[dtag] = density
 
         # Project into a single dimension
+        density_array = np.vstack([den.flatten() for den in densities.values()])
+        tsne = TSNE(n_components=1)
+        embedding = tsne.fit_transform(density_array)
 
-    # Contruct a seaborn-usable table
+        # Contruct a seaborn-usable table
+        records = [
+            {
+                "Chain": residue_id[0],
+                "Residue": residue_id[1],
+                "Dtag": dtag,
+                "DensityEmbedding": point
+            }
+            for dtag, point
+            in zip(dmaps, embedding.flatten())
+        ]
 
     # Plot in seaborn
 
