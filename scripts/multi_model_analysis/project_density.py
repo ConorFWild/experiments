@@ -8,7 +8,7 @@ from dlib.dplotting.plot_projection import plot_projection
 data = {
     "BAZ2BA":
         {
-            "ModelDir": Path('../../Downloads/pandda_BAZ2BA_all_hits_all_models/'),
+            "ModelDir": Path('../../Downloads/pandda_BAZ2BA_all_hits_all_models/processed_datasets'),
             "Datasets":
                 {
                     "BAZ2BA-x446": {
