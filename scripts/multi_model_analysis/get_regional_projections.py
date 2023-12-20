@@ -260,8 +260,8 @@ def main(args):
     j = 0
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
         j += 1
-        if j > 10:
-            continue
+        # if j > 10:
+        #     continue
         # if residue_id.chain != 'A':
         #     continue
         # if residue_id.number not in ['1888', '1914']:
