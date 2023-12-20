@@ -251,6 +251,7 @@ def main(args):
     embeddings = {}
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
         # Get the relevant density from all the datasets in the cell
+        print(ppa)
         densities = {}
         for dtag, dmap in dmaps_dict.items():
             grid = reference_frame.unmask(SparseDMap(dmap.data))
@@ -288,6 +289,7 @@ def main(args):
     ax.legend_ = None
 
     # Save
+    plt.savefig('outputs/regional_projections.png')
 
 
 if __name__ == '__main__':
