@@ -289,9 +289,11 @@ def main(args):
         print(table)
 
     # Plot in seaborn
+    joint_table = pd.concatenate([embedding for embedding in embeddings.values()], axis=0)
     fig, ax = plt.subplots()
+
     ax = sns.violinplot(
-        data=pd.concatenate([embedding for embedding in embeddings.values()], axis=0),
+        data=,
         x="ResidueID", y="DensityEmbedding", hue=True,
         hue_order=[True, False], split=True,
         ax=ax
@@ -299,9 +301,8 @@ def main(args):
     ax.legend_ = None
 
     # Save
-
     plt.savefig('outputs/regional_projections.png')
-    table.to_csv('outputs/regional_projections.csv')
+    joint_table.to_csv('outputs/regional_projections.csv')
 
 if __name__ == '__main__':
     # Parse Command Line Arguments
