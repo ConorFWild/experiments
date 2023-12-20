@@ -323,10 +323,10 @@ def main(args):
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
                 "Dtag": _dtag,
-                "DensityEmbedding": densities[_dtag] - densities[dtag],
+                "DensityEmbedding": val,
                 "DensityDistance": densities[_dtag]-densities[dtag],
             }
-            for _dtag, point
+            for _dtag, val
             in zip(dmaps_dict, embedding)
         ]
 
