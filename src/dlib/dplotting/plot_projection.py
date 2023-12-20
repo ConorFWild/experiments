@@ -921,9 +921,11 @@ def get_plane_vectors(nbr_poss):
 #     print(f"Writing map!")
 #     plt.savefig('test.png')
 
-def plot_projection(structure_path,
+def plot_projection(
+        structure_path,
         cif_path,
-        map_path
+        map_path,
+        output_path
 ):
     # Load the structure
     st = gemmi.read_structure(str(structure_path))
@@ -1094,4 +1096,4 @@ def plot_projection(structure_path,
     plt.axis('scaled')
     plt.colorbar()
     print(f"Writing map!")
-    plt.savefig('test.png')
+    plt.savefig(output_path)
