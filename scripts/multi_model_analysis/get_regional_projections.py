@@ -318,7 +318,9 @@ def main(args):
 
     # Plot in seaborn
     joint_table = pd.concat([embedding for embedding in embeddings.values()], axis=0)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(
+        figsize=(j, 4.8)
+    )
 
     ax = sns.violinplot(
         data=joint_table,
