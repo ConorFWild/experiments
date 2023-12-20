@@ -62,9 +62,12 @@ from pandda_gemmi import serialize
 
 from pandda_gemmi.args import PanDDAArgs
 
-data = [
-    "A"
-]
+config = {
+    "Residues": [
+        ("A", "1888"),
+        ("A", "1914")
+    ]
+}
 
 
 class GetDatasetsToProcess:
