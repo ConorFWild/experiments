@@ -45,6 +45,7 @@ def main(
             cif_path = dtag_data['CifPath']
 
             for map_path in (dtag_dataset / 'model_maps').glob('*'):
+                print(f'\t\t{map_path.name}')
 
                 # Produce and save figure for default mu map
                 output_path = base_path / f'{map_path.stem}.png'
