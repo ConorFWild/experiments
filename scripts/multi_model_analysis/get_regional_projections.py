@@ -6,7 +6,8 @@ import pandas as pd
 from sklearnex import patch_sklearn
 patch_sklearn()
 
-from sklearn.manifold import TSNE, PCA
+from sklearn.manifold import TSNE
+from sklearn.decomposition import PCA
 
 from matplotlib import pyplot as plt
 import seaborn as sns
