@@ -253,7 +253,7 @@ def main(args):
         # Get the relevant density from all the datasets in the cell
         densities = {}
         for dtag, dmap in dmaps_dict.items():
-            grid = reference_frame.unmask(SparseDMap(dmap))
+            grid = reference_frame.unmask(SparseDMap(dmap.data))
             grid_array = np.array(grid, copy=False)
             density = grid_array[ppa]
             densities[dtag] = density
