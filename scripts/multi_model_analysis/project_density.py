@@ -30,7 +30,7 @@ def main(
 ):
     #
 
-    base_path = Path('output')
+    base_path = Path('outputs')
 
     for system, system_data in data.items():
         print(system)
