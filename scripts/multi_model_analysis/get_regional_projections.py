@@ -277,8 +277,8 @@ def main(args):
             density = grid_array[
                 (
                     np.mod(ppa.points[:, 0].flatten(), grid_array.shape[0]),
-                    np.mod(ppa.points[:, 1].flatten(), grid_array.shape[0]),
-                    np.mod(ppa.points[:, 2].flatten(), grid_array.shape[0]),
+                    np.mod(ppa.points[:, 1].flatten(), grid_array.shape[1]),
+                    np.mod(ppa.points[:, 2].flatten(), grid_array.shape[2]),
                 )
             ]
             densities[_dtag] = density[density != 0.0]
