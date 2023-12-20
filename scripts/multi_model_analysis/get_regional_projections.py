@@ -264,6 +264,8 @@ def main(args):
         #     continue
         # if residue_id.chain != 'A':
         #     continue
+        if residue_id.number not in ['1888',]:
+            continue
         # if residue_id.number not in ['1888', '1914']:
         #     continue
         # Get the relevant density from all the datasets in the cell
@@ -283,21 +285,40 @@ def main(args):
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
-        # embedder = TSNE(n_components=1, init='pca')
+        # # embedder = TSNE(n_components=1, init='pca')
+        # # embedding = embedder.fit_transform(density_array)
+        # embedder = PCA(n_components=1)
         # embedding = embedder.fit_transform(density_array)
-        embedder = PCA(n_components=1)
+        # #
+        # # Contruct a seaborn-usable table
+        # records = [
+        #     {
+        #         "ResidueID": f"{residue_id.chain}{residue_id.number}",
+        #         "Dtag": dtag,
+        #         "DensityEmbedding": point
+        #     }
+        #     for dtag, point
+        #     in zip(dmaps_dict, embedding.flatten())
+        # ]
+
+        embedder = TSNE(n_components=2, init='pca')
         embedding = embedder.fit_transform(density_array)
+        # embedder = PCA(n_components=1)
+        # embedding = embedder.fit_transform(density_array)
         #
         # Contruct a seaborn-usable table
         records = [
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
                 "Dtag": dtag,
-                "DensityEmbedding": point
+                "DensityEmbeddingX": point[0],
+                "DensityEmbeddingY": point[1],
             }
             for dtag, point
-            in zip(dmaps_dict, embedding.flatten())
+            in zip(dmaps_dict, embedding)
         ]
+
+
 
         # stds = np.std(density_array, axis=0)
         #
@@ -315,6 +336,21 @@ def main(args):
         table = pd.DataFrame(records)
         embeddings[residue_id] = table
         # print(table)
+
+        fig, ax = plt.subplots(
+            figsize=(j, 4.8)
+        )
+
+        ax = sns.scatterplot(
+            data=table,
+            x="DensityEmbeddingX", y="DensityEmbeddingY",
+            ax=ax
+        )
+        ax.legend_ = None
+
+        # Save
+        plt.savefig('outputs/regional_projection_A1888.png')
+        exit()
 
     # Plot in seaborn
     joint_table = pd.concat([embedding for embedding in embeddings.values()], axis=0)
