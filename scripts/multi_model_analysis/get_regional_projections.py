@@ -281,18 +281,31 @@ def main(args):
         density_array = np.vstack([den.flatten() for den in densities.values()])
         # tsne = TSNE(n_components=1)
         # embedding = tsne.fit_transform(density_array)
-        embedder = PCA(n_components=1)
-        embedding = embedder.fit_transform(density_array)
+        # embedder = PCA(n_components=1)
+        # embedding = embedder.fit_transform(density_array)
+        #
+        # # Contruct a seaborn-usable table
+        # records = [
+        #     {
+        #         "ResidueID": f"{residue_id.chain}{residue_id.number}",
+        #         "Dtag": dtag,
+        #         "DensityEmbedding": point
+        #     }
+        #     for dtag, point
+        #     in zip(dmaps_dict, embedding.flatten())
+        # ]
+
+        stds = np.std(density_array, axis=0)
 
         # Contruct a seaborn-usable table
         records = [
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
-                "Dtag": dtag,
-                "DensityEmbedding": point
+                "Index": f"{point[0]}{point[1]}{point[2]}",
+                "DensityEmbedding": val
             }
-            for dtag, point
-            in zip(dmaps_dict, embedding.flatten())
+            for point, val
+            in zip(ppa.points, stds.flatten())
         ]
         table = pd.DataFrame(records)
         embeddings[residue_id] = table
