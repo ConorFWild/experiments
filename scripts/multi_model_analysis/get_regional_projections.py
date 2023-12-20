@@ -338,7 +338,7 @@ def main(args):
         # print(table)
 
         fig, ax = plt.subplots(
-            figsize=(j, 4.8)
+            # figsize=(j, 4.8)
         )
 
         ax = sns.scatterplot(
