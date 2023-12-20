@@ -289,7 +289,7 @@ def main(args):
         print(table)
 
     # Plot in seaborn
-    joint_table = pd.concatenate([embedding for embedding in embeddings.values()], axis=0)
+    joint_table = pd.concat([embedding for embedding in embeddings.values()], axis=0)
     fig, ax = plt.subplots()
 
     ax = sns.violinplot(
