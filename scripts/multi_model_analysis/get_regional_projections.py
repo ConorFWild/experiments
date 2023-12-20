@@ -271,7 +271,7 @@ def main(args):
                 "DensityEmbedding": point
             }
             for dtag, point
-            in zip(dmaps_dict, embedding.flatten())
+            in zip(dmaps_dict, embedding)
         ]
         table = pd.DataFrame(records)
         print(table)
