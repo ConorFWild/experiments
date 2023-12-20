@@ -297,7 +297,7 @@ def main(args):
     fig, ax = plt.subplots()
 
     ax = sns.violinplot(
-        data=,
+        data=joint_table,
         x="ResidueID", y="DensityEmbedding", hue=True,
         hue_order=[True, False], split=True,
         ax=ax
