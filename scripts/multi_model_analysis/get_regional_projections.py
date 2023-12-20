@@ -277,7 +277,7 @@ def main(args):
         # Contruct a seaborn-usable table
         records = [
             {
-                "ResidueID": f"{residue_id[0]}{residue_id[1]}",
+                "ResidueID": f"{residue_id.chain}{residue_id.number}",
                 "Dtag": dtag,
                 "DensityEmbedding": point
             }
