@@ -305,7 +305,7 @@ def main(args):
         records = [
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
-                "Index": f"{point[0]}{point[1]}{point[2]}",
+                "Index": f"{point[0]}_{point[1]}_{point[2]}",
                 "DensityEmbedding": val
             }
             for point, val
