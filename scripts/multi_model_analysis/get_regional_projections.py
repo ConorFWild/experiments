@@ -62,6 +62,10 @@ from pandda_gemmi import serialize
 
 from pandda_gemmi.args import PanDDAArgs
 
+data = [
+    "A"
+]
+
 
 class GetDatasetsToProcess:
     def __init__(self, filters=None):
