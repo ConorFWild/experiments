@@ -250,6 +250,10 @@ def main(args):
     # For each residue (and its voronoi cell)...
     embeddings = {}
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
+        if residue_id.chain != 'A':
+            continue
+        if residue_id.number != '1888':
+            continue
         # Get the relevant density from all the datasets in the cell
         print(ppa.points)
         densities = {}
@@ -273,7 +277,7 @@ def main(args):
         # Contruct a seaborn-usable table
         records = [
             {
-                "ResidueID": residue_id,
+                "ResidueID": f"{residue_id[0]}{residue_id[1]}",
                 "Dtag": dtag,
                 "DensityEmbedding": point
             }
