@@ -285,8 +285,8 @@ def main(args):
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
-        # # embedder = TSNE(n_components=1, init='pca')
-        # # embedding = embedder.fit_transform(density_array)
+        embedder = TSNE(n_components=1, init='pca')
+        embedding = embedder.fit_transform(density_array)
         # embedder = PCA(n_components=1)
         # embedding = embedder.fit_transform(density_array)
         # #
@@ -323,10 +323,11 @@ def main(args):
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
                 "Dtag": _dtag,
-                "DensityEmbedding": densities[_dtag]-densities[dtag],
+                "DensityEmbedding": densities[_dtag] - densities[dtag],
+                "DensityDistance": densities[_dtag]-densities[dtag],
             }
             for _dtag, point
-            in dmaps_dict
+            in zip(dmaps_dict, embedding)
         ]
 
         # stds = np.std(density_array, axis=0)
