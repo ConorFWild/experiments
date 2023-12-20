@@ -8,6 +8,8 @@ patch_sklearn()
 
 from sklearn.manifold import TSNE
 
+from matplotlib import pyplot as plt
+import seaborn as sns
 
 import numpy as np
 import gemmi
@@ -264,8 +266,7 @@ def main(args):
         # Contruct a seaborn-usable table
         records = [
             {
-                "Chain": residue_id[0],
-                "Residue": residue_id[1],
+                "ResidueID": residue_id,
                 "Dtag": dtag,
                 "DensityEmbedding": point
             }
@@ -276,6 +277,14 @@ def main(args):
         print(table)
 
     # Plot in seaborn
+    fig, ax = plt.subplots()
+    ax = sns.violinplot(
+        data=table,
+        x="ResidueID", y="DensityEmbedding", hue=True,
+        hue_order=[True, False], split=True,
+        ax=ax
+    )
+    ax.legend_ = None
 
     # Save
 
