@@ -283,10 +283,10 @@ def main(args):
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
-        embedder = TSNE(n_components=1)
-        embedding = embedder.fit_transform(density_array)
-        # embedder = PCA(n_components=1)
+        # embedder = TSNE(n_components=1, init='pca')
         # embedding = embedder.fit_transform(density_array)
+        embedder = PCA(n_components=1)
+        embedding = embedder.fit_transform(density_array)
         #
         # Contruct a seaborn-usable table
         records = [
