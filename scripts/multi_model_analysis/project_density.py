@@ -41,8 +41,8 @@ def main(
             #
 
             dtag_dataset = model_dir / dtag
-            model_path = dtag_data['ModelPath']
-            cif_path = dtag_data['CifPath']
+            model_path = dtag_dataset / dtag_data['ModelPath']
+            cif_path = dtag_dataset /dtag_data['CifPath']
 
             for map_path in (dtag_dataset / 'model_maps').glob('*'):
                 print(f'\t\t{map_path.name}')
