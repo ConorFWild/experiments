@@ -1,6 +1,8 @@
 import os
 import time
 
+import pandas as pd
+
 from sklearnex import patch_sklearn
 patch_sklearn()
 
@@ -270,6 +272,8 @@ def main(args):
             for dtag, point
             in zip(dmaps, embedding.flatten())
         ]
+        table = pd.DataFrame(records)
+        print(table)
 
     # Plot in seaborn
 
