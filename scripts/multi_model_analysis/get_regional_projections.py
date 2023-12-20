@@ -257,11 +257,15 @@ def main(args):
 
     # For each residue (and its voronoi cell)...
     embeddings = {}
+    j = 0
     for residue_id, ppa in reference_frame.partitioning.partitions.items():
-        if residue_id.chain != 'A':
+        j += 1
+        if j > 10:
             continue
-        if residue_id.number not in ['1888', '1914']:
-            continue
+        # if residue_id.chain != 'A':
+        #     continue
+        # if residue_id.number not in ['1888', '1914']:
+        #     continue
         # Get the relevant density from all the datasets in the cell
         print(ppa.points)
         densities = {}
