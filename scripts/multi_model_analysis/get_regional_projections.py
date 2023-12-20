@@ -285,12 +285,13 @@ def main(args):
             in zip(dmaps_dict, embedding.flatten())
         ]
         table = pd.DataFrame(records)
+        embeddings[residue_id] = table
         print(table)
 
     # Plot in seaborn
     fig, ax = plt.subplots()
     ax = sns.violinplot(
-        data=table,
+        data=pd.concatenate([embedding for embedding in embeddings.values()], axis=0),
         x="ResidueID", y="DensityEmbedding", hue=True,
         hue_order=[True, False], split=True,
         ax=ax
