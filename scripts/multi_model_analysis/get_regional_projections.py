@@ -327,7 +327,7 @@ def main(args):
                 "DensityDistance": np.linalg.norm(densities[_dtag]-densities[dtag]),
             }
             for _dtag, val
-            in zip(dmaps_dict, embedding)
+            in zip(dmaps_dict, embedding.flatten())
         ]
 
         # stds = np.std(density_array, axis=0)
