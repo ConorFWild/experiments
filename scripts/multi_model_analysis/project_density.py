@@ -30,6 +30,8 @@ def main(
 ):
     #
 
+    base_path = Path('output')
+
     for system, system_data in data.items():
         model_dir = system_data['ModelDir']
         for dtag, dtag_data in data['Datasets'].items():
@@ -42,7 +44,7 @@ def main(
 
 
                 # Produce and save figure for default mu map
-                output_path = f'{map_path.stem}.png'
+                output_path = base_path / f'{map_path.stem}.png'
                 plot_projection(
                     model_path,
                     cif_path,
