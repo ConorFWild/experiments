@@ -267,7 +267,7 @@ def main(args):
         # if residue_id.number not in ['1888', '1914']:
         #     continue
         # Get the relevant density from all the datasets in the cell
-        print(ppa.points)
+        # print(ppa.points)
         densities = {}
         for dtag, dmap in dmaps_dict.items():
             grid = reference_frame.unmask(SparseDMap(dmap.data))
@@ -314,7 +314,7 @@ def main(args):
         ]
         table = pd.DataFrame(records)
         embeddings[residue_id] = table
-        print(table)
+        # print(table)
 
     # Plot in seaborn
     joint_table = pd.concat([embedding for embedding in embeddings.values()], axis=0)
