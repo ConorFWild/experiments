@@ -288,7 +288,7 @@ def main(args):
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
         print(density_array)
-        print(density_array.shape())
+        print(density_array.shape)
         embedder = TSNE(n_components=1, init='pca')
         embedding = embedder.fit_transform(density_array)
         # embedder = PCA(n_components=1)
