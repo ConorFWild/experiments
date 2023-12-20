@@ -281,7 +281,7 @@ def main(args):
                     np.mod(ppa.points[:, 2].flatten(), grid_array.shape[0]),
                 )
             ]
-            densities[dtag] = density
+            densities[dtag] = density[density != 0.0]
 
         # Project into a single dimension
         density_array = np.vstack([den.flatten() for den in densities.values()])
