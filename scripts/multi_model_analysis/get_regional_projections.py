@@ -256,7 +256,13 @@ def main(args):
         for dtag, dmap in dmaps_dict.items():
             grid = reference_frame.unmask(SparseDMap(dmap.data))
             grid_array = np.array(grid, copy=False)
-            density = grid_array[ppa.points]
+            density = grid_array[
+                (
+                    ppa.points[:, 0],
+                    ppa.points[:, 1],
+                    ppa.points[:, 2],
+                )
+            ]
             densities[dtag] = density
 
         # Project into a single dimension
