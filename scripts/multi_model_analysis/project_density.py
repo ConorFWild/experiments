@@ -34,14 +34,13 @@ def main(
 
     for system, system_data in data.items():
         model_dir = system_data['ModelDir']
-        for dtag, dtag_data in data['Datasets'].items():
+        for dtag, dtag_data in system_data['Datasets'].items():
             #
             dtag_dataset = model_dir / dtag
             model_path = dtag_data['ModelPath']
             cif_path = dtag_data['CifPath']
 
             for map_path in (dtag_dataset / 'model_maps').glob('*'):
-
 
                 # Produce and save figure for default mu map
                 output_path = base_path / f'{map_path.stem}.png'
