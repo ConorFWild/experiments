@@ -48,7 +48,7 @@ def main(
                 print(f'\t\t{map_path.name}')
 
                 # Produce and save figure for default mu map
-                output_path = base_path / f'{map_path.stem}.png'
+                output_path = base_path / f'{dtag}_{map_path.stem}.png'
                 plot_projection(
                     model_path,
                     cif_path,
