@@ -281,8 +281,8 @@ def main(args):
                     np.mod(ppa.points[:, 2].flatten(), grid_array.shape[2]),
                 )
             ]
-            print(density.shape)
-            print(min(density))
+            # print(density.shape)
+            # print(min(density))
             densities[_dtag] = density[density != 0.0]
 
         # Project into a single dimension
