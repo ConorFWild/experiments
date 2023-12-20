@@ -258,9 +258,9 @@ def main(args):
             grid_array = np.array(grid, copy=False)
             density = grid_array[
                 (
-                    ppa.points[:, 0].flatten(),
-                    ppa.points[:, 1].flatten(),
-                    ppa.points[:, 2].flatten(),
+                    np.mod(ppa.points[:, 0].flatten(), grid_array.shape[0]),
+                    np.mod(ppa.points[:, 1].flatten(), grid_array.shape[0]),
+                    np.mod(ppa.points[:, 2].flatten(), grid_array.shape[0]),
                 )
             ]
             densities[dtag] = density
