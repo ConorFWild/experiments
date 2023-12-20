@@ -33,9 +33,13 @@ def main(
     base_path = Path('output')
 
     for system, system_data in data.items():
+        print(system)
         model_dir = system_data['ModelDir']
         for dtag, dtag_data in system_data['Datasets'].items():
+            print(f"\t{dtag}")
+
             #
+
             dtag_dataset = model_dir / dtag
             model_path = dtag_data['ModelPath']
             cif_path = dtag_data['CifPath']
