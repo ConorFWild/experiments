@@ -306,6 +306,7 @@ def main(args):
             }
             for point, val
             in zip(ppa.points, stds.flatten())
+            if val != 0.0
         ]
         table = pd.DataFrame(records)
         embeddings[residue_id] = table
