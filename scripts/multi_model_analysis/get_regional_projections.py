@@ -334,22 +334,38 @@ def main(args):
         #     in zip(dmaps_dict, embedding.flatten())
         # ]
 
-        stds = np.std(density_array, axis=0)
+        # stds = np.std(density_array, axis=0)
+
 
         # Contruct a seaborn-usable table
+        # records = [
+        #     {
+        #         "ResidueID": f"{residue_id.chain}{residue_id.number}",
+        #         "Index": f"{point[0]}_{point[1]}_{point[2]}",
+        #         "SD": val
+        #     }
+        #     for point, val
+        #     in zip(ppa.points, stds.flatten())
+        #     if val != 0.0
+        # ]
+        # table = pd.DataFrame(records)
+        # embeddings[residue_id] = table
+        # print(table)
+
+        deltas = density_array - np.mean(density_array, axis=0)
+
         records = [
             {
                 "ResidueID": f"{residue_id.chain}{residue_id.number}",
-                "Index": f"{point[0]}_{point[1]}_{point[2]}",
+                "Index": j,
                 "SD": val
             }
-            for point, val
-            in zip(ppa.points, stds.flatten())
-            if val != 0.0
+            for j, val
+            in enumerate(deltas.flatten())
+            # if val != 0.0
         ]
         table = pd.DataFrame(records)
         embeddings[residue_id] = table
-        # print(table)
 
         # fig, ax = plt.subplots(
         #     # figsize=(j, 4.8)
