@@ -270,6 +270,7 @@ def main(args):
         #     continue
         # Get the relevant density from all the datasets in the cell
         # print(ppa.points)
+
         densities = {}
         for _dtag, _dmap_data in zip(dtag_array, dmaps):
             grid = reference_frame.unmask(SparseDMap(_dmap_data))
