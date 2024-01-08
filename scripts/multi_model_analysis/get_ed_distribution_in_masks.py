@@ -321,7 +321,7 @@ def main(args):
             std_array = np.array(sigma_grid)
 
             protein_mask_array = np.zeros(std_array.shape, dtype=bool)
-            protein_mask_array[reference_frame.mask.indicies_sparse_inner_atomic] = True
+            protein_mask_array[reference_frame.mask.indicies_inner_atomic] = True
 
             solvent_mask_array = np.zeros(std_array.shape, dtype=bool)
             solvent_mask_array[reference_frame.mask.indicies] = True
