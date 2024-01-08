@@ -341,7 +341,7 @@ def main(args):
                 )
 
             solvent_std_array = std_array[solvent_mask_array]
-            model_type = f"protein_{model_number}"
+            model_type = f"solvent_{model_number}"
             for j, val in enumerate(solvent_std_array):
                 records.append(
                     {
