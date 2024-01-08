@@ -330,7 +330,7 @@ def main(args):
                 ):
                     xmap = reference_frame.unmask(SparseDMap(density))
 
-                    val = xmap.interpolate_point(
+                    val = xmap.interpolate_value(
                         pos
                     )
                     records.append(
