@@ -23,6 +23,10 @@ data = {
                         "ModelPath": "autobuild/3_7_ligand_0.pdb",
                         "CifPath": 'ligand_files/ligand.cif'
                     },
+                    "BAZ2BA-x583": {
+                        "ModelPath": "autobuild/2_4_ligand_0.pdb",
+                        "CifPath": 'ligand_files/ligand.cif'
+                    },
 
                 }
         }
