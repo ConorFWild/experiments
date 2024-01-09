@@ -18,7 +18,12 @@ data = {
                     "BAZ2BA-x557": {
                         "ModelPath": "autobuild/2_4_ligand_0.pdb",
                         "CifPath": 'ligand_files/ligand.cif'
-                    }
+                    },
+                    "BAZ2BA-x529": {
+                        "ModelPath": "autobuild/3_7_ligand_0.pdb",
+                        "CifPath": 'ligand_files/ligand.cif'
+                    },
+
                 }
         }
 }
