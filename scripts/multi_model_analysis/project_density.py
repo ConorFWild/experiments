@@ -30,54 +30,54 @@ data = {
     #
     #             }
     #     },
-    # "JMJD2DA":
-    #     {
-    #         "ModelDir": Path('../../Downloads/pandda_JMJD2DA_all_models/processed_datasets'),
-    #         "Datasets":
-    #             {
-    #                 "JMJD2DA-x427": {
-    #                     "ModelPath": "autobuild/2_13_ligand_0.pdb",
-    #                     "CifPath": 'ligand_files/ligand.cif',
-    #                 },
-    #                 "JMJD2DA-x390": {
-    #                     "ModelPath": "autobuild/1_24_ligand_0.pdb",
-    #                     "CifPath": 'ligand_files/ligand.cif'
-    #                 },
-    #                 # "JMJD2DA-x390": {
-    #                 #     "ModelPath": "autobuild/1_3_ligand_0.pdb",
-    #                 #     "CifPath": 'ligand_files/ligand.cif'
-    #                 # },
-    #                 "JMJD2DA-x533": {
-    #                     "ModelPath": "autobuild/1_2_ligand_0.pdb",
-    #                     "CifPath": 'ligand_files/ligand.cif'
-    #                 },
-    #                 "JMJD2DA-x334": {
-    #                     "ModelPath": "autobuild/3_2_ligand_0.pdb",
-    #                     "CifPath": 'ligand_files/ligand.cif'
-    #                 },
-    #
-    #             }
-    #     },
-    "NSP16":
+    "JMJD2DA":
         {
-            "ModelDir": Path('/dls/labxchem/data/2020/lb26998-2/processing/analysis/pandda_2_new_hits/processed_datasets'),
+            "ModelDir": Path('../../Downloads/pandda_JMJD2DA_all_models/processed_datasets'),
             "Datasets":
                 {
-                    "NSP16-x0165": {
-                        "ModelPath": "autobuild/4_16_Z1250132544_4.pdb",
-                        "CifPath": 'ligand_files/Z1250132544.cif',
+                    "JMJD2DA-x427": {
+                        "ModelPath": "autobuild/2_13_ligand_0.pdb",
+                        "CifPath": 'ligand_files/ligand.cif',
                     },
-                    # "NSP16-x0145": {
-                    #     "ModelPath": "autobuild/2_4_ligand_0.pdb",
+                    # "JMJD2DA-x390": {
+                    #     "ModelPath": "autobuild/1_24_ligand_0.pdb",
                     #     "CifPath": 'ligand_files/ligand.cif'
                     # },
-                    # "NSP16-x0501": {
-                    #     "ModelPath": "autobuild/3_7_ligand_0.pdb",
-                    #     "CifPath": 'ligand_files/ligand.cif'
-                    # },
+                    "JMJD2DA-x390": {
+                        "ModelPath": "autobuild/1_3_ligand_0.pdb",
+                        "CifPath": 'ligand_files/ligand.cif'
+                    },
+                    "JMJD2DA-x533": {
+                        "ModelPath": "autobuild/1_2_ligand_0.pdb",
+                        "CifPath": 'ligand_files/ligand.cif'
+                    },
+                    "JMJD2DA-x334": {
+                        "ModelPath": "autobuild/3_2_ligand_0.pdb",
+                        "CifPath": 'ligand_files/ligand.cif'
+                    },
 
                 }
-        }
+        },
+    # "NSP16":
+    #     {
+    #         "ModelDir": Path('/dls/labxchem/data/2020/lb26998-2/processing/analysis/pandda_2_new_hits/processed_datasets'),
+    #         "Datasets":
+    #             {
+    #                 "NSP16-x0165": {
+    #                     "ModelPath": "autobuild/4_16_Z1250132544_4.pdb",
+    #                     "CifPath": 'ligand_files/Z1250132544.cif',
+    #                 },
+    #                 # "NSP16-x0145": {
+    #                 #     "ModelPath": "autobuild/2_4_ligand_0.pdb",
+    #                 #     "CifPath": 'ligand_files/ligand.cif'
+    #                 # },
+    #                 # "NSP16-x0501": {
+    #                 #     "ModelPath": "autobuild/3_7_ligand_0.pdb",
+    #                 #     "CifPath": 'ligand_files/ligand.cif'
+    #                 # },
+    #
+    #             }
+    #     }
 }
 
 
