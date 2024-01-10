@@ -399,7 +399,7 @@ def main(args):
             x='Sigma',
             hue='ModelType'
         )
-        # ax.set_xscale('log')
+        ax.set_xscale('log')
 
         # Save
         plt.savefig('outputs/std_protein_solvent_dist.png')
@@ -419,7 +419,7 @@ def main(args):
             x='MeanDiff',
             hue='ModelType'
         )
-        ax.set_xscale('log')
+        # ax.set_xscale('log')
 
         # Save
         plt.savefig('outputs/mean_diff_protein_solvent_dist.png')
