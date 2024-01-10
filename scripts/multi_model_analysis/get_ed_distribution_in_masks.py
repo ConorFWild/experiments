@@ -181,6 +181,7 @@ def main(args):
 
     # Analyse datasets
     records = []
+    records_mean_diff = []
     for dtag in config['Dtags']:
 
         # Get the dataset
@@ -354,6 +355,36 @@ def main(args):
                 )
 
 
+            #####################
+
+            mean_difference_array = np.array(xmap_grid) - np.array(mu_grid)
+
+            protein_mean_diff_array = mean_difference_array[protein_mask_array]
+            model_type = f"mean_diff_protein_{model_number}"
+            for j, val in enumerate(protein_mean_diff_array):
+                records_mean_diff.append(
+                    {
+                        'Dtag': dtag,
+                        'Index': j,
+                        'Model': model_number,
+                        'MeanDiff': val,
+                        'ModelType': model_type
+                    }
+                )
+
+            solvent_mean_diff_array = mean_difference_array[solvent_mask_array]
+            model_type = f"mean_diff_solvent_{model_number}"
+            for j, val in enumerate(solvent_mean_diff_array):
+                records_mean_diff.append(
+                    {
+                        'Dtag': dtag,
+                        'Index': j,
+                        'Model': model_number,
+                        'MeanDiff': val,
+                        'ModelType': model_type
+                    }
+                )
+
 
 
         # Plot in seaborn
@@ -374,6 +405,26 @@ def main(args):
         plt.savefig('outputs/std_protein_solvent_dist.png')
 
         data.to_csv('outputs/std_protein_solvent_dist.csv')
+
+
+        # Plot in seaborn
+        data = pd.DataFrame(records_mean_diff)
+        fig, ax = plt.subplots(
+            figsize=(6, 4.8)
+        )
+
+        sns.ecdfplot(
+            data=data,
+            ax=ax,
+            x='MeanDiff',
+            hue='ModelType'
+        )
+        ax.set_xscale('log')
+
+        # Save
+        plt.savefig('outputs/mean_diff_protein_solvent_dist.png')
+
+        data.to_csv('outputs/mean_diff_protein_solvent_dist.csv')
 
 if __name__ == '__main__':
     # Parse Command Line Arguments
