@@ -107,6 +107,31 @@ def get_sigma_map(mean_diff_array):
         1,
     )
 
+    data = pd.DataFrame(
+        [
+            {
+                'MeanDiff': mean_diff,
+                'StandardNormal': normal_sample,
+            }
+            for mean_diff, normal_sample
+            in zip(sorted_mean_diff, sorted_normal_samples)
+        ]
+    )
+    fig, ax = plt.subplots(
+        figsize=(6, 4.8)
+    )
+
+    sns.regplot(
+        data=data,
+        ax=ax,
+        x='MeanDiff',
+        y='StandardNormal'
+    )
+    # ax.set_xscale('log')
+
+    # Save
+    plt.savefig('outputs/qq.png')
+
     print(z)
     return z[0]
 
