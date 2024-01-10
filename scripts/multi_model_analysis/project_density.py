@@ -32,7 +32,7 @@ data = {
         },
     "JMJD2DA":
         {
-            "ModelDir": Path('../../Downloads/pandda_JMJD2DAK_all_models/processed_datasets'),
+            "ModelDir": Path('../../Downloads/pandda_JMJD2DA_all_models/processed_datasets'),
             "Datasets":
                 {
                     "JMJD2DA-x427": {
