@@ -104,6 +104,7 @@ def get_sigma_map(mean_diff_array):
         1,
     )
 
+    print(z)
     return z[0]
 
 class GetDatasetsToProcess:
