@@ -98,7 +98,11 @@ def get_sigma_map(mean_diff_array):
     inner_sorted_normal_samples = sorted_normal_samples[int(sorted_mean_diff.size/4):int(sorted_mean_diff.size*(3/4))]
 
     # Get line of best fit angle
-    z = np.polyfit(inner_sorted_mean_diff, inner_sorted_normal_samples, 1)
+    z = np.polyfit(
+        inner_sorted_normal_samples,
+        inner_sorted_mean_diff,
+        1,
+    )
 
     return z[0]
 
