@@ -65,7 +65,7 @@ data = {
                 {
                     "NSP16-x0165": {
                         "ModelPath": "autobuild/4_16_Z1250132544_4.pdb",
-                        "CifPath": 'ligand_files/ligand.cif',
+                        "CifPath": 'ligand_files/Z1250132544.cif',
                     },
                     # "NSP16-x0145": {
                     #     "ModelPath": "autobuild/2_4_ligand_0.pdb",
