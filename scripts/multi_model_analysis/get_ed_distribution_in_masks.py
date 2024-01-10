@@ -98,8 +98,8 @@ def get_sigma_map(mean_diff_array):
 
     # Get inner 50% of data
     mask = (sorted_normal_samples > -1.5) & (sorted_normal_samples < 1.5)
-    inner_sorted_mean_diff = sorted_mean_diff[int(sorted_mean_diff.size*0.07):int(sorted_mean_diff.size*(0.93))]
-    inner_sorted_normal_samples = sorted_normal_samples[int(sorted_mean_diff.size*0.07):int(sorted_mean_diff.size*(0.93))]
+    inner_sorted_mean_diff = sorted_mean_diff[mask]
+    inner_sorted_normal_samples = sorted_normal_samples[mask]
 
     # Get line of best fit angle
     z = np.polyfit(
