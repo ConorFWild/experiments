@@ -134,7 +134,7 @@ def get_sigma_map(mean_diff_array):
     plt.savefig('outputs/qq.png')
 
     print(z)
-    return z[0]
+    return np.sqrt(1/z[0])
 
 class GetDatasetsToProcess:
     def __init__(self, filters=None):
