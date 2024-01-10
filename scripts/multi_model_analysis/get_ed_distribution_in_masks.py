@@ -15,6 +15,8 @@ import seaborn as sns
 import numpy as np
 import gemmi
 
+from rich import print as rprint
+
 from pandda_gemmi.interfaces import *
 from pandda_gemmi.args import PanDDAArgs
 from pandda_gemmi.fs import PanDDAFS
@@ -80,7 +82,25 @@ config = {
         ("A", "1914")
     ]
 }
+def get_sigma_map(mean_diff_array):
+    # Sort array values
+    sorted_mean_diff = np.sort(mean_diff_array)
 
+    # Sample standard normal values of same size
+    rng = np.random.default_rng()
+    normal_samples = rng.standard_normal(sorted_mean_diff.size)
+
+    # Sort normal values
+    sorted_normal_samples = np.sort(normal_samples)
+
+    # Get inner 50% of data
+    inner_sorted_mean_diff = sorted_mean_diff[int(sorted_mean_diff.size/4):int(sorted_mean_diff.size*(3/4))]
+    inner_sorted_normal_samples = sorted_normal_samples[int(sorted_mean_diff.size/4):int(sorted_mean_diff.size*(3/4))]
+
+    # Get line of best fit angle
+    z = np.polyfit(inner_sorted_mean_diff, inner_sorted_normal_samples, 1)
+
+    return z[0]
 
 class GetDatasetsToProcess:
     def __init__(self, filters=None):
@@ -182,6 +202,7 @@ def main(args):
     # Analyse datasets
     records = []
     records_mean_diff = []
+    sigma_maps = {}
     for dtag in config['Dtags']:
 
         # Get the dataset
@@ -371,6 +392,8 @@ def main(args):
                         'ModelType': model_type
                     }
                 )
+            sigma_map = get_sigma_map(protein_mean_diff_array)
+            sigma_maps[model_type] = sigma_map
 
             solvent_mean_diff_array = mean_difference_array[solvent_mask_array]
             model_type = f"mean_diff_solvent_{model_number}"
@@ -384,6 +407,8 @@ def main(args):
                         'ModelType': model_type
                     }
                 )
+            sigma_map = get_sigma_map(solvent_mean_diff_array)
+            sigma_maps[model_type] = sigma_map
 
 
 
@@ -425,6 +450,8 @@ def main(args):
         plt.savefig('outputs/mean_diff_protein_solvent_dist.png')
 
         data.to_csv('outputs/mean_diff_protein_solvent_dist.csv')
+
+        rprint(sigma_maps)
 
 if __name__ == '__main__':
     # Parse Command Line Arguments
