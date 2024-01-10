@@ -383,6 +383,9 @@ def main(args):
             solvent_mask_array[reference_frame.mask.indicies] = True
             solvent_mask_array[reference_frame.mask.indicies_inner_atomic] = False
 
+            total_mask_array = np.zeros(std_array.shape, dtype=bool)
+            total_mask_array[reference_frame.mask.indicies] = True
+
             protein_std_array = std_array[protein_mask_array]
             model_type = f"protein_{model_number}"
             for j, val in enumerate(protein_std_array):
@@ -442,6 +445,21 @@ def main(args):
                     }
                 )
             sigma_map = get_sigma_map(solvent_mean_diff_array)
+            sigma_maps[model_type] = sigma_map
+
+            total_mean_diff_array = mean_difference_array[total_mask_array]
+            model_type = f"mean_diff_total_{model_number}"
+            for j, val in enumerate(total_mean_diff_array):
+                records_mean_diff.append(
+                    {
+                        'Dtag': dtag,
+                        'Index': j,
+                        'Model': model_number,
+                        'MeanDiff': val,
+                        'ModelType': model_type
+                    }
+                )
+            sigma_map = get_sigma_map(total_mean_diff_array)
             sigma_maps[model_type] = sigma_map
 
 
