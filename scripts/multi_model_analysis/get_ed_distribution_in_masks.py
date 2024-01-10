@@ -84,8 +84,8 @@ config = {
 }
 def get_sigma_map(mean_diff_array):
     # Scale
-    scaled_mean_diff = (mean_diff_array - np.mean(mean_diff_array)) / np.std(mean_diff_array)
-
+    # scaled_mean_diff = (mean_diff_array - np.mean(mean_diff_array)) / np.std(mean_diff_array)
+    scaled_mean_diff = mean_diff_array
     # Sort array values
     sorted_mean_diff = np.sort(scaled_mean_diff)
 
