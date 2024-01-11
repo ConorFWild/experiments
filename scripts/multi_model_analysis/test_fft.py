@@ -138,7 +138,7 @@ for x, y, z in itertools.product(np.linspace(0, 360, 10, endpoint=False), np.lin
     ccp4 = gemmi.Ccp4Map()
     ccp4.grid = new_grid
     ccp4.update_ccp4_header()
-    ccp4.write_ccp4_map('out_fft.ccp4')
+    ccp4.write_ccp4_map('out_fft89.ccp4')
 
     break
 
