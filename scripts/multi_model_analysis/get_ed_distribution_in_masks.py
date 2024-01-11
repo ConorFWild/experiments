@@ -65,6 +65,24 @@ from pandda_gemmi import serialize
 
 from pandda_gemmi.args import PanDDAArgs
 
+# config = {
+#     "Dtags": {
+#         "BAZ2BA-x557": {
+#             "Points": [
+#                 [
+#                     13.11,
+#                     39.91,
+#                     29.79
+#                 ]
+#             ]
+#         },
+#     },
+#     "Residues": [
+#         ("A", "1888"),
+#         ("A", "1914")
+#     ]
+# }
+
 config = {
     "Dtags": {
         "BAZ2BA-x557": {
@@ -82,6 +100,7 @@ config = {
         ("A", "1914")
     ]
 }
+
 def get_sigma_map(mean_diff_array):
     # Scale
     # scaled_mean_diff = (mean_diff_array - np.mean(mean_diff_array)) / np.std(mean_diff_array)
