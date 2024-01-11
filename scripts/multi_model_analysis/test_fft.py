@@ -110,6 +110,18 @@ st.write_minimal_pdb('out.pdb')
 
 # Get the xmap
 xmap = get_xmap(mtz_path, protein_structure_array)
+
+
+mtz_path = '/dls/labxchem/data/2020/lb18145-153/processing/analysis/model_building/Mpro-x0030/dimple.mtz'
+
+
+# Get the xmap
+xmap_contrast = get_xmap(mtz_path, protein_structure_array)
+
+xmap_array = np.array(xmap, copy=False)
+xmap_contrast_array = np.array(xmap_contrast, copy=False)
+xmap_array[:,:,:] = xmap_array[:,:,:] - xmap_contrast_array[:,:,:]
+
 ccp4 = gemmi.Ccp4Map()
 ccp4.grid = xmap
 ccp4.update_ccp4_header()
