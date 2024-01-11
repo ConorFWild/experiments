@@ -115,56 +115,76 @@ ccp4.grid = xmap
 ccp4.update_ccp4_header()
 ccp4.write_ccp4_map('out.ccp4')
 
+
+fft_maps = []
 for x, y, z in itertools.product(np.linspace(0, 360, 10, endpoint=False), np.linspace(0, 360, 10, endpoint=False),
                                  np.linspace(0, 360, 10, endpoint=False)):
+    print([x,y,z])
     begin_fft = time.time()
     structure_map = get_structure_map(ligand_structure_array, x, y, z)
-    ccp4 = gemmi.Ccp4Map()
-    ccp4.grid = structure_map
-    ccp4.update_ccp4_header()
-    ccp4.write_ccp4_map('out_ligand.ccp4')
+    # ccp4 = gemmi.Ccp4Map()
+    # ccp4.grid = structure_map
+    # ccp4.update_ccp4_header()
+    # ccp4.write_ccp4_map('out_ligand.ccp4')
     fft = fft_convolve(structure_map, xmap)
     finish_fft = time.time()
-    print(f'FFTd in {finish_fft - begin_fft}')
+    # print(f'FFTd in {finish_fft - begin_fft}')
 
-    new_grid = gemmi.FloatGrid(
-        fft.shape[0],
-        fft.shape[1],
-        fft.shape[2]
-    )
-    new_grid.set_unit_cell(gemmi.UnitCell(fft.shape[0] * 0.5, fft.shape[1] * 0.5, fft.shape[2] * 0.5, 90.0, 90.0, 90.0))
-    new_grid_array = np.array(new_grid, copy=False)
-    new_grid_array[:, :, :] = fft[:, :, :]
-    ccp4 = gemmi.Ccp4Map()
-    ccp4.grid = new_grid
-    ccp4.update_ccp4_header()
-    ccp4.write_ccp4_map('out_fft89.ccp4')
+    fft_maps.append(fft)
 
-    break
+    # new_grid = gemmi.FloatGrid(
+    #     fft.shape[0],
+    #     fft.shape[1],
+    #     fft.shape[2]
+    # )
+    # new_grid.set_unit_cell(gemmi.UnitCell(fft.shape[0] * 0.5, fft.shape[1] * 0.5, fft.shape[2] * 0.5, 90.0, 90.0, 90.0))
+    # new_grid_array = np.array(new_grid, copy=False)
+    # new_grid_array[:, :, :] = fft[:, :, :]
 
-# Define the structure and xmap paths
-mtz_path = '/dls/labxchem/data/2020/lb18145-153/processing/analysis/model_building/Mpro-x0030/dimple.mtz'
-
-
-# Get the xmap
-xmap = get_xmap(mtz_path, protein_structure_array)
-
-begin_fft = time.time()
-fft = fft_convolve(structure_map, xmap)
-finish_fft = time.time()
-print(f'FFTd in {finish_fft - begin_fft}')
-
+fft_max = np.max(np.stack(fft_maps), axis=0)
+print(fft_max.shape)
 new_grid = gemmi.FloatGrid(
-    fft.shape[0],
-    fft.shape[1],
-    fft.shape[2]
+    fft_max.shape[0],
+    fft_max.shape[1],
+    fft_max.shape[2]
 )
-new_grid.set_unit_cell(gemmi.UnitCell(fft.shape[0] * 0.5, fft.shape[1] * 0.5, fft.shape[2] * 0.5, 90.0, 90.0, 90.0))
+new_grid.set_unit_cell(gemmi.UnitCell(
+    fft_max.shape[0] * 0.5,
+    fft_max.shape[1] * 0.5,
+    fft_max.shape[2] * 0.5, 90.0, 90.0, 90.0))
 new_grid_array = np.array(new_grid, copy=False)
-new_grid_array[:, :, :] = fft[:, :, :]
+new_grid_array[:, :, :] = fft_max[:, :, :]
+
 ccp4 = gemmi.Ccp4Map()
 ccp4.grid = new_grid
 ccp4.update_ccp4_header()
-ccp4.write_ccp4_map('out_fft30.ccp4')
+ccp4.write_ccp4_map('out_fftmax.ccp4')
 
+
+
+# # Define the structure and xmap paths
+# mtz_path = '/dls/labxchem/data/2020/lb18145-153/processing/analysis/model_building/Mpro-x0030/dimple.mtz'
+#
+#
+# # Get the xmap
+# xmap = get_xmap(mtz_path, protein_structure_array)
+#
+# begin_fft = time.time()
+# fft = fft_convolve(structure_map, xmap)
+# finish_fft = time.time()
+# print(f'FFTd in {finish_fft - begin_fft}')
+#
+# new_grid = gemmi.FloatGrid(
+#     fft.shape[0],
+#     fft.shape[1],
+#     fft.shape[2]
+# )
+# new_grid.set_unit_cell(gemmi.UnitCell(fft.shape[0] * 0.5, fft.shape[1] * 0.5, fft.shape[2] * 0.5, 90.0, 90.0, 90.0))
+# new_grid_array = np.array(new_grid, copy=False)
+# new_grid_array[:, :, :] = fft[:, :, :]
+# ccp4 = gemmi.Ccp4Map()
+# ccp4.grid = new_grid
+# ccp4.update_ccp4_header()
+# ccp4.write_ccp4_map('out_fft30.ccp4')
+#
 
