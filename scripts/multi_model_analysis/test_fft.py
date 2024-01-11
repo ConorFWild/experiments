@@ -129,6 +129,7 @@ ccp4.grid = xmap
 ccp4.update_ccp4_header()
 ccp4.write_ccp4_map('out.ccp4')
 
+initial_structure_map = get_structure_map(ligand_structure_array, 0, 0, 0)
 
 fft_maps = []
 for x, y, z in itertools.product(np.linspace(0, 360, 10, endpoint=False), np.linspace(0, 360, 10, endpoint=False),
@@ -141,8 +142,8 @@ for x, y, z in itertools.product(np.linspace(0, 360, 10, endpoint=False), np.lin
     # ccp4.update_ccp4_header()
     # ccp4.write_ccp4_map('out_ligand.ccp4')
     # fft = fft_convolve(structure_map, xmap)
-    fft = fft_convolve(structure_map, structure_map)
-    print(fft.shape)
+    fft = fft_convolve(structure_map, initial_structure_map)
+    # print([structure_map.shape,fft.shape])
 
     finish_fft = time.time()
     # print(f'FFTd in {finish_fft - begin_fft}')
