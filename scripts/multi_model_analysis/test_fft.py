@@ -130,6 +130,11 @@ ccp4.update_ccp4_header()
 ccp4.write_ccp4_map('out.ccp4')
 
 initial_structure_map = get_structure_map(ligand_structure_array, 0, 0, 0)
+ccp4 = gemmi.Ccp4Map()
+ccp4.grid = initial_structure_map
+ccp4.update_ccp4_header()
+ccp4.write_ccp4_map('out_initial_ligand.ccp4')
+
 
 fft_maps = []
 for x, y, z in itertools.product(np.linspace(0, 360, 10, endpoint=False), np.linspace(0, 360, 10, endpoint=False),
