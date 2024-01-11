@@ -142,6 +142,7 @@ for x, y, z in itertools.product(np.linspace(0, 360, 10, endpoint=False), np.lin
     # ccp4.write_ccp4_map('out_ligand.ccp4')
     # fft = fft_convolve(structure_map, xmap)
     fft = fft_convolve(structure_map, structure_map)
+    print(fft.shape)
 
     finish_fft = time.time()
     # print(f'FFTd in {finish_fft - begin_fft}')
