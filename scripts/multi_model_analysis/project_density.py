@@ -84,7 +84,7 @@ data = {
             "Datasets":
                 {
                     "Mpro-x0089": {
-                        "ModelPath": "autobuild/9_8_Z1650168321_0.pdb",
+                        "ModelPath": "autobuild/7_4_Z1650168321_0.pdb",
                         "CifPath": 'ligand_files/Z1650168321.cif',
                     },
                 }
