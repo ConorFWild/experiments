@@ -1080,7 +1080,9 @@ def plot_projection(
     plt.contourf(
         xs,
         ys,
-        np.array(values).reshape(100, 100).T
+        np.array(values).reshape(100, 100).T,
+        vmin=0.0,
+        vmax=0.2
     )
     # plt.imshow(np.array(values).reshape(100,100).T,
     #            extent=(
