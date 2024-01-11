@@ -121,6 +121,8 @@ xmap_contrast = get_xmap(mtz_path, protein_structure_array)
 xmap_array = np.array(xmap, copy=False)
 xmap_contrast_array = np.array(xmap_contrast, copy=False)
 xmap_array[:,:,:] = xmap_array[:,:,:] - xmap_contrast_array[:,:,:]
+xmap_array[xmap_array < 0.0] = 0.0
+
 
 ccp4 = gemmi.Ccp4Map()
 ccp4.grid = xmap
