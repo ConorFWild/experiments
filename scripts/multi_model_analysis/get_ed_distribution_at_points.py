@@ -365,6 +365,32 @@ def main(args):
                         }
                     )
 
+        # Sample the distribution of the ground state datasets at the sample point
+        model_number = -1
+        for sample_point in config['Dtags'][dtag]['Points']:
+            pos = gemmi.Position(
+                sample_point[0],
+                sample_point[1],
+                sample_point[2]
+            )
+            for _dtag, density in zip(
+                    dtag_array,
+                    dmaps
+            ):
+                xmap = reference_frame.unmask(SparseDMap(density))
+
+                val = xmap.interpolate_value(
+                    pos
+                )
+                records.append(
+                    {
+                        'Dtag': dtag,
+                        'Comparator Dtag': _dtag,
+                        'Model': model_number,
+                        'ED': val
+                    }
+                )
+
 
 
 
