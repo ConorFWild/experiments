@@ -341,7 +341,7 @@ def main(args):
             z_grid = reference_frame.unmask(SparseDMap(z))
 
             # Sample the distribution of the ground state datasets at the sample point
-            for sample_point in config['Dtags'][dtag]['Points']:
+            for j, sample_point in enumerate(config['Dtags'][dtag]['Points']):
                 pos = gemmi.Position(
                     sample_point[0],
                     sample_point[1],
@@ -361,13 +361,14 @@ def main(args):
                             'Dtag': dtag,
                             'Comparator Dtag': _dtag,
                             'Model': model_number,
-                            'ED': val
+                            'ED': val,
+                            'Sample': j
                         }
                     )
 
         # Sample the distribution of the ground state datasets at the sample point
         model_number = -1
-        for sample_point in config['Dtags'][dtag]['Points']:
+        for j, sample_point in enumerate(config['Dtags'][dtag]['Points']):
             pos = gemmi.Position(
                 sample_point[0],
                 sample_point[1],
@@ -387,7 +388,8 @@ def main(args):
                         'Dtag': dtag,
                         'Comparator Dtag': _dtag,
                         'Model': model_number,
-                        'ED': val
+                        'ED': val,
+                        'Sample': j,
                     }
                 )
 
