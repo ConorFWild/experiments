@@ -424,23 +424,23 @@ def main(args):
 
 
         # Plot in seaborn
-        data = pd.DataFrame(records)
-        fig, ax = plt.subplots(
-            figsize=(6, 4.8)
-        )
-
-        sns.ecdfplot(
-            data=data,
-            ax=ax,
-            x='ED',
-            hue='Model'
-        )
-
-
-        # Save
-        plt.savefig('outputs/ed_dist.png')
-
-        data.to_csv('outputs/ed_dist.csv')
+        # data = pd.DataFrame(records)
+        # fig, ax = plt.subplots(
+        #     figsize=(6, 4.8)
+        # )
+        #
+        # sns.ecdfplot(
+        #     data=data,
+        #     ax=ax,
+        #     x='ED',
+        #     hue='Model'
+        # )
+        #
+        #
+        # # Save
+        # plt.savefig('outputs/ed_dist.png')
+        #
+        # data.to_csv('outputs/ed_dist.csv')
 
 if __name__ == '__main__':
     # Parse Command Line Arguments
