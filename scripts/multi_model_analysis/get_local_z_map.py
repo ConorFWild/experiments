@@ -351,7 +351,7 @@ def main(args):
             ccp4 = gemmi.Ccp4Map()
             ccp4.grid = z_grid
             ccp4.update_ccp4_header()
-            ccp4.write_ccp4_map(f'z_{model_number}.ccp4')
+            ccp4.write_ccp4_map(f'z_pos_{model_number}.ccp4')
 
             z_grid_array = np.array(z_grid, copy=False)
             z_grid_array[z_grid_array<0.0] = 0.0
