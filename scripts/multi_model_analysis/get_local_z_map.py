@@ -358,7 +358,7 @@ def main(args):
 
             z_grid_conv = oaconvolve(
                 z_grid_array,
-                np.ones((5,5,5)),
+                np.ones((30,30,30)),
                 mode='same'
             )
             z_grid_array[:,:,:] = z_grid_conv[:,:,:]
@@ -366,7 +366,7 @@ def main(args):
             ccp4 = gemmi.Ccp4Map()
             ccp4.grid = z_grid
             ccp4.update_ccp4_header()
-            ccp4.write_ccp4_map(f'z_conv_pos_{model_number}.ccp4')
+            ccp4.write_ccp4_map(f'z_conv_pos_large_{model_number}.ccp4')
 
         #     # Sample the distribution of the ground state datasets at the sample point
         #     for j, sample_point in enumerate(config['Dtags'][dtag]['Points']):
