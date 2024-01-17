@@ -317,7 +317,30 @@ def main(args):
             ax=axes,
             color_threshold=0.5*max(dmaps_tree[:,2]),
         )
-        plt.savefig('outputs/dmaps_tree.png')
+        plt.savefig('outputs/dmaps_tree_complete.png')
+
+        # Dendrogram and plot
+        from scipy.cluster import hierarchy
+        dmaps_tree = hierarchy.linkage(dmaps_pca, 'centroid')
+        fig, axes = plt.subplots()
+        dn = hierarchy.dendrogram(
+            dmaps_tree,
+            ax=axes,
+            color_threshold=0.5*max(dmaps_tree[:,2]),
+        )
+        plt.savefig('outputs/dmaps_tree_centroid.png')
+
+        # Dendrogram and plot
+        from scipy.cluster import hierarchy
+        dmaps_tree = hierarchy.linkage(dmaps_pca, 'single')
+        fig, axes = plt.subplots()
+        dn = hierarchy.dendrogram(
+            dmaps_tree,
+            ax=axes,
+            color_threshold=0.5*max(dmaps_tree[:,2]),
+        )
+        plt.savefig('outputs/dmaps_tree_single.png')
+
 
 
         # TSNE and plot
