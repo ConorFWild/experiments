@@ -301,7 +301,7 @@ def main(args):
         # PCA
         from sklearn.decomposition import PCA
         pca = PCA(n_components=100)
-        dmaps_pca = pca.fit(dmaps).transform(dmaps)
+        dmaps_pca = pca.fit_transform(dmaps)
 
         # TSNE and plot
         from sklearn.manifold import TSNE
