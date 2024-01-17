@@ -298,6 +298,28 @@ def main(args):
         print(f"\t\tGot dmaps in: {round(time_finish_get_dmaps - time_begin_get_dmaps, 2)}")
         dtag_array = np.array([_dtag for _dtag in comparator_datasets])
 
+        # PCA
+        from sklearn.decomposition import PCA
+        pca = PCA(n_components=100)
+        dmaps_pca = pca.fit(dmaps).transform(dmaps)
+
+        # TSNE and plot
+        from sklearn.manifold import TSNE
+        tsne = TSNE(n_components=2, )
+        dmaps_tsne = tsne.fit_transform(dmaps_pca)
+        fig, axes = plt.subplots()
+        axes.scatter(dmaps_tsne[:,0], dmaps_tsne[:,1])
+        plt.savefig('outputs/dmaps_tsne.png')
+
+
+        # Dendrogram and plot
+        from scipy.cluster import hierarchy
+        dmaps_tree = hierarchy.linkage(dmaps_pca, 'complete')
+        fig, axes = plt.subplots()
+        dn = hierarchy.dendrogram(dmaps_tree, ax=axes)
+        plt.savefig('outputs/dmaps_tree.png')
+
+
         # Get the dataset dmap, both processed and unprocessed
         dtag_index = np.argwhere(dtag_array == dtag)
         dataset_dmap_array = dmaps[dtag_index[0][0], :]
