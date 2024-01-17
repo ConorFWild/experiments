@@ -305,13 +305,7 @@ def main(args):
         print(dmaps_pca)
         print(dmaps_pca.dtype)
 
-        # TSNE and plot
-        from sklearn.manifold import TSNE
-        tsne = TSNE(n_components=2, )
-        dmaps_tsne = tsne.fit_transform(dmaps_pca)
-        fig, axes = plt.subplots()
-        axes.scatter(dmaps_tsne[:,0], dmaps_tsne[:,1])
-        plt.savefig('outputs/dmaps_tsne.png')
+
 
 
         # Dendrogram and plot
@@ -321,6 +315,14 @@ def main(args):
         dn = hierarchy.dendrogram(dmaps_tree, ax=axes)
         plt.savefig('outputs/dmaps_tree.png')
 
+
+        # TSNE and plot
+        from sklearn.manifold import TSNE
+        tsne = TSNE(n_components=2, )
+        dmaps_tsne = tsne.fit_transform(dmaps_pca)
+        fig, axes = plt.subplots()
+        axes.scatter(dmaps_tsne[dn['leaves'],0], dmaps_tsne[dn['leaves'],1], color=dn['leaves_color_list'])
+        plt.savefig('outputs/dmaps_tsne.png')
 
         # Get the dataset dmap, both processed and unprocessed
         dtag_index = np.argwhere(dtag_array == dtag)
