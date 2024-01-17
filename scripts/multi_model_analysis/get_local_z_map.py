@@ -312,7 +312,11 @@ def main(args):
         from scipy.cluster import hierarchy
         dmaps_tree = hierarchy.linkage(dmaps_pca, 'complete')
         fig, axes = plt.subplots()
-        dn = hierarchy.dendrogram(dmaps_tree, ax=axes)
+        dn = hierarchy.dendrogram(
+            dmaps_tree,
+            ax=axes,
+            color_threshold=0.5*max(dmaps_tree[:,2]),
+        )
         plt.savefig('outputs/dmaps_tree.png')
 
 
