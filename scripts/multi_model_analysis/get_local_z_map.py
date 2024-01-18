@@ -361,6 +361,7 @@ def main(args):
         from sklearn.manifold import TSNE
         tsne = TSNE(n_components=2, )
         dmaps_tsne = tsne.fit_transform(dmaps_pca)
+        fig, axes = plt.subplots()
         axes.scatter(
             dmaps_tsne[outlier_scores < quantile,0],
             dmaps_tsne[outlier_scores < quantile,1],
@@ -374,7 +375,10 @@ def main(args):
 
         plt.savefig('outputs/dmaps_tsne.png')
 
+
         labels = clusterer.labels_
+
+        fig, axes = plt.subplots()
         axes.scatter(
             dmaps_tsne[labels < 0,0],
             dmaps_tsne[labels < 0,1],
