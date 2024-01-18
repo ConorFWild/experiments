@@ -419,6 +419,27 @@ def main(args):
         print(
             f"\t\tGot characterization sets in: {round(time_finish_get_characterization_sets - time_begin_get_characterization_sets, 2)}")
 
+        characterization_mask = []
+        for _dtag in dtag_array:
+            for model_datasets in characterization_sets.values():
+                if _dtag in model_datasets:
+                    characterization_mask.append(True)
+                else:
+                    characterization_mask.append(False)
+        characterization_mask = np.array(characterization_mask)
+        fig, axes = plt.subplots()
+        axes.scatter(
+            dmaps_tsne[~characterization_mask],
+            dmaps_tsne[~characterization_mask],
+            c='gray',
+        )
+        axes.scatter(
+            dmaps_tsne[characterization_mask],
+            dmaps_tsne[characterization_mask],
+            c='green',
+        )
+        plt.savefig('outputs/dmaps_tsne_clusters.png')
+
         # Filter the models which are clearly poor descriptions of the density
         # In theory this step could result in the exclusion of a ground state model which provided good contrast
         # for a ligand binding in one part of the protein but fit poorly to say a large disordered region
