@@ -361,8 +361,6 @@ def main(args):
         from sklearn.manifold import TSNE
         tsne = TSNE(n_components=2, )
         dmaps_tsne = tsne.fit_transform(dmaps_pca)
-        fig, axes = plt.subplots()
-        # axes.scatter(dmaps_tsne[dn['leaves'],0], dmaps_tsne[dn['leaves'],1], color=dn['leaves_color_list'])
         axes.scatter(
             dmaps_tsne[outlier_scores < quantile,0],
             dmaps_tsne[outlier_scores < quantile,1],
@@ -373,7 +371,20 @@ def main(args):
             dmaps_tsne[outlier_scores >= quantile,1],
             c='red',
         )
+
         plt.savefig('outputs/dmaps_tsne.png')
+
+        labels = clusterer.labels_
+        axes.scatter(
+            dmaps_tsne[labels < 0,0],
+            dmaps_tsne[labels < 0,1],
+            c='gray',
+        )
+        axes.scatter(
+            dmaps_tsne[labels >= 0, 0],
+            dmaps_tsne[labels >= 0, 1],
+            c='green',
+        )
 
         # Get the dataset dmap, both processed and unprocessed
         dtag_index = np.argwhere(dtag_array == dtag)
