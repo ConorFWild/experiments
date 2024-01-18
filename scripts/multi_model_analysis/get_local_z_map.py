@@ -353,6 +353,9 @@ def main(args):
             axis=axes)
         plt.savefig('outputs/dmaps_tree.png')
 
+        df = clusterer.condensed_tree_.to_pandas()
+        df.to_csv('outputs/dmaps_tree.csv')
+
 
         # TSNE and plot
         from sklearn.manifold import TSNE
