@@ -351,6 +351,8 @@ def main(args):
         clusterer.condensed_tree_.plot(
             select_clusters=True,
             axis=axes)
+        plt.savefig('outputs/dmaps_tree.png')
+
 
         # TSNE and plot
         from sklearn.manifold import TSNE
