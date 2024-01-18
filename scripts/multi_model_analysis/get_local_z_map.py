@@ -438,7 +438,7 @@ def main(args):
             dmaps_tsne[characterization_mask],
             c='green',
         )
-        plt.savefig('outputs/dmaps_tsne_clusters.png')
+        plt.savefig('outputs/dmaps_tsne_clusters_min_var.png')
 
         # Filter the models which are clearly poor descriptions of the density
         # In theory this step could result in the exclusion of a ground state model which provided good contrast
