@@ -391,6 +391,9 @@ def main(args):
         )
         plt.savefig('outputs/dmaps_tsne_clusters.png')
 
+        for x in dtag_array[outlier_scores >= quantile]:
+            print(x)
+
 
         # Get the dataset dmap, both processed and unprocessed
         dtag_index = np.argwhere(dtag_array == dtag)
