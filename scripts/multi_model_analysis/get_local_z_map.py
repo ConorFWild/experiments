@@ -421,21 +421,22 @@ def main(args):
 
         characterization_mask = []
         for _dtag in dtag_array:
+            in_a_model = False
             for model_datasets in characterization_sets.values():
                 if _dtag in model_datasets:
-                    characterization_mask.append(True)
-                else:
-                    characterization_mask.append(False)
+                    in_a_model = True
+
+            characterization_mask.append(in_a_model)
         characterization_mask = np.array(characterization_mask)
         fig, axes = plt.subplots()
         axes.scatter(
-            dmaps_tsne[~characterization_mask],
-            dmaps_tsne[~characterization_mask],
+            dmaps_tsne[~characterization_mask, 0],
+            dmaps_tsne[~characterization_mask, 1],
             c='gray',
         )
         axes.scatter(
-            dmaps_tsne[characterization_mask],
-            dmaps_tsne[characterization_mask],
+            dmaps_tsne[characterization_mask, 0],
+            dmaps_tsne[characterization_mask, 1],
             c='green',
         )
         plt.savefig('outputs/dmaps_tsne_clusters_min_var.png')
