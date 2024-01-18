@@ -373,7 +373,7 @@ def main(args):
             c='red',
         )
 
-        plt.savefig('outputs/dmaps_tsne.png')
+        plt.savefig('outputs/dmaps_tsne_outliers.png')
 
 
         labels = clusterer.labels_
@@ -389,6 +389,8 @@ def main(args):
             dmaps_tsne[labels >= 0, 1],
             c='green',
         )
+        plt.savefig('outputs/dmaps_tsne_clusters.png')
+
 
         # Get the dataset dmap, both processed and unprocessed
         dtag_index = np.argwhere(dtag_array == dtag)
