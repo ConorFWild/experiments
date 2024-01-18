@@ -341,6 +341,12 @@ def main(args):
         )
         plt.savefig('outputs/dmaps_tree_single.png')
 
+        # Calculate outliers
+        import hdbscan
+        clusterer = hdbscan.HDBSCAN(min_cluster_size=15).fit(dmaps_pca)
+        outlier_scores = clusterer.outlier_scores_
+        quantile = np.quantile(outlier_scores, 0.95)
+
 
 
         # TSNE and plot
@@ -348,7 +354,17 @@ def main(args):
         tsne = TSNE(n_components=2, )
         dmaps_tsne = tsne.fit_transform(dmaps_pca)
         fig, axes = plt.subplots()
-        axes.scatter(dmaps_tsne[dn['leaves'],0], dmaps_tsne[dn['leaves'],1], color=dn['leaves_color_list'])
+        # axes.scatter(dmaps_tsne[dn['leaves'],0], dmaps_tsne[dn['leaves'],1], color=dn['leaves_color_list'])
+        axes.scatter(
+            dmaps_tsne[outlier_scores < quantile,0],
+            dmaps_tsne[outlier_scores < quantile,1],
+            c='gray',
+        )
+        axes.scatter(
+            dmaps_tsne[outlier_scores >= quantile,0],
+            dmaps_tsne[outlier_scores >= quantile,1],
+            c='red',
+        )
         plt.savefig('outputs/dmaps_tsne.png')
 
         # Get the dataset dmap, both processed and unprocessed
