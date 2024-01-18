@@ -347,7 +347,10 @@ def main(args):
         outlier_scores = clusterer.outlier_scores_
         quantile = np.quantile(outlier_scores, 0.95)
 
-
+        fig, axes = plt.subplots()
+        clusterer.condensed_tree_.plot(
+            select_clusters=True,
+            axis=axes)
 
         # TSNE and plot
         from sklearn.manifold import TSNE
