@@ -343,7 +343,7 @@ def main(args):
 
         # Calculate outliers
         import hdbscan
-        clusterer = hdbscan.HDBSCAN(min_cluster_size=15).fit(dmaps_pca)
+        clusterer = hdbscan.HDBSCAN(min_cluster_size=15,cluster_selection_method='leaf').fit(dmaps_pca)
         outlier_scores = clusterer.outlier_scores_
         quantile = np.quantile(outlier_scores, 0.95)
 
