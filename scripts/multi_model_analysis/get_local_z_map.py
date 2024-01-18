@@ -337,7 +337,7 @@ def main(args):
         dn = hierarchy.dendrogram(
             dmaps_tree,
             ax=axes,
-            color_threshold=0.5*max(dmaps_tree[:,2]),
+            color_threshold=0.25*max(dmaps_tree[:,2]),
         )
         plt.savefig('outputs/dmaps_tree_single.png')
 
