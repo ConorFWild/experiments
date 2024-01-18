@@ -84,9 +84,37 @@ from scipy.signal import oaconvolve
 #     ]
 # }
 
+# config = {
+#     "Dtags": {
+#         "Mpro-x0089": {
+#             "Points": [
+#                 [
+#                     20.88,
+#                     -22.20,
+#                     16.72
+#                 ],
+#                 [  # Oxygen with high z
+#                     14.87,
+#                     -23.85,
+#                     17.18
+#                 ],
+#                 [
+#                     21.41,
+#                     -22.65,
+#                     15.41
+#                 ]
+#             ]
+#         },
+#     },
+#     "Residues": [
+#         ("A", "1888"),
+#         ("A", "1914")
+#     ]
+# }
+
 config = {
     "Dtags": {
-        "Mpro-x0089": {
+        "BAZ2BA-x583": {
             "Points": [
                 [
                     20.88,
