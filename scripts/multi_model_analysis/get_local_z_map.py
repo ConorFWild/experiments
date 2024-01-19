@@ -373,7 +373,7 @@ def main(args):
         import hdbscan
         clusterer = hdbscan.HDBSCAN(
             min_cluster_size=5,
-            # min_samples=10,
+            min_samples=0,
             cluster_selection_method='leaf',
             allow_single_cluster=True
         ).fit(dmaps_pca)
