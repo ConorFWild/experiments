@@ -376,6 +376,8 @@ def main(args):
             # min_samples=10,
             cluster_selection_method='leaf',
         ).fit(dmaps_pca)
+        labels = clusterer.labels_
+        print(labels)
         outlier_scores = clusterer.outlier_scores_
         quantile = np.quantile(outlier_scores, 0.95)
 
@@ -408,8 +410,7 @@ def main(args):
         plt.savefig('outputs/dmaps_tsne_outliers.png')
 
 
-        labels = clusterer.labels_
-        print(labels)
+
 
         fig, axes = plt.subplots()
         axes.scatter(
