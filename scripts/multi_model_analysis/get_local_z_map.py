@@ -430,8 +430,8 @@ def main(args):
                           for x in labels]
 
         axes.scatter(
-            dmaps_tsne[labels < 0,0],
-            dmaps_tsne[labels < 0,1],
+            dmaps_tsne[:,0],
+            dmaps_tsne[:,1],
             c=cluster_colors,
         )
         plt.savefig('outputs/dmaps_tsne_clusters.png')
