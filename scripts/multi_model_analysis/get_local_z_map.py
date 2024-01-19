@@ -425,7 +425,7 @@ def main(args):
         #     dmaps_tsne[labels >= 0, 1],
         #     c='green',
         # )
-        color_palette = sns.color_palette('deep', 8)
+        color_palette = sns.color_palette('deep', 32)
         cluster_colors = [color_palette[x] if x >= 0
                           else (0.5, 0.5, 0.5)
                           for x in labels]
