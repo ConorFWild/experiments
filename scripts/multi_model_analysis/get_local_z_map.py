@@ -386,7 +386,9 @@ def main(args):
         fig, axes = plt.subplots()
         clusterer.condensed_tree_.plot(
             select_clusters=True,
-            axis=axes)
+            axis=axes,
+            selection_palette=sns.color_palette('deep', 32)
+        )
         plt.savefig('outputs/dmaps_tree.png')
 
         df = clusterer.condensed_tree_.to_pandas()
