@@ -378,7 +378,8 @@ def main(args):
             allow_single_cluster=True
         ).fit(dmaps_pca)
         labels = clusterer.labels_
-        print(labels)
+        for _dtag, _label in zip(dtag_array, labels):
+            print(f"{_dtag} : {_label}")
         outlier_scores = clusterer.outlier_scores_
         quantile = np.quantile(outlier_scores, 0.95)
 
