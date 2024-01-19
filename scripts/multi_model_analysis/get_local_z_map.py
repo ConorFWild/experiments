@@ -409,6 +409,7 @@ def main(args):
 
 
         labels = clusterer.labels_
+        print(labels)
 
         fig, axes = plt.subplots()
         axes.scatter(
