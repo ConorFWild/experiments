@@ -372,7 +372,7 @@ def main(args):
         # Calculate outliers
         import hdbscan
         clusterer = hdbscan.HDBSCAN(
-            min_cluster_size=15,
+            # min_cluster_size=15,
             # min_samples=10,
             cluster_selection_method='leaf',
             allow_single_cluster=True
