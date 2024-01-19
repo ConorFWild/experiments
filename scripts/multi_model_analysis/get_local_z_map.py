@@ -414,15 +414,25 @@ def main(args):
 
 
         fig, axes = plt.subplots()
+        # axes.scatter(
+        #     dmaps_tsne[labels < 0,0],
+        #     dmaps_tsne[labels < 0,1],
+        #     c='gray',
+        # )
+        # axes.scatter(
+        #     dmaps_tsne[labels >= 0, 0],
+        #     dmaps_tsne[labels >= 0, 1],
+        #     c='green',
+        # )
+        color_palette = sns.color_palette('deep', 8)
+        cluster_colors = [color_palette[x] if x >= 0
+                          else (0.5, 0.5, 0.5)
+                          for x in labels]
+
         axes.scatter(
             dmaps_tsne[labels < 0,0],
             dmaps_tsne[labels < 0,1],
-            c='gray',
-        )
-        axes.scatter(
-            dmaps_tsne[labels >= 0, 0],
-            dmaps_tsne[labels >= 0, 1],
-            c='green',
+            c=cluster_colors,
         )
         plt.savefig('outputs/dmaps_tsne_clusters.png')
 
