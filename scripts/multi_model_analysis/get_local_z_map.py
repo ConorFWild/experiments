@@ -375,7 +375,8 @@ def main(args):
             min_cluster_size=5,
             min_samples=1,
             cluster_selection_method='leaf',
-            allow_single_cluster=True
+            allow_single_cluster=True,
+            prediction_data=True
         ).fit(dmaps_pca)
         labels = clusterer.labels_
         for _dtag, _label in zip(dtag_array[np.argsort(dtag_array)], labels[np.argsort(dtag_array)]):
@@ -387,7 +388,8 @@ def main(args):
         clusterer.condensed_tree_.plot(
             select_clusters=True,
             axis=axes,
-            selection_palette=sns.color_palette('deep', 32)
+            selection_palette=sns.color_palette('deep', 32),
+
         )
         plt.savefig('outputs/dmaps_tree.png')
 
@@ -427,10 +429,14 @@ def main(args):
         #     dmaps_tsne[labels >= 0, 1],
         #     c='green',
         # )
+        soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
+
         color_palette = sns.color_palette('deep', 32)
-        cluster_colors = [color_palette[x] if x >= 0
-                          else (0.5, 0.5, 0.5)
-                          for x in labels]
+        # cluster_colors = [color_palette[x] if x >= 0
+        #                   else (0.5, 0.5, 0.5)
+        #                   for x in labels]
+        cluster_colors = [color_palette[np.argmax(x)]
+                         for x in soft_clusters]
 
         axes.scatter(
             dmaps_tsne[:,0],
