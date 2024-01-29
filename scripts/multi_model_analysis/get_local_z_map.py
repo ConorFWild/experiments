@@ -448,6 +448,33 @@ def main(args):
         for x in dtag_array[outlier_scores >= quantile]:
             print(x)
 
+        # Make cluster top 30 member plots
+        color_palette = sns.color_palette('deep', 32)
+        # cluster_colors = [color_palette[x] if x >= 0
+        #                   else (0.5, 0.5, 0.5)
+        #                   for x in labels]
+
+        for cluster_num in np.unique(labels):
+            if cluster_num == -1:
+                continue
+            cluster_probs = soft_clusters[:, cluster_num]
+            sorted_probs = np.sort(cluster_probs, axis=None)
+            # top_datasets = np.argwhere(
+
+            cluster_colors = []
+            for _x in (cluster_probs > sorted_probs[:-30]):
+                if _x:
+                    cluster_colors.append(color_palette[cluster_num])
+                else:
+                    cluster_colors.append('gray')
+
+            axes.scatter(
+                dmaps_tsne[:, 0],
+                dmaps_tsne[:, 1],
+                c=cluster_colors,
+            )
+            plt.savefig(f'outputs/dmaps_tsne_clusters_{cluster_num}.png')
+
 
         # Get the dataset dmap, both processed and unprocessed
         dtag_index = np.argwhere(dtag_array == dtag)
