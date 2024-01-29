@@ -459,11 +459,11 @@ def main(args):
                 continue
             cluster_probs = soft_clusters[:, cluster_num].flatten()
             sorted_probs = np.sort(cluster_probs, axis=None).flatten()
-            lowest_prob = sorted_probs[:-30]
+            lowest_prob = sorted_probs[-30]
             # top_datasets = np.argwhere(
 
             cluster_colors = []
-            for _x in cluster_probs :
+            for _x in cluster_probs:
                 if _x > lowest_prob:
                     cluster_colors.append(color_palette[cluster_num])
                 else:
