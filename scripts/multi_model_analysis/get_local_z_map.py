@@ -457,8 +457,8 @@ def main(args):
         for cluster_num in np.unique(labels):
             if cluster_num == -1:
                 continue
-            cluster_probs = soft_clusters[:, cluster_num]
-            sorted_probs = np.sort(cluster_probs, axis=None)
+            cluster_probs = soft_clusters[:, cluster_num].flatten()
+            sorted_probs = np.sort(cluster_probs, axis=None).flatten()
             # top_datasets = np.argwhere(
 
             cluster_colors = []
