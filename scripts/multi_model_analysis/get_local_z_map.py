@@ -416,6 +416,24 @@ def main(args):
         plt.savefig('outputs/dmaps_tsne_outliers.png')
 
 
+        # High res datasets/PanDDA1 plot
+        resolutions = np.array([datasets[_dtag].reflections.resolution() for _dtag in dtag_array])
+        high_res_cutoff = np.sort(resolutions, axis=None)[30]
+        fig, axes = plt.subplots()
+        axes.scatter(
+            dmaps_tsne[resolutions >= high_res_cutoff, 0],
+            dmaps_tsne[resolutions >= high_res_cutoff, 1],
+            c='gray',
+        )
+        axes.scatter(
+            dmaps_tsne[resolutions < high_res_cutoff, 0],
+            dmaps_tsne[resolutions < high_res_cutoff, 1],
+            c='red',
+        )
+
+        plt.savefig('outputs/dmaps_tsne_pandda_1.png')
+
+
 
 
         fig, axes = plt.subplots()
